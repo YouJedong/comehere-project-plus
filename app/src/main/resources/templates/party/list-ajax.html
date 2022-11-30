@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="partyList" th:each="party : ${partys}">
+		<div class="col-md-6 col-md-6_party_wrap">
+			<div class="container_main_party_img">
+				<div class="party_list_img">
+					<a th:href="@{detail(no=${party.no})}">
+						<div style="display: flex; justify-content: center; align-items: center;">
+							<img th:if="${party.thumbnail != null}" th:src="@{'/party/files/' + ${party.thumbnail}}" alt="모임썸네일" class="list_image"> <img th:if="${party.thumbnail == null}" src="/app/party/files/nothumbnail.png" alt="Avatar" class="list_image">
+						</div>
+						<div class="overlay">
+							<a th:href="@{detail(no=${party.no})}" class="icon" title="User Profile"> <i class="fa fa-search"></i>
+							</a>
+						</div>
+					</a>
+				</div>
+			</div>
+			<a th:href="@{detail(no=${party.no})}">
+				<h3 class="temper_text_party" th:text="${party.title == ''} ? '(제목없음)' : ${party.title}"></h3>
+			</a>
+			<div class="container_main_party">
+				<p class="dololr_text_region" th:text="${party.region.sigu}"></p>
+				<p style="float: left; font-size: x-small; margin: 0px;">|</p>
+				<p class="dololr_text_sports" th:text="${party.sports.name}"></p>
+				<p style="float: left; font-size: x-small; margin: 0px;">|</p>
+			</div>
+			<div class="container_main_party">
+				<p class="dololr_text_sports" th:text="${#dates.format(party.partyDate, 'yy/MM/dd')}"></p>
+				<p style="float: left; font-size: x-small; margin: 0px;">|</p>
+				<p class="dololr_text_sports" th:text="${#dates.format(party.partyTime, 'HH시mm분')}"></p>
+			</div>
+			<div class="container_main_party_star" style="margin-left: 3px;">
+				<span data-th-if="${party.star} == 0 and ${party.star} < 0.5"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star0.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 0.5 and ${party.star} < 1"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star05.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 1 and ${party.star} < 1.5"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star10.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 1.5 and ${party.star} < 2"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star15.png" class="dololr_text_party_star"></span> <span
+					data-th-if="${party.star} >= 2 and ${party.star} < 2.5"
+				><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star20.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 2.5 and ${party.star} < 3"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star25.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 3 and ${party.star} < 3.5"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star30.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 3.5 and ${party.star} < 4"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star35.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 4 and ${party.star} < 4.5"><span class="dololr_text_party"
+					th:value="${party.star}" th:text="${party.star}"
+				></span> <img src="/app/review/star/star40.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} >= 4.5 and ${party.star} < 5"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star45.png" class="dololr_text_party_star"></span> <span data-th-if="${party.star} == 5"><span class="dololr_text_party" th:value="${party.star}" th:text="${party.star}"></span> <img src="/app/review/star/star50.png" style="height: 23px;" class="dololr_text_party_star"></span>
+			</div>
+		</div>
+	</th:block>
+
+</body>
+</html>

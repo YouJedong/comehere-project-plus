@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+<title>여기모여</title>
+      <meta charset="UTF-8">
+      <!-- basic -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- mobile metas -->
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+      <!-- bootstrap css -->
+      <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> -->
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <!-- Responsive-->
+      <!-- <link rel="stylesheet" href="../css/responsive.css"> -->
+      <!-- fevicon -->
+      <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <!-- <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"> -->
+      <!-- Tweaks for older IEs-->
+      <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+      <!-- owl stylesheets --> 
+      <!-- <link rel="stylesheet" href="../css/owl.carousel.min.css"> -->
+      <!-- <link rel="stylesheet" href="../css/owl.theme.default.min.css"> -->
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"> -->
+      
+      <!-- 공식부트스트랩 CSS -->
+      <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+        
+      <style>
+      .windowWidth {
+        max-width:1130px !important;
+        min-width:1130px !important;
+        margin: auto !important;
+        float: none !important;
+      }
+      .nav-line {
+        border-bottom: 1px solid #e4e8eb;
+        border-top: 1px solid #e4e8eb;
+        margin-bottom: 30px;
+      }
+      .container-detail {
+        width: 960px;
+        margin: auto;
+      }
+      .bnt-setting1 {
+        font-size: 13px;
+        float: right; 
+        position: relative; 
+        top:0; 
+        left:0; 
+        z-index: 998; 
+        margin-left: 5px;
+      }
+      .bnt-setting {
+        color: white !important;
+        font-size: 13px;
+      }
+      .board-title {
+        font-size: 18px;
+      }
+      .board-info {
+        position: relative;
+        margin-top: 22px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid #e4e8eb;
+      }
+      
+.comment_input_wrap {
+    overflow: hidden;
+    position: relative;
+    margin-top: 10px;
+    border: 1px solid #d7dce5;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.comment_input_wrap .comment_input_bot {
+    height: 47px;
+    box-sizing: border-box;
+}
+.comment_input_wrap .comment_submit {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 128px;
+    border-radius: 0;
+}
+.comment_input_wrap .comment_input textarea {
+    margin-top: 12px;
+    width: 100%;
+    height: 98px;
+    border: 0;
+    box-sizing: border-box;
+    color: #373f57;
+    font-size: 14px;
+    letter-spacing: -1px;
+    line-height: 24px;
+    background-color: #fff;
+    resize: none;
+}
+.comment_input_wrap .comment_input {
+    padding: 22px 24px 0 24px;
+    border-bottom: 1px solid #d7dce5;
+}
+.comment_input_wrap .comment_input.img_add {
+    padding-right: 108px;
+}
+.btnSizeL {
+    padding: 10px 16px 12px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 24px;
+}
+[class*="btnSize"] {
+    display: inline-block;
+    border: 1px solid #4876ef;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    letter-spacing: -1px;
+    text-align: center;
+    background-color: #0d6efd;
+}
+      
+        .our_textJD {
+        width: 100%;
+        float: left;
+        font-size: 36px;
+        color: #121111;
+        text-transform: uppercase;
+        text-align: center;
+        border-top: solid gray 1px;
+        padding-top: 90px;
+        }
+        
+        .furnitures_sectionJD {
+            width: 100%;
+            min-height: 1300px;
+            float: left;
+            padding-bottom: 90px;
+        }
+        
+        .write-box {
+          border: 2px, black;
+          padding-top: 30px;
+          padding-left: 87%;
+        }
+        .page_center {
+          display : flex;
+          margin : auto;
+          /* width: 42px; */
+        }
+        .title-min-width2 {
+          min-width: 300px;
+        }
+        
+        .btn-outline-successJD {
+          color: #0d6efd;
+          background-color: transparent;
+          background-image: none;
+          border-color: #0d6efd;
+        }
+        .btn-outline-successJD:hover {
+          color: #fff;
+          background-color: #0d6efd;
+          border-color: #0d6efd;
+        }
+        
+        .cate-bottom-line {
+          border-bottom: 1px solid black;
+          border-top: 1px solid black;
+        }
+        
+        #community-title {
+          color: #0d6efd;
+        }
+        
+         .mainList-title {
+          margin: 0 66px 0 66px;
+          font-weight: bold;
+        }
+        
+        .clg-plus {
+          float: right;
+          font-size: 17px;
+          font-weight: normal;
+          padding-top: 12px;
+          
+        }
+        
+        .recent-clg-list {
+          /* border: 1px solid blue; */
+          width: 90%;
+          margin: auto;
+          min-height: 500px;
+        }
+        .recent-clg-wapper {
+          display: inline-block;
+          width: 48%;
+          padding: 2%;
+          margin: 4px;
+          background-color: #0d6efd;
+        }
+        .recent-clg-img-wapper {
+          height: 256.031px;
+          width: 256.031px;
+        }
+        .imgJD {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          margin: auto;
+          display: block;
+        }
+        .recent-clg-content-wapper {
+          background-color: white;
+          margin-top: 10px;
+          padding: 5px;
+          height: 60px;
+        }
+        
+        .form-content {
+          margin-top: 32px;
+          min-height: 400px;
+        }
+        
+        .profile_pic {
+          margin-right: 5px;
+          border: 1px solid rgba(55, 63, 87, 0.15);
+          border-radius: 50%;
+          height: 50px;
+          width: 50px;
+        }
+        .board-wrapper {
+          margin-bottom: 10px;
+          margin-top: 10px;
+          padding: 30px;
+          border: 1px solid #d7dce5;
+          border-radius: 8px;      
+        }
+        
+        .thumbnail-temp {
+          width: 30%;
+          height: 30%;
+        }
+        
+        /* Modal */
+#modal.modal-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 999;
+}
+
+#modal .modal-window {
+  background: rgba(13, 110, 253, 0.70);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(13.5px);
+  -webkit-backdrop-filter: blur(13.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 500px;
+  height: 300px;
+  position: absolute;
+  top: 200px;
+  padding: 10px;
+  z-index: 10;
+}
+
+#modal .title {
+  padding-left: 10px;
+  display: inline;
+  text-shadow: 1px 1px 2px gray;
+  color: white;
+}
+
+#modal .title h2 {
+  display: inline;
+}
+
+#modal .close-area {
+  display: inline;
+  float: right;
+  padding-right: 10px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px gray;
+  color: white;
+}
+
+#modal .content {
+  margin-top: 20px;
+  padding: 0px 10px;
+  text-shadow: 1px 1px 2px gray;
+  color: white;
+}
+
+.email-bt3 {
+  color: #989696;
+  width: 300px;
+  height: 55px;
+  font-size: 18px;
+  padding: 15px;
+  margin-top: 30px;
+  margin-left: 80px;
+  margin-bottom: -20px;
+  border: 0px;
+  border-radius: 5px;
+  height: 55px;
+  font-size: 18px;
+}
+
+.report_menu {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+.massage-bt1 {
+  color: #989696;
+  width: 100%;
+  height: 300px;
+  font-size: 18px;
+  padding: 50px 20px 10px 20px;
+  margin-top: 50px;
+  border: 0px;
+  border-radius: 5px;
+}
+
+.send_bt3 {
+  width: 30%;
+  float: left;
+  font-size: 20px;
+  color: #0d6efd;
+  text-align: center;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  padding: 10px 0px;
+  font-weight: bold;
+  margin-top: 18px;
+  margin-left: 160px;
+  display: inline;
+  padding-right: 10px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px gray;
+  color: white;
+  /* f8b81f7a */
+}
+
+.comment-wrapper {
+  margin-top: 30px;
+} 
+.commentList {
+  border-bottom: 1px solid #d7dce5;
+}
+.comment-area {
+  position: relative;
+  padding: 24px 16px;
+  border-top: 1px solid #d7dce5;
+}
+.comment-cont {
+  display: inline-block;
+  width: 99.3%;
+  min-height: 60px;
+  margin-bottom: 20px;
+}
+.comment-info {
+    right: 22px;
+    top: 24px;
+    position: absolute;
+}
+.comment-writer {
+    position: absolute;
+    left: 30px;
+    top: 90px;
+    color: gray;
+}
+.btn-jd {
+    color: black !important;
+    border: #d7dce5 1px solid;
+}
+.btn-jd:hover {
+    background-color: #d7dce5;
+    border: #d7dce5 1px solid;
+}
+.update-form {
+    resize: none;
+    border: #d7dce5 1px solid !important;
+    z-index: 300;
+    background-color: white !important;
+    border-radius: 8px !important;
+}
+.in-img {
+    width: 188.398px;
+    min-height: 240px;
+    max-height: 240px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.clg1 {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #eaedf4;
+    border-radius: 12px;
+    width: 210px;
+}
+.login-bt-d {
+ margin-left: 520px;
+ font-size: 15px;
+}
+
+
+        .swal-text {
+          text-align: center;
+        } 
+        
+      </style>
+
+    </head>
+    <body>
+  <!-- header section start -->
+  <div class="header_section windowWidth">
+    <div class="container-fluid windowWidth">
+      <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+        <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+            <li class="nav-item"><a class="nav-link" href="main">커뮤니티</a></li>
+            <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+          </ul>
+          <div class="login-bt-d">
+            <ul>
+              <li th:if="${session.loginMember == null}" ><a href="../auth/form" >로그인</a></li>
+              <li class="loginId" th:if="${session.loginMember != null}" th:id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
+              <li th:if="${session.loginMember != null}"><a href="../auth/logout" th:text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- header section end -->
+      <!-- furnitures section start -->
+         <!-- <a href="main"><h1 class="container" id="community-title">커뮤니티</h1></a> -->
+           <!-- 게시판 카테고리 이동 시작 -->
+           <div class="nav-line">
+           <ul class="nav nav-pills nav-justified windowWidth">
+             <li class="nav-item"><a class="nav-link" href="list?no=1">자유게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=2">식단게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=3">챌린지게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=4">질문게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=5">핫딜게시판</a></li>
+           </ul>
+           </div>
+           <!-- 게시판 카테고리 이동 끝 -->
+
+            <div class="furnitures_sectionJD windowWidth">
+            <div class="container-detail">
+              <div style="height: 34px;">
+                <span style="float: right;"><a data-th-href="@{list(no=${board.cateno})}" class="btn btn-primary bnt-setting">목록</a></span>
+              </div>
+            <div class="board-wrapper">
+              <input th:value="${board.no}" value=게시글번호 id="boardNo" name='no' type="hidden">
+              <a data-th-if="${session.loginMember} != null and ${session.loginMember.no} != ${board.writer.no}" 
+               class="btn btn-primary bnt-setting1"  role="button" id="scrap-button" href="#">스크랩</a>
+              <a data-th-if="${session.loginMember} != null and ${session.loginMember.no} != ${board.writer.no}" 
+               class="btn btn-primary btn-modal bnt-setting1" 
+               href="#" 
+               role="button" 
+               type="button">신고</a>
+              <h3 class="board-title" th:text='${board.title}'>제목없음</h3>
+              <div class="board-info" style="color: gray">
+                <img th:src="@{'/member/files/' + ${board.writer.filepath}}" class="profile_pic" alt="profile_picture" onerror="this.src='../images/default-profile-pic.png';" >
+                <span th:text="${board.writer.nickname}"></span>
+                <div style="float: right; margin-top: 28px">
+                  <span th:text="${board.createdDate}"></span>
+                  <img style="width: 18px; margin-left: 1px;" src="../images/view-icon2.png"><span th:text="${board.viewCount}">0</span>
+                </div>
+              </div>
+              <div th:if="${board.cateno == 3}">
+                <h5 style="margin-top: 15px; margin-left: 40px; margin-bottom: 0px; color: gray; font-size: 20px;">챌린지 인증 사진</h5>
+                <div class="clg1">
+                  <img th:if="${board.thumbnail == null}" src="../images/nothumbnail.png" alt="thumbnail" class="in-img"/>
+                  <img th:if="${board.thumbnail != null}" th:src="@{'/board/files/' + ${board.thumbnail}}" alt="Avatar" class="in-img"/>
+                </div>
+              </div>
+              <div th:utext="${board.content}" class="form-content">내용</div>
+            </div>
+            <div style="height: 34px;">
+              <span style="float: right;">
+                <a data-th-if="${session.loginMember} != null and ${session.loginMember.no} == ${board.writer.no}" 
+                   data-th-href="@{updateForm(no=${board.no})}" 
+                   class="btn btn-primary bnt-setting" 
+                   role="button">수정</a>
+                <a data-th-if="${session.loginMember} != null and ${session.loginMember.no} == ${board.writer.no}" 
+                   class="btn btn-primary bnt-setting"
+                   role="button"
+                   id="delete-button">삭제</a>
+              </span>
+            </div>
+              
+            <div>
+              <!-- 댓글 등록 시작 -->
+              <div th:if="${session.loginMember}">        
+                <input type="hidden" id="memberNo"  th:value="${session.loginMember.no}">
+                <div class="comment_input_wrap">
+                  <div class="comment_input img_add">
+                    <textarea id="commentCont" class="scrollbar" placeholder="내용을 입력하세요." onkeypress="block_enter(event)"></textarea>
+                  </div>
+                  <div class="comment_input_bot">
+                    <button id="commentButton" type="button" class="btnSizeL comment_submit" >댓글 등록</button>
+                  </div>
+                </div>
+              </div>
+              <div th:if="${session.loginMember == null}">  
+                <input type="hidden" id="memberNo"  value=0>      
+                <div class="comment_input_wrap" onclick="alertToLogin();">
+                  <div class="comment_input img_add">
+                      <textarea id="commentCont" class="scrollbar" placeholder="댓글을 등록하려면 로그인 하세요." disabled=""></textarea>
+                  </div>
+                  <div class="comment_input_bot">
+                    <button id="commentButton" type="button" class="btnSizeL comment_submit" onclick="alertToLogin();">댓글 등록</button>
+                  </div>
+                </div>
+              </div>
+              <!-- 댓글 등록 끝 -->
+              
+              <!-- 댓글 목록 시작 -->
+              <div class="comment-wrapper">
+                  <div class="commentList"></div>
+              </div>
+              <!-- 댓글 목록 끝 -->
+              
+            <!-- 댓글페이징 -->
+            <nav aria-label="Page navigation">
+              <ul class="pagination" style="margin-top: 20px">
+                <div class="page_center">
+                  <!-- 이전 페이지 보류                 
+                  <li class="page-item" th:if="${pageMaker.prev}">
+                    <a data-th-href="@{detail(page=${pageMaker.startPage-1}, no=${board.no})}" class="page-link" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                   -->
+                  <th:block th:if="${pageMaker.endPage != 0}" th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                    <li data-th-id="${'pageButton' + pageNum}"  class="page-item">
+                      <a data-th-id="'pageNo' + ${pageNum}" class="page-link" onclick="getId(this.id)"><i th:text="${pageNum}"></i></a>
+                    </li>
+                  </th:block>
+                  <!-- 다음 페이지 보류               
+                  <li class="page-item" th:if="${pageMaker.next && pageMaker.endPage >0}">
+                    <a th:href="@{detail(page=${pageMaker.endPage+1}, no=${board.no})}" class="page-link" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                   -->
+                </div>
+              </ul>
+            </nav>
+            <!-- 댓글페이징 -->
+
+            </div>
+            <!-- 댓글 블록 끝 -->
+
+         </div>
+      </div>
+
+      <!--  footer section end -->
+      
+      <!-- Javascript files-->
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/popper.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <script src="../js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../js/custom.js"></script>
+      <!-- javascript --> 
+      <!-- <script src="../js/owl.carousel.js"></script> -->
+      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
+      
+      <!-- 공식부트스트랩 JS -->
+      <script src="../js/bootstrap/bootstrap.js"></script>  
+      <!-- sweetalert -->
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+
+      <script>
+      "use strict"
+    	  const boardNo = document.getElementById( 'boardNo').value;
+    	  const memberNo = document.getElementById( 'memberNo' ).value;
+    	  const lastPageNo = document.getElementsByClassName('page-link').length;
+        document.getElementById('commentButton').addEventListener('click', insertCommentProcess);
+    	  
+    	  // 로그인 회원 유효성을 위한 셋팅
+    	  let loginMemberNo = -1;
+    	  if($(".loginId").attr("id") != undefined) {
+    	   loginMemberNo = $(".loginId").attr("id");
+    	  };
+    	  
+    	  // 처음 페이지 로드했을 때 마지막 댓글 페이지가 보이게 셋팅
+    	  // 그 후 페이징 버튼 클릭 후 이벤트 제어를 위한 페이지 번호 셋팅
+    	  let pageNo = lastPageNo;
+    	  function getId(pageId) {
+    		  pageNo = pageId.replace('pageNo', '')
+    		  commentList();
+    	  }
+    	  
+        // 페이지 버튼 active 시키기
+        window.addEventListener('DOMContentLoaded', function(){
+            $('#pageButton' + pageNo).addClass('active');
+        });
+        // 페이지 버튼을 누르면 버튼을 active시키기
+        document.querySelectorAll('.page-item').forEach((pageBtn) => {
+        	pageBtn.addEventListener('click', function(e) {
+        			$('.page-item').removeClass('active');
+          		$(e.currentTarget).addClass('active');
+          });
+        });
+    		// 댓글 등록 시 과정 (댓글 유효성 체크 -> 등록(ajax) -> 댓글 개수 카운트)
+        function insertCommentProcess(){
+          if (document.getElementById('commentCont').value == '') {
+            swal('등록 실패!', "내용을 입력해주세요.", 'error');
+            return false;
+          }
+          insertAndReplay();
+        }
+        // 댓글을 등록했을 때 한 페이지에 보일수 있는 댓글수 초과 시(현재 5개) 페이지 reload()
+    		document.getElementById('commentButton').addEventListener('click', countCommentToInsert); 
+        function countCommentToInsert() {
+          var count = document.getElementsByClassName('commentArea').length;
+          if (count == 5) {
+            window.location.reload();
+          }
+        };
+        // 댓글을 삭제했을 때 댓글이 0개일 때 reload
+        function countCommentToDelete() {
+          var count = document.getElementsByClassName('commentArea').length;
+          if (count == 0) {
+            window.location.reload();
+          }
+        };
+    		
+        // 페이지 시작할 때 댓글 목록 출력 
+        $(document).ready(function(){
+          commentList(); //페이지 로딩시 댓글 목록 출력 
+        });
+    	  // 댓글 목록 
+    	  function commentList(){
+          $.ajax({
+            url : '/app/boardComment/list',
+            type : 'get',
+            data : {boardNo: boardNo,
+          	        pageNo: pageNo
+          	        },
+            success : function(result){
+              var a =''; 
+              $.each(result, function(key, value){ 
+                a += '<div class="commentArea comment-area">';
+                a += '<div class="commentInfo' + value.no + ' comment-info">';
+                if (loginMemberNo == value.writer.no) {
+                  a += '<a id="udBnt' +value.no+ '" class="btn btn-outline-primary btn-sm btn-jd" onclick="commentUpdate(' + value.no + ',\'' + value.content + '\');"> 수정 </a>';
+                  a += '<a id="dlBnt' +value.no+ '" class="btn btn-outline-primary btn-sm btn-jd" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';
+                }
+                if (loginMemberNo != -1 && loginMemberNo != value.writer.no) {
+                    a += '<a class="btn btn-outline-primary btn-sm btn-jd" onclick="commentComplain('+value.no+');"> 신고 </a></div>';
+                }
+                if (loginMemberNo == -1) {
+                    a += '<a class="btn btn-outline-primary btn-sm btn-jd" onclick="alertToLoginByTattle();"> 신고 </a></div>';
+                }
+                a += '<div class="commentContent'+value.no+' comment-cont">'+value.content;
+                a += '<div class="comment-writer">' +value.writer.nickname + '</div>';
+                a += '</div></div></div>';
+              });
+              $(".commentList").html(a);
+            }
+          });
+        }
+    	  
+      	// 댓글 등록
+        function insertAndReplay(){
+          $.ajax({
+            url : "/app/boardComment/insertAndReplay",
+            data : {
+              content : $("#commentCont").val(),
+              boardNo : boardNo,
+              memberNo : memberNo
+            },
+            type : "post",
+            success : function(result){
+              if(result != null){
+               	commentList();
+                $("#commentCont").val("");
+              }
+            }
+          })
+        }
+  	
+        //댓글 삭제 
+        function commentDelete(no){
+            swal({
+                text : "댓글을 삭제하시겠습니까?",
+                icon : "warning",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url : '/app/boardComment/delete/'+no,
+                        type : 'post',
+                        success : function(result){
+                            if(result == 1) {
+                            	commentList(); //댓글 삭제후 목록 출력
+                            	swal({
+                            		text: '댓글이 삭제되었습니다.',
+                            		icon: 'success',
+                            		closeOnClickOutside: false
+                            	}).then(() => {
+                            		countCommentToDelete() // 웹 상에서 댓글이 0개면 reload
+                            	});
+                            } else {
+                            	swal('','댓글을 삭제할 수 없습니다!','error');
+                            }
+                        }
+                    });
+                } else{
+                  return false;
+                }
+            });
+        }
+      
+        //댓글 수정 모드- 댓글 내용 출력을 input 폼으로 변경 
+        function commentUpdate(commentNo, content){
+        	$('#udBnt'+commentNo).css('display', 'none');
+        	$('#dlBnt'+commentNo).css('display', 'none');
+            var a ='';
+            a += '<label for="form"></label>';
+            a += '<div class="input-group">';
+            a += '<textarea onkeypress="block_enter(event)" cols="40" rows="3" class="form-control update-form" name="content_' + commentNo + '">' + content + '</textarea>';
+            a += '<span class="input-group-btn"><button class="btn btn-outline-primary btn-sm btn-jd" type="button" onclick="commentUpdateProc(' + commentNo + ');">수정</button></span>';
+            a += '<span class="input-group-btn"><button class="btn btn-outline-primary btn-sm btn-jd" type="button" onclick="commentList()">취소</button></span>';
+            a += '</div>';
+            
+            $('.commentContent'+commentNo).html(a);
+        }
+        
+        // 댓글 수정
+        function commentUpdateProc(commentNo){
+            var updateContent = $('[name=content_'+commentNo+']').val();
+            $.ajax({
+                url : '/app/boardComment/update',
+                type : 'post',
+                data : { 
+              	  'content' : updateContent, 
+              	  'no' : commentNo},
+                success : function(result){
+                    if(result == 1) commentList(); //댓글 수정후 목록 출력 
+                }
+            });
+        }
+        // 비회원 댓글 작성시 로그인 유도
+        function alertToLogin(){
+            swal({
+                text :  "댓글을 작성하려면 로그인을 해야합니다.\n로그인하시겠습니까?",
+                icon : "warning",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                  location.href = '../auth/form';
+                } else{
+                  return false;
+                }
+            });
+        }
+        // 비회원 신고 시 로그인 유도 
+        function alertToLoginByTattle(){
+            swal({
+                text :  "신고를 하려면 로그인을 해야합니다.\n로그인하시겠습니까?",
+                icon : "warning",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                  location.href = '../auth/form';
+                } else{
+                  return false;
+                }
+            });
+        }
+        // 댓글 우선 엔터 막자
+        function block_enter(e){
+           if(e.keyCode == 13){
+        	   event.preventDefault();
+           }
+        }
+        
+        // 스크랩 관련 함수
+        if ($('#scrap-button').length != 0) {
+          document.getElementById('scrap-button').addEventListener('click', insertScrap);
+        }
+        
+        // 스크랩 등록
+        function insertScrap() {
+            swal({
+                text : "스크랩 하시겠습니까?",
+                icon : "info",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url : "/app/scrap/add",
+                        data : {
+                          boardNo : boardNo,
+                          memberNo : memberNo
+                        },
+                        type : "post",
+                        success : function(result){
+                          if(result == 1){
+                            swal('','게시글이 스크랩되었습니다.','success');
+                          } else if (result == 0) {
+                        	  swal({
+                                  text : "이미 스크랩한 게시글입니다.\n스크랩을 취소하겠습니까?",
+                                  icon : "warning",
+                                  buttons : ["아니요", "예"],
+                              }).then(function(isConfirm) {
+                            	  if (isConfirm) {
+                            		  deleteScrap();
+                            	  } else {
+                                  return false;
+                                }
+                            });
+                          }
+                        }
+                     })
+                } else{
+                  return false;
+                }
+            });
+        }
+        
+        // 스크랩 취소
+        function deleteScrap() {
+            $.ajax({
+                url : '/app/scrap/delete',
+                type : 'post',
+                data : { 
+                    boardNo : boardNo,
+                    memberNo : memberNo},
+                success : function(result){
+                    if(result == 1) {
+                    	swal('','스크랩이 취소되었습니다!','success');
+                    } else {
+                    	alert("오류??");
+                    }
+                }
+            });
+        }
+        
+        // 게시글 삭제 이벤트
+        if ($('#delete-button').length != 0) {
+          document.getElementById('delete-button').addEventListener('click', deleteBoard);
+        }
+        function deleteBoard() {
+            swal({
+                text : "게시글을 삭제하시겠습니까?",
+                icon : "warning",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                	location.href = 'delete?no=' + boardNo;
+                } else{
+                  return false;
+                }
+            });
+        }
+        </script>
+        
+<!-- Modal Start -->
+<form>
+  <table border='1'>
+    <div id="container">
+      <div id="lorem-ipsum"></div>
+    </div>
+    <div id="modal" class="modal-overlay">
+      <div class="modal-window">
+        <div class="close-area">X</div>
+        <div class="content">
+          <div>
+            <input type="hidden" name="boardNo" data-th-value="${board.no}">
+            <div class="report_menu">신고사유</div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" value="Contents" class="form-check-input" id="1" name="reports" onclick='checkOnlyOne(this)' style="margin-top: 4px; display: block"> <input type="hidden" name="_reports" value="on" /> <label for="1" class="form-check-label">불건전한 내용</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" value="promotion" class="form-check-input" id="2" name="reports" onclick='checkOnlyOne(this)' style="margin-top: 4px; display: block"> <input type="hidden" name="_reports" value="on" /> <label for="2" class="form-check-label">스팸 및 부적절한 홍보</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" value="calumny" class="form-check-input" id="3" name="reports" onclick='checkOnlyOne(this)' style="margin-top: 4px; display: block"> <input type="hidden" name="_reports" value="on" /> <label for="3" class="form-check-label">명예훼손 및 비방</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" value="prejudice" class="form-check-input" id="4" name="reports" onclick='checkOnlyOne(this)' style="margin-top: 4px; display: block"> <input type="hidden" name="_reports" value="on" /> <label for="4" class="form-check-label">초상권 및 저작권 침해</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" value="embezzlement" class="form-check-input" id="5" name="reports" onclick='checkOnlyOne(this)' style="margin-top: 4px; display: block"> <input type="hidden" name="_reports" value="on" /> <label for="5" class="form-check-label">개인정보 도용</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" value="act" class="form-check-input" id="6" name="reports" onclick='checkOnlyOne(this)' style="margin-top: 4px; display: block"> <input type="hidden" name="_reports" value="on" /> <label for="6" class="form-check-label">기타 사이트 목적에 맞지 않는 행위</label>
+            </div>
+            <!-- 신고 종류 설정 input hidden type-->
+            <div class="form-check form-check-inline"><input type="hidden" id="reportForm"></div>
+          </div>
+          <div class="send_bt3" id="singo">신고</div>
+        </div>
+      </div>
+    </div>
+  </table>
+</form>
+  
+  
+<script>
+let tatlleNo = -1; /* 신고 사유 번호 초기화 */
+
+function commentComplain(number) {
+  objNo = number;
+  console.log(number);
+  $("#reportForm").attr("value", number);
+  $("#reportForm").attr("name", "댓글");
+
+  modal.style.display = 'flex';
+  window.scrollTo(0,0);
+  // x버튼 누르면 종료
+  $(".close-area").click(function () {
+      $("input:checkbox[name='reports']").each(function(){
+          this.checked = false
+          });
+    modal.style.display = 'none';
+    checkTag.setAttribute('checked', 'false');
+  });
+  // 신고 누르면 종료
+  $(".send_bt3").click(function () {
+      $("input:checkbox[name='reports']").each(function(){
+          this.checked = false
+          });
+    modal.style.display = 'none';
+  });
+  // esc누르면 종료
+  window.addEventListener('keyup', (e) => {
+    if (modal.style.display === 'flex' && e.key === 'Escape') {
+      modal.style.display = 'none';
+      checkTag.setAttribute('checked', 'false');
+    }
+  });
+}
+
+const loremIpsum = document.getElementById("lorem-ipsum")
+//fetch를 통해 받아온 데이터를 loremIpsum DOM에 넣어주기 때문에 모달창 내부에 내용이 채워져서 뜨는것. 
+//fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+      loremIpsum.innerHTML = ``
+      /* .then(response => response.text())
+      .then(result => loremIpsum.innerHTML = result) */
+              
+//디스플레이 non 버튼클릭하면 flex로 변환  
+const modal = document.getElementById("modal")
+const btnModal = document.querySelectorAll(".btn-modal")
+
+$("#reportForm").attr("value", boardNo);
+$("#reportForm").attr("name", "게시글");
+btnModal.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    objNo = boardNo;
+    modal.style.display = 'flex';
+
+    // x버튼 누르면 종료
+    const closeFromExit = modal.querySelector('.close-area');
+    closeFromExit.addEventListener('click', (e) => {
+      $("input:checkbox[name='reports']").each(function(){
+        this.checked = false
+      });
+      modal.style.display = 'none';
+    });
+      
+    // 신고 누르면 종료
+    const closeFromReport = modal.querySelector('.send_bt3');
+    closeFromReport.addEventListener('click', (e) => {
+      $("input:checkbox[name='reports']").each(function(){
+        this.checked = false
+      });
+      modal.style.display = 'none';
+    });
+      
+    // esc누르면 종료
+    window.addEventListener('keyup', (e) => {
+      if (modal.style.display === 'flex' && e.key === 'Escape') {
+        modal.style.display = 'none';
+      }
+    });
+  });
+});
+          
+    </script>
+  
+  
+  <script>
+  
+  function checkOnlyOne(element) {
+      
+      const checkboxes 
+          = document.getElementsByName("reports");
+      
+      checkboxes.forEach((cb) => {
+        cb.checked = false;
+      })
+      
+      element.checked = true;
+    }
+  
+  let check = 0;
+  let checkTag = "";
+
+      
+  $(".form-check-input").change(function(e){
+      if($(".form-check-input").is(":checked")){
+          check = e.currentTarget.id;
+          checkTag = e.currentTarget;
+      }else{
+      }
+  });
+
+$("#singo").click(function a () {
+    $('input:checkbox[name=reports]').each(function (index) {
+      if($(this).is(":checked")==true){
+        console.log("신고사유번호 : " + $(this).attr("id"));
+        tatlleNo = $(this).attr("id");
+      }
+    });
+    if (tatlleNo == -1) {
+    	swal('신고 실패!', "신고사유를 선택해주세요!", 'warning');
+    	return false;
+    }
+    let value = $("#reportForm").val(); /* 신고할 게시글/댓글 번호 */
+    let name = $("#reportForm").attr("name"); /* 신고할 대상이 '게시글'이라는 것을 알림 */
+    console.log("게시글/댓글 번호 " + value + "게시글이니? 댓글이니? 표시 " + name);
+    
+    $.ajax({
+      type: "POST",
+      url: "/app/boardReport/add",
+      data:{value: value, name: name, tatlleNo: tatlleNo, boardNo : boardNo},
+      success: function (result) {
+    	document.getElementById("modal").style.display = 'none';
+    	checkTag.setAttribute('checked', 'false');
+    	tatlleNo = -1; /* 신고사유번호 다시 초기화 */
+    	swal('신고 성공', name + ' 신고를 완료했습니다!', 'success');
+      },
+    });
+});
+
+</script>
+
+
+
+  <!-- Modal End-->
+      
+   </body>
+         
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- mobile metas -->
+        <!-- site metas -->
+        <title>여기모여</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <!-- style css -->
+        <link rel="stylesheet" type="text/css" href="../css/style2.css">
+        <!-- Responsive-->
+        <!-- fevicon -->
+        <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+        <!-- Scrollbar Custom CSS -->
+        <!-- Tweaks for older IEs-->
+        <!-- owl stylesheets -->
+    </head>
+    <style>
+    .infoMenu span {
+      font-size: 20px;
+    }
+    </style>
+        <body>
+          <!-- header section start -->
+          <div class="header_section">
+            <div class="container-fluid">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+                  </ul>
+                  <div class="search_icon">
+                    <ul>
+                      <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+                      <li data-th-if="${session.loginMember != null}"><a href="../mypage/my-post">마이페이지</a></li>
+                      <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <!-- header section end -->
+          <!-- contact section start -->
+          <div class="contact_section layout_padding">
+            <div class= info>
+              <ul class="infoMenu">
+                <li class= "menu"><a href="../mypage/my-post" ><span class="menu-on">나의 활동</span></a></li>
+                <li class= "menu"><a href="../mypage/my-party"><span>모임 관리</span></a></li>
+                <li class= "menu"><a href="../member/viewer"><span>회원 정보 변경</span></a></li>
+              </ul>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="mail_sectin">
+										<div class="sort_area">
+											<a href="my-post" class="link_sort on">작성글</a>
+											<a href="my-comment" class="link_sort">작성댓글</a>
+											<a href="my-scrap" class="link_sort">스크랩</a>
+									</div>
+									<table class="my-page">
+										<colgroup>
+											<col>
+											<col style="width: 120px;">
+											<col style="width: 80px;">
+										</colgroup>
+										<thead>
+											<tr>
+												<!-- <th scope="col" width="5"></th> -->
+												<th scope="col" width="10%">번호</th>
+												<th scope="col" width="50%">제목</th>
+												<th scope="col" width="20%">작성일</th>
+												<th scope="col" width="5%">조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-th-each="myPost , i : ${myPostList}" >
+											   <td>
+                            <div class="FormInputCheck">
+															<label data-th-for="'check_article_'  +${myPost.no}" class="label">
+															 <span class="blind">[[${i.count} + (((${pageMaker.cri.page}) - 1) * ${pageMaker.cri.perPageNum})]]</span>
+															</label>
+                          </div>
+                        </td>
+                        <td class="title-td">
+                          <div class="board-list">
+                            <div class="inner_list">
+															<a data-th-href="@{/board/detail(no=${myPost.no})}" class="article" >[[${myPost.title}]]</a> <!-- 속성 우선 뺌 target="_blank" -->
+                              <span data-v-8ce69c06=""></span>
+                              <a data-th-href="@{/board/detail(no=${myPost.no})}" class="cmt">[<em>[[${myPost.commentCount}]]</em>]</a> <!-- 속성 우선 뺌 target="_blank" -->
+                            </div>
+                          </div>
+                        </td>
+												<td class="td_date">[[${myPost.createdDate}]]</td>
+												<td class="td_view">[[${myPost.viewCount}]]</td>
+                      </tr>
+										</tbody>
+									</table>
+                  <!-- 페이징 버튼 시작 -->
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <div class="page_center">
+                        <li class="page-item" th:if="${pageMaker.prev}">
+                          <a class="page-link" th:href="@{my-post(page=${pageMaker.startPage-1})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <th:block th:if="${pageMaker.endPage != 0}" th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                          <li data-th-id="${'pageButton' + pageNum}" class="page-item">
+                            <a class="page-link" th:href="@{my-post(page=${pageNum})}"><i th:text="${pageNum}"></i></a>
+                          </li>
+                        </th:block>
+                        <li class="page-item" th:if="${pageMaker.next && pageMaker.endPage >0}">
+                          <a class="page-link" th:href="@{my-post(page=${pageMaker.endPage+1})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </div>
+                    </ul>
+                  </nav>
+                  <!-- 페이징 버튼 끝 -->
+								</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- contact section end -->
+            <!-- Javascript files-->
+            <script src="../js/jquery.min.js"></script>
+            <!-- <script src="js/popper.min.js"></script> -->
+            <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+            <!-- <script src="js/jquery-3.0.0.min.js"></script> -->
+            <!-- <script src="js/plugin.js"></script> -->
+            <!-- sidebar -->
+            <!-- <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> -->
+            <!-- <script src="js/custom.js"></script> -->
+            <!-- javascript -->
+            <!-- <script src="js/owl.carousel.js"></script> -->
+            <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
+            <script>
+            window.addEventListener('DOMContentLoaded', function(){
+                var param = 1; 
+                if (window.location.search.match(/page=([^&]*)/) != null) {
+                  param = window.location.search.match(/page=([^&]*)/)[1];
+                } 
+                $('#pageButton' + param).addClass('active');
+              });
+            </script>
+            <script>
+              // 뒤로가기하면 자동으로 새로고침 (조회수 반영을 위해)
+              window.onpageshow = function(e) {
+                if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                  window.location.reload();
+                }
+              }
+            </script>
+        </body>
+
+</html>

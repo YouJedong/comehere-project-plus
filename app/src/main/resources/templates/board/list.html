@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+<title>여기모여</title>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- mobile metas -->
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <!-- Responsive-->
+      <!-- <link rel="stylesheet" href="../css/responsive.css"> -->
+      <!-- fevicon -->
+      <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />      <!-- Scrollbar Custom CSS -->
+      <!-- <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"> -->
+      <!-- Tweaks for older IEs-->
+      <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+      <!-- owl stylesheets --> 
+      <!-- <link rel="stylesheet" href="../css/owl.carousel.min.css"> -->
+      <!-- <link rel="stylesheet" href="../css/owl.theme.default.min.css"> -->
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"> -->
+      
+      <!-- 공식부트스트랩 CSS -->
+      <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+      
+      <style>
+      .windowWidth {
+        max-width:1130px !important;
+        min-width:1130px !important;
+        margin: auto !important;
+        float: none !important;
+      }
+      .nav-line {
+        border-bottom: 1px solid #e4e8eb;
+        border-top: 1px solid #e4e8eb;
+        margin-bottom: 30px;
+      }
+      .category-name-wrapper {
+        border: 1px solid #e4e8eb;
+        background-color: #7e92c6;
+        height: 300px;
+      }
+      
+      .write-button {
+        float: right;
+      }
+      .search-border {
+        border: 1px solid #ced4da !important;
+      }
+      .table-th > * {
+        text-align: center;
+        /* font-size: 20px; */
+      }
+      .board-title {
+        width:765.389px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      
+      
+.my-page {
+  min-width: 970px;
+  max-width: 970px;
+  background-color: white;
+}
+.my-page tr {
+  text-align:center;
+  padding: 5px;
+}
+.my-page tr .title-td {
+  text-align:left;
+}
+.my-page th {
+  border-top:1px solid rgb(0 0 0 / 20%);
+  border-bottom:1px solid rgb(0 0 0 / 20%);
+  padding: 10px;
+}
+.my-page td {
+  font-size: 14px;
+  border-bottom:1px solid rgb(0 0 0 / 20%);
+  padding: 12px 0px;
+}
+
+.layout_padding-jd {
+  padding-top: 50px;
+  padding-bottom: 0px;
+}
+
+.our_textJD_free {
+background-image: url("../images/free-banner1.png");
+width: 100%;
+height : 100%;
+line-height:300px;
+float: left;
+font-size: 45px;
+font-weight:bold;
+color: white;
+text-transform: uppercase;
+text-align: center;
+/* padding-top: 120px; */
+}
+.our_textJD_food {
+background-image: url("../images/food-banner1.png");
+width: 100%;
+height : 100%;
+line-height:300px;
+float: left;
+font-size: 45px;
+font-weight:bold;
+color: white;
+text-transform: uppercase;
+text-align: center;
+/* padding-top: 120px; */
+}
+.our_textJD_q {
+background-image: url("../images/q-banner.png");
+width: 100%;
+height : 100%;
+line-height:300px;
+float: left;
+font-size: 45px;
+font-weight:bold;
+color: white;
+text-transform: uppercase;
+text-align: center;
+/* padding-top: 120px; */
+}
+.our_textJD_hotdeal {
+background-image: url("../images/free-board.png");
+width: 100%;
+height : 100%;
+line-height:300px;
+float: left;
+font-size: 45px;
+font-weight:bold;
+color: white;
+text-transform: uppercase;
+text-align: center;
+/* padding-top: 120px; */
+}
+
+
+
+.write-box {
+  border: 2px, black;
+  padding-top: 30px;
+  padding-left: 87%;
+}
+.page_center {
+  display : flex;
+  margin : auto;
+  /* width: 42px; */
+}
+
+.btn-outline-successJD {
+  color: #0d6efd;
+  background-color: transparent;
+  background-image: none;
+  border-color: #0d6efd;
+}
+.btn-outline-successJD:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+#community-title {
+  color: #ffb607;
+}
+.temp-height {
+  min-height: 500px;
+}
+.form-selectJd {
+  margin-left: 45px;
+  margin-right: 8px;
+  display: block;
+  width: 20%;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  -moz-padding-start: calc(0.75rem - 3px);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.swal-text {
+  text-align: center;
+} 
+
+      </style>
+
+    </head>
+    
+<script>
+  // 뒤로가기하면 자동으로 새로고침 (조회수 반영을 위해)
+  window.onpageshow = function(e) {
+    if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
+      window.location.reload();
+    }
+  }
+</script>
+  <body>
+    
+  <!-- header section start -->
+  <div class="header_section windowWidth">
+    <div class="container-fluid windowWidth">
+      <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+        <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+            <li class="nav-item"><a class="nav-link" href="main">커뮤니티</a></li>
+            <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+          </ul>
+          <div class="login-bt">
+            <ul>
+              <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+              <li class="loginId" data-th-if="${session.loginMember != null}" th:id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
+              <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- header section end -->
+      
+      <!-- furnitures section start -->
+      <div class="board-list-wrapper">
+         <!-- <a href="main"><h1 class="container" id="community-title" >커뮤니티</h1></a> -->
+         <div class="nav-line">
+           <ul class="nav nav-pills nav-justified windowWidth">
+             <li class="nav-item"><a class="nav-link" href="list?no=1">자유게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=2">식단게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=3">챌린지게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=4">질문게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=5">핫딜게시판</a></li>
+           </ul>
+         </div>
+            <!-- 게시판 제목과 내용 -->
+            <a data-th-href="@{list(no=${catenoInBoard.cateno})}">
+              <div class="category-name-wrapper">
+                <div data-th-if="${catenoInBoard.cateno} == 1" class="our_textJD_free windowWidth" id="cateName"></div>
+                <div data-th-if="${catenoInBoard.cateno} == 2" class="our_textJD_food windowWidth" id="cateName"></div>
+                <div data-th-if="${catenoInBoard.cateno} == 4" class="our_textJD_q windowWidth" id="cateName"></div>
+                <div data-th-if="${catenoInBoard.cateno} == 5" class="our_textJD_hotdeal windowWidth" id="cateName"></div>
+              </div>
+            </a>
+            
+            <div class="furnitures_section2 layout_padding-jd windowWidth">
+             <div class="container">
+               <div class="row">
+                  <!-- 게시글 목록 시작 -->
+              <div style="min-width: 960px; max-width: 960px">
+               <span style="font-weight: lighter; float: left;" data-th-if="${search.keyword != null}" 
+                    data-th-text="'&lsquo;' + ${search.typeName} + '&rsquo;' + '에 '   + '&lsquo;' + ${search.keyword} + '&rsquo;' +' 을(를) 포함한 검색결과 입니다.'">
+               </span>
+              </div>
+                  <table class="my-page">
+                    <tr>
+                      <th style="width: 10%;">번호</th>
+                      <th style="width: 61%">제목</th>
+                      <th style="width: 7%">작성자</th>
+                      <th style="width: 7%">조회수</th>
+                      <th style="width: 13%">등록일</th>
+                    </tr>
+                    <tr th:each="board : ${list}">
+                      <td th:text="${board.no}">100</td>
+                      <td style="text-align: left;"><a href='detail?no=1'
+                          th:href="@{detail(no=${board.no})}"
+                          th:text="${board.title == ''} ? '(제목없음)' : ${board.title}">제목없음</a></td>
+                      <td th:text="${board.writer.nickname}">유길동</td>
+                      <td th:text="${board.viewCount}">17</td>
+                      <td th:text="${board.createdDate}">2022-1-1</td>
+                    </tr>
+                  </table>
+                  <!-- 게시글 목록 끝 -->
+                  <div class="write-box windowWidth">
+                    <div id="postButton" class="btn btn-primary write-button" th:value="@{form(cateno=${catenoInBoard.cateno})}" role="button" style="margin-right: 80px;">글쓰기</div>
+                  </div>
+<!--                   <li class="write-box">
+                    <div id="postButton" class="btn btn-primary" th:value="@{form(cateno=${catenoInBoard.cateno})}" role="button">글쓰기</div>
+                  </li> -->
+                  <!-- 페이징 버튼 시작 -->
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <div class="page_center">
+                        <li class="page-item" th:if="${pageMaker.prev}">
+                          <a class="page-link" th:href="@{list(page=${pageMaker.startPage-1}, no=${catenoInBoard.cateno})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <th:block th:if="${pageMaker.endPage != 0}" th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                          <li data-th-id="${'pageButton' + pageNum}"  class="page-item">
+                            <a data-th-if="${search.keyword == null}" class="page-link" th:href="@{list(page=${pageNum}, no=${catenoInBoard.cateno})}"><i th:text="${pageNum}"></i></a>
+                            <a data-th-if="${search.keyword != null}" class="page-link" th:href="@{list(page=${pageNum}, no=${catenoInBoard.cateno}, keyword=${search.keyword}, type=${search.type})}"><i th:text="${pageNum}"></i></a>
+                          </li>
+                        </th:block>
+                        <li class="page-item" th:if="${pageMaker.next && pageMaker.endPage > 0}">
+                          <a data-th-if="${search.keyword == null}" class="page-link" th:href="@{list(page=${pageMaker.endPage+1}, no=${catenoInBoard.cateno})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                          <a data-th-if="${search.keyword != null}" class="page-link" th:href="@{list(page=${pageMaker.endPage+1}, no=${catenoInBoard.cateno}, keyword=${search.keyword}, type=${search.type})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </div>
+                    </ul>
+                  </nav>
+                  <!-- 페이징 버튼 끝 -->
+                 <nav class="navbar navbar-light windowWidth">
+                 <div style="margin: auto">
+                  <!-- 검색 버튼 시작 -->
+                  <form class="form-inline" action='list' method="GET">
+                    <input data-th-value="${catenoInBoard.cateno}" type="hidden" name="no" aria-label="category">
+                    <select id="searchId" class="form-selectJd" name="type">
+                        <option value="T">제목</option>
+                        <option value="C">내용</option>
+                        <option value="W">작성자</option>
+                        <option value="TC">제목 + 내용</option>
+                        <option value="TW">제목 + 작성자</option>
+                        <option value="TCW">제목 + 내용 + 작성자</option>
+                    </select>   
+                    <input class="form-control mr-sm-2 search-border" type="search" name="keyword" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-successJD my-2 my-sm-0" type="submit" id="searchButton">Search</button>
+                  </form>
+                  <!-- 검색 버튼 끝 -->
+                </div>
+                 </nav>
+            </div>
+         </div>
+
+        </div>
+      </div>
+      <!-- furnitures section end -->
+      <!-- Javascript files-->
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/popper.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <script src="../js/plugin.js"></script>
+      
+      <!-- sidebar -->
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <!-- <script src="../js/custom.js"></script> --><!-- 검색때매 우선 막자 --> 
+      
+      <!-- javascript --> 
+      <!-- <script src="../js/owl.carousel.js"></script> -->
+      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
+      
+      <!-- 공식부트스트랩 JS -->
+      <script src="../js/bootstrap/bootstrap.js"></script>  
+      <!-- sweetalert -->
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+      <script>
+      "use strict"
+      document.getElementById('postButton').addEventListener('click', checkLogin);
+      
+      // 로그인 회원 번호 저장
+      let loginMemberNo = -1;
+      if($(".loginId").attr("id") != -1) {
+       loginMemberNo = $(".loginId").attr("id");
+      };
+      
+      // 비회원일때 로그인으로 유도
+      function checkLogin() {
+        if (loginMemberNo == undefined || loginMemberNo == -1) {
+          swal({
+            text :  "회원만 이용가능합니다.\n로그인하시겠습니까?",
+            icon : "warning",
+            buttons : ["아니요", "예"],
+          }).then(function(isConfirm) {
+            if (isConfirm) {
+              location.href = '../auth/form';
+            } else{
+              return false;
+            }
+          });
+        } else{
+          location.href = $("#postButton").attr("value"); 
+        }
+      }
+      
+      // 검색기능 목록일 때 검색조건의 type을 selected하기 위한 메서드 
+      const searchOption = $("select").children();
+      for (let i = 0; i < searchOption.length; i++) {
+    	  if (searchOption.eq(i).val() == "[[${search.type}]]") {
+    		  $('#searchId').find("option").eq(i).attr("selected", true)
+    	  }
+      } 
+      
+      window.addEventListener('DOMContentLoaded', function findCategory() {
+          var param = window.location.search.match(/no=([^&]*)/)[1];
+            switch(param) {
+              case '1' :
+                document.getElementById( 'cateName' ).innerHTML = "자유게시판";
+                break;
+              case '2' :
+                document.getElementById( 'cateName' ).innerHTML = "식단게시판";
+                break;
+              case '3' :
+                document.getElementById( 'cateName' ).innerHTML = "챌린지게시판";
+                break;
+              case '4' :
+                document.getElementById( 'cateName' ).innerHTML = "질문게시판";
+                break;
+              case '5' :
+                document.getElementById( 'cateName' ).innerHTML = "핫딜게시판";
+          }
+        });
+        
+        window.addEventListener('DOMContentLoaded', function(){
+          var param = 1; 
+          if (window.location.search.match(/page=([^&]*)/) != null) {
+            param = window.location.search.match(/page=([^&]*)/)[1];
+          } 
+          $('#pageButton' + param).addClass('active');
+        });
+
+      </script>
+   </body>
+
+         
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.FavoriteRegionDao">
+
+  <resultMap type="FavoriteRegion" id="favoriteRegionMap">
+    <result column="rno" property="rno"/>
+    <result column="mno" property="mno"/>
+  </resultMap>
+  
+  <!-- 관심지역 등록  -->
+  <insert id="insertRegion" parameterType="member">
+    INSERT INTO 
+      favorite_region(rno,mno)
+    VALUES
+      <foreach collection="favoriteRegion" item="region" separator=",">
+        (#{region.rno},#{no})
+      </foreach>
+  </insert>
+  
+  <!-- 관심지역 수정  -->
+  <select id="findAllRegionNosByMemberNo" parameterType="int" resultMap="favoriteRegionMap">
+    SELECT * 
+    FROM 
+      favorite_region 
+    WHERE 
+      mno=#{memberNo}
+  </select>
+  
+   <update id="updateRegion" >
+      UPDATE
+        favorite_region
+      SET 
+         rno = #{regionDomain}
+      WHERE 
+        mno=#{mno} 
+      AND 
+        rno=#{regionDomain}
+  </update>
+  
+  <delete id="deleteFavoriteRegion" parameterType="int">
+    delete 
+    from 
+      favorite_region 
+    where 
+      mno=#{memberNo}
+  </delete>
+  
+
+</mapper>
+
+
+

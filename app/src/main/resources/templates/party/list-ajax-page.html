@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="partyPage">
+      <!-- 페이징 버튼 시작 -->
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <div class="page_center">
+            <li class="page-item" th:if="${pageMaker.prev}">
+              <button type="button" th:value="${pageMaker.startPage-1}" id="prevPage" class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </button>
+            </li>
+            <th:block th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+              <li data-th-id="${'pageButton' + pageNum}" class="page-item">
+                <button type="button" th:value="${pageNum}" class="page-link pageNum"><i th:text="${pageNum}"></i></button>
+              </li>
+            </th:block>
+            <li class="page-item" th:if="${pageMaker.next && pageMaker.endPage > 0}">
+              <button type="button" th:value="${pageMaker.endPage+1}" id="nextPage"  class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </li>
+          </div>
+        </ul>
+      </nav>
+      <!-- 페이징 버튼 끝 -->
+  </th:block>
+
+</body>
+</html>

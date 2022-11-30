@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+      <title>여기모여</title>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <!-- site metas -->
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="../css/style2.css">
+      <!-- Responsive-->
+      <!-- fevicon -->
+      <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <!-- Tweaks for older IEs-->
+      <!-- owl stylesheets --> 
+      <!-- 공식부트스트랩 CSS -->
+      <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+      <!-- summernote 관련 소스 -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<style>
+.post_form1 {
+  width: 800px;
+  height: 40px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: black;
+  width:1100px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.post_form2 {
+  float: left;
+  margin: 10px 0px;
+}
+
+.furnitures_sectionJD {
+  width: 100%;
+  min-height: 800px;
+  float: left;
+  padding-bottom: 90px;
+  margin-left: 60px;
+}
+
+.post_button_box {
+  width: 800px;
+  margin-left: 77%;
+}
+
+.btn-outline-secondary {
+  margin-top: 10px;
+  color: #0d6efd;
+  background-color: #ffffff00;
+  border: 1px solid grey;
+}
+.btn-outline-secondary:hover {
+  color: #ffffff;
+  background-color: #0d6efd;
+  transition: all .3s ease;
+}
+</style>
+</head>
+<body>
+	<!-- header section start -->
+	<div class="header_section">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+						<li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+					</ul>
+					<div class="login-bt">
+            <ul>
+              <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+              <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+            </ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<!-- header section end -->
+	<!-- furnitures section start -->
+	<div class="furnitures_sectionJD layout_padding">
+		<div class="row"  style="justify-content: center;">
+			<!-- 게시글 수정폼 시작 -->
+				<form class="post_max_box" action='update' method="post" enctype="multipart/form-data" style="margin-left: 7%;">
+				  <input id="boardNo" name='no' type="hidden" data-th-value="${notice.no}">
+					<table class="table_form" style="width:1100px">
+						<tr>
+							<td><input class="post_form1"  name='title' type='text' value='제목'data-th-value='${notice.title}' size='60'></td>
+						</tr>
+						<tr>
+							<td><textarea class="form-content" id="summernote" name='content' th:text="${notice.content}"></textarea></td>
+						</tr>
+            <tr>
+              <td><input class="post_form2" name='file' type="file"></td> 
+            </tr>
+					</table>
+           <div class="post_button_box">
+              <input class="btn btn-outline-secondary" id="subBtn" type="button" value="수정" onclick="goWrite(this.form);"/>
+              <input class="btn btn-outline-secondary none" id="subBtn" type="button" value="취소" data-th-onclick="@{'cancel(' + ${notice.no} + ')'}" />
+           </div>
+				</form>
+			</div>
+			<!-- 게시글 수정폼 끝 -->
+		</div>
+	<!-- furnitures section end -->
+
+  <!-- Javascript files-->
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/jquery-3.0.0.min.js"></script>
+  <!-- sidebar -->
+  <!-- javascript  -->
+  <!-- 공식부트스트랩 JS -->
+  <script src="../js/bootstrap/bootstrap.js"></script>   
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     
+	<script>
+  function goWrite(frm) {
+    var title = frm.title.value;
+    var content = frm.content.value;
+    if (title.trim() == '') {
+    	swal('','제목을 입력해주세요','warning');
+        return false;
+  }
+    if (content.trim() == '') {
+        swal('','내용을 입력해주세요','warning').then(() =>{
+            return false;
+        });      } else {
+            swal({
+                text : "게시글을 수정하시겠습니까?",
+                icon : "info",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                  frm.submit();
+                } else{
+                  return false;
+                }
+            });
+        }
+    
+    }
+  
+  // 썸머노트
+  $(document).ready(function() {
+	    $('textarea[name=content]').summernote({height: 500});
+	  });
+  </script>
+  
+  <script>
+  // 수정 취소
+  function cancel(no) {
+        swal({
+              text : "수정을 취소하시겠습니까?",
+              icon : "warning",
+              buttons : ["아니요", "예"],
+            }).then(function(isConfirm) {
+              if (isConfirm) {
+                window.location.href = 'detail?no=' + no;
+              } else {
+                  return false;
+            }
+          });
+  }
+  
+</script>
+<script>
+ // 뒤로가기하면 자동으로 새로고침 (조회수 반영을 위해)
+ window.onpageshow = function(e) {
+   if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
+     window.location.reload();
+   }
+ }
+</script>
+</body>
+</html>

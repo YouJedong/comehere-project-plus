@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- mobile metas -->
+<!-- site metas -->
+<title>여기모여</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="../css/style2.css">
+<!-- Responsive-->
+<!-- fevicon -->
+<link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<!-- Tweaks for older IEs-->
+<!-- owl stylesheets -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+
+.party_detail_img {
+  margin: 0 auto;
+  width: auto;
+  max-height: 200px;
+  max-width: 300px;
+}
+
+.layout_padding_party {
+  min-width: 825px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color: white;
+}
+
+.party_detail_bar {
+  width: 100%;
+  height: 50px;
+  float: left;
+  margin: 0 auto;
+}
+
+.party_detail_buttons {
+  width: 825px;
+  height: 40px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.party_detail_content {
+  overflow-y: scroll;
+  width: 470px;
+  height: 200px;
+}
+
+.party_detail_content_l {
+  width: 330px;
+  float: left;
+}
+
+.party_detail_content_r {
+  width: 470px;
+  float: left;
+}
+
+.party_detail_content_r span {
+  font-size: 1.2em;
+}
+
+.profile {
+  opacity: 1;
+  display: block;
+  width: 50px;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.profile_wrap {
+  width: 330px;
+  min-height: 70px;
+  overflow: hidden;
+  margin-top: 25px;
+}
+
+.profile_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  float: left;
+}
+
+.profile_user {
+  width: 280px;
+  float: left;
+  margin-top: 25px;
+  transform: translateY(-50%);
+}
+    
+.profile_user > span {
+  font-size: large;
+  margin-left: 5px;
+}
+    
+.party_detail_view {
+  width: 825px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.dololr_text_region {
+  float: left;
+  color: #121111;
+  margin-left: 3px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  height: 25px;
+  
+  font-size: small;
+  font-weight: bold;
+  
+  border-radius: 5px;
+  padding: 0px 5px 5px 5px;
+}
+
+.dololr_text_sports {  
+  float: left;
+  color: #121111;
+  margin-left: 3px;
+  margin-top: 0px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+  height: 25px;
+
+  font-size: small;
+  font-weight: bold;
+  
+  border-radius: 5px;
+  padding: 0px 5px 5px 5px;
+}
+  
+      
+.party_detail_thumbnail_wrap {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 46px 2px 45px 2px;
+                  width: 310px;
+    height: 210px;
+    display: flex;
+     justify-content: center; 
+     align-items: center;
+}
+    
+.party_detail_r_cont {
+  margin-bottom: 10px;
+}
+.party_detail_r_cont > span{
+  font-size: medium;
+}
+.my-page {
+    text-align: center;
+    margin: 30px 0;
+}
+.btn-outline-secondary {
+  margin: 0px;
+  padding: 3px 8px;
+}
+.profile {
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  margin: 0 auto;
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%;
+}
+  
+  .condition_button {
+    margin: 10px auto;
+    position: absolute;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-size: small;
+    color: #0d6efd;
+          background-color: transparent;
+          background-image: none;
+          border: 1px solid #0d6efd;
+      transform: translateX(-50%);
+      left: 50%;
+    
+  }
+  .condition_button:hover {
+          color: #fff;
+          background-color: #0d6efd;
+          border-color: #0d6efd;
+        }
+        
+</style>
+</head>
+<body>
+	<!-- header section start -->
+	<div class="header_section">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="main_logo">
+					<a href="/app"><img src="../images/logo.png"></a>
+				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+						<li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+					</ul>
+					<div class="search_icon">
+						<ul>
+							<li data-th-if="${session.loginMember == null}"><a href="auth/form">로그인</a></li>
+							<li data-th-if="${session.loginMember != null}"><a href="../mypage/my-post">마이페이지</a></li>
+							<li data-th-if="${session.loginMember != null}"><a href="auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<!-- header section end -->
+	<!-- contact section start -->
+	<div class="contact_section layout_padding">
+		<div class=info>
+			<ul class="infoMenu">
+				<li class="menu"><a href="../mypage/my-post"><span>나의 활동</span></a></li>
+				<li class="menu"><a href="../mypage/my-party"><span class="menu-on">모임 관리</span></a></li>
+				<li class="menu"><a href="../member/viewer"><span>회원 정보 변경</span></a></li>
+			</ul>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="mail_sectin">
+						<div class="sort_area">
+							<a href="my-party" class="link_sort">내가 만든 모임</a>
+							<a href="join-party" class="link_sort">참여 중인 모임</a>
+							<a href="end-party" class="link_sort">종료된 모임</a>
+						</div>
+						<div class="furnitures_section2 layout_padding_party">
+							<div class="party_detail_bar">
+								<div class="party_detail_buttons">
+									  <p class="dololr_text_region" th:text="${party.region.sido}"></p>
+                  <p style="float: left; font-size: x-small; margin: 0px;">|</p>
+                    <p class="dololr_text_region" th:text="${party.region.sigu}"></p>
+                  <p style="float: left; font-size: x-small; margin: 0px;">|</p>
+                    <p class="dololr_text_sports" th:text="${party.sports.name}"></p>
+                    <button th:if="${session.loginMember} != null and ${session.loginMember.no} != ${party.user.no}" class="btn btn-primary dololr_text_tatlle btn-modal" data-th-id="${party.user.no}" type="button" role="button">신고</button>
+                  </div>
+							</div>
+							<div class="party_detail_view">
+								<div class="party_detail_content_l">
+                  <div class="party_detail_thumbnail_wrap">
+                    <div style="margin: auto 0; display: flex; justify-content: center; align-items: center;">
+  										<img th:if="${party.thumbnail != null}" th:src="@{'/party/files/' + ${party.thumbnail}}" alt="Avatar" class="image party_detail_img"> 
+                      <img th:if="${party.thumbnail == null}" src="/app/party/files/nothumbnail.png" alt="Avatar" class="image party_detail_img">
+                    </div>
+                  </div>
+									<div class="profile_wrap">
+										<div class="profile_img">
+                      <img th:src="@{'/member/files/' + ${party.user.filepath}}" alt="Avatar" class="profile" onerror="this.src='../images/default-profile-pic.png';" > 
+										</div>
+										<div class="profile_user">
+											<span data-th-text='${party.user.nickname}'>홍길동</span> 
+                      <span data-th-text='${party.user.ageGroup}'>90대</span> 
+											<span data-th-text="${party.user.sex} == true ? '남자' : '여자'">성별</span>
+										</div>
+									</div>
+								</div>
+								<div class="party_detail_content_r">
+                  <div style="border-bottom: 1px solid gray; margin-bottom: 5px;">
+										<input type="hidden" data-th-value="${party.no}" id="partyNo">
+										<h1 data-th-text='${party.title}'></h1>
+									</div>
+                    <div class="party_detail_r_cont">
+										<div style="position: relative; height: 30px;" data-th-if="${party.star} == 0 and ${party.star} < 0.5"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star0.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 0.5 and ${party.star} < 1"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star05.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 1 and ${party.star} < 1.5"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star10.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 1.5 and ${party.star} < 2"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star15.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 2 and ${party.star} < 2.5"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star20.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 2.5 and ${party.star} < 3"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star25.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 3 and ${party.star} < 3.5"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star30.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 3.5 and ${party.star} < 4"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star35.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 4 and ${party.star} < 4.5"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star40.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} >= 4.5 and ${party.star} < 5"><div style="position: absolute; top: 1.6px;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star45.png" style="height:23px;"></div></div>
+                    <div style="position: relative; height: 30px;" data-th-if="${party.star} == 5"><div style="position: absolute;">
+                    <span style="font-size: large;" class="reviewStarVal" th:value="${party.star}" th:text="${party.star}"></span></div>
+                    <div style="position: absolute; top: 2px; left: 30px;"><img src="/app/review/star/star50.png" style="height:23px;"></div></div>
+                  </div>
+                    <div class="party_detail_r_cont">
+											<div class="party_detail_content" th:utext="${party.content}"></div>
+										</div>
+                    <div class="party_detail_r_cont">
+											<span>모임일자 : </span> 
+                      <span data-th-text="${#dates.format(party.partyDate, 'yy/MM/dd')}"></span>
+										</div>
+                    <div class="party_detail_r_cont">
+											<span>모임시간 : </span> 
+                      <span data-th-text="${#dates.format(party.partyTime, 'HH시mm분')}"></span>
+										</div>
+											<span>모집인원 : </span> <span data-th-text="${party.headCount} + '명'"></span>
+										</div>
+									</div>
+                  <div style="width: 100%; height: 50px; position: relative;">
+                    <button type="button" name="partyEndBtn" th:id="${party.partyDate}" th:onclick="partyEnd(this.getAttribute('id'))" class="condition_button">모임 종료</button>
+                  </div>
+									<p style="width: 470px; float: left; margin-bottom: 20px;" text=" "></p>
+								<!-- 신청한 멤버들 보이게 -->
+								<table class="my-page">
+									<thead style="border-bottom: 1px solid grey;">
+										<tr>
+											<th style="width:5%"></th>
+											<th style="width:15%">프로필</th>
+											<th style="width:15%">닉네임</th>
+											<th style="width:15%">연령대</th>
+											<th style="width:15%">성별</th>
+											<th style="width:30%">비고</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-th-each="myPartyMember , i : ${myPartyMembers}">
+											<td>
+												<div class="FormInputCheck">
+													<label data-th-for="'check_article_' + ${myPartyMember.member.no}" class="label"> <span class="blind">[[${i.count} + (((${pageMaker.cri.page}) - 1) * ${pageMaker.cri.perPageNum})]]</span>
+													</label>
+												</div>
+											</td>
+											<td>
+											   <img class="profile" th:src="@{'/member/files/' + ${myPartyMember.member.filepath}}">
+											</td>
+											<td data-th-text="${myPartyMember.member.nickname}">17</td>
+											<td data-th-text="${myPartyMember.member.ageGroup}">17</td>
+											<td data-th-text="${myPartyMember.member.sex} == true ? '남자' : '여자'">17</td>
+											<td>
+											  <div style="width: 120px; overflow: hidden; margin: auto;">
+													<div style="width: 55px; float: left;">
+														<form action="partymember-update">
+															<input type="hidden" name="status" value="2">
+															<input type="hidden" name="memberNo" data-th-value="${myPartyMember.member.no}">
+															<input type="hidden" name="partyNo" data-th-value="${party.no}">
+															<input type="button" class="btn btn-outline-secondary" data-th-id="${myPartyMember.member.no} + 'ok'" value="승인" th:onclick="|javascript:checkHeadCount('${party.no},${myPartyMember.member.no}')|">
+														</form>
+													</div>
+													<div style="width: 55px; float: left;">
+														<form action="partymember-update">
+															<input type="hidden" name="status" value="3">
+															<input type="hidden" name="memberNo" data-th-value="${myPartyMember.member.no}">
+															<input type="hidden" name="partyNo" data-th-value="${party.no}">
+															<input type="button" class="btn btn-outline-secondary" data-th-id="${myPartyMember.member.no} + 'no'" value="거절" th:onclick="|javascript:noMember('${party.no},${myPartyMember.member.no}')|">
+														</form>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- contact section end -->
+
+	<!-- Javascript files-->
+	<!--       <script src="js/jquery.min.js"></script> -->
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<!-- sidebar -->
+	<!-- javascript -->
+<script>
+function joinInfoSubmit() {
+	var form = document.getElementById("joinForm");
+	console.log(form);
+	const formData = new FormData(form);
+	const request = new XMLHttpRequest();
+	request.open("POST", "/app/sign-up");
+	request.send(formData);
+}
+</script>
+  
+  <script type="text/javascript">
+
+$('.reviewStarVal').ready(function () {
+  
+  let starArr = [];
+  let starVal = $('.reviewStarVal').val();
+  console.log(starVal);
+}
+    
+    
+    );
+
+
+$('.profile').ready(function () {
+  const img = new Image();
+  const imgSize = "";
+  let[imgUrl, imgPath] = $('.profile').attr('src').split('files/');
+  img.src = imgPath;
+    console.log(imgPath);
+    console.log(img.src);
+    console.log(imgPath.height);
+    console.log(imgPath.width);
+  if (img.width > img.height) {
+    imgSize = img.height;
+    console.log(imgSize + "dd");
+    $('.profile').css('max-height', imgSize);
+  } else if (img.width < img.height) {
+    imgSize = img.width;
+    console.log(imgSize + "dd");
+    $('.profile').css('max-width', imgSize);
+  }
+  
+});
+
+
+function partyEnd(pdate) {
+	console.log("들어온 모임일자" + pdate);
+	let partyNo = $('#partyNo').val();
+	console.log("들어온 모임번호" + partyNo);
+	var now = new Date();
+	var partyDate = new Date(pdate);
+	console.log(now + " " + partyDate);
+	if(pdate){
+		  if(partyDate > now){
+		    console.log("모임 일자가 현재 날짜보다 빠릅니다.");
+		    swal({
+                text: '모임 일자가 현재 날짜보다 빠릅니다.',
+                icon: 'success',
+                closeOnClickOutside: false
+              });
+		  } else {
+			  swal({
+		          text : "모임을 종료하시겠습니까?",
+		          icon : "warning",
+		          buttons : ["아니요", "예"],
+		        }).then(function(isConfirm) {
+		          if (isConfirm) {
+		        	  $.ajax({
+		        		  type: "GET",
+		              url: "/app/party/party-end-ajax",
+		              data: { no: partyNo },
+		              success: function(result) {
+		            	  $('button[name=partyEndBtn]').css('display', 'none');
+		            swal({
+		                text: '모임이 종료되었습니다.',
+		                icon: 'success',
+		                closeOnClickOutside: false
+		              }).then(() => {
+		                console.log("dhk");
+		                window.location.href="my-party";
+		              });
+		              }
+		        	  });
+		          } else {
+		              return false;
+		          }
+		              
+		          });
+		        	  
+		  }
+		  }
+		  
+	
+	
+}
+
+</script>
+<script type="text/javascript">
+function checkHeadCount(noData) {
+	let [pno, mno] = noData.split(",");
+	$.ajax({
+        type: "GET",
+        url: "/app/mypage/check-headcount-ajax",
+        data: { partyNo: pno },
+        success: function(result) {
+        	if (result == "1") {
+                swal({
+                    text: '승인되었습니다.',
+                    icon: 'success',
+                    closeOnClickOutside: false
+                    }).then(function(isConfirm) {
+                        if (isConfirm) {
+                            location.href="partymember-update?status=2&memberNo=" + mno + "&partyNo=" + pno;
+                            } else{
+                                return false;
+                            };
+              });
+        	} else if (result == "0") {
+          	swal({
+            text: '모임이 정원을 초과했습니다.',
+            icon: 'error',
+            closeOnClickOutside: false
+            });
+        	}
+        }
+      });
+	
+}
+
+function noMember(noData) {
+	 let [pno, mno] = noData.split(",");
+	swal({
+        text: '거절되었습니다.',
+        icon: 'success',
+        closeOnClickOutside: false
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+            	location.href="partymember-update?status=3&memberNo=" + mno + "&partyNo=" + pno;
+              } else{
+                  return false;
+              };
+});
+}
+</script>
+  
+  
+</body>
+
+</html>

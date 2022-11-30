@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+<title>여기모여</title>
+      <meta charset="utf-8">
+      <!-- basic -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- mobile metas -->
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <!-- Responsive-->
+      <!-- <link rel="stylesheet" href="../css/responsive.css"> -->
+      <!-- fevicon -->
+      <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <!-- <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"> -->
+      <!-- Tweaks for older IEs-->
+      <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+      <!-- owl stylesheets --> 
+      <!-- <link rel="stylesheet" href="../css/owl.carousel.min.css"> -->
+      <!-- <link rel="stylesheet" href="../css/owl.theme.default.min.css"> -->
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"> -->
+      
+      <!-- summernote 관련 소스 -->
+      <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+      
+      <!-- 공식부트스트랩 CSS -->
+      <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+      
+      <style>
+.windowWidth {
+  max-width:1130px !important;
+  min-width:1130px !important;
+  margin: auto !important;
+  float: none !important;
+}
+.nav-line {
+  border-bottom: 1px solid #e4e8eb;
+  border-top: 1px solid #e4e8eb;
+  margin-bottom: 30px;
+}
+
+        .our_textJD {
+        width: 100%;
+        float: left;
+        font-size: 36px;
+        color: #121111;
+        text-transform: uppercase;
+        text-align: center;
+        padding-top: 90px;
+        }
+        
+.furnitures_sectionJD {
+  width: 100%;
+  min-height: 800px;
+  float: left;
+  padding-bottom: 90px;
+  margin-left: 60px;
+}
+        
+        .write-box {
+          border: 2px, black;
+          padding-top: 30px;
+          padding-left: 87%;
+        }
+        .page_center {
+          display : flex;
+          margin : auto;
+          /* width: 42px; */
+        }
+        .title-min-width {
+          min-width: 700px;
+        }
+        
+        .btn-outline-successJD {
+          color: #0d6efd;
+          background-color: transparent;
+          background-image: none;
+          border-color: #0d6efd;
+        }
+        .btn-outline-successJD:hover {
+          color: #fff;
+          background-color: #0d6efd;
+          border-color: #0d6efd;
+        }
+
+        #community-title {
+          color: #ffb607;
+        }
+        
+.post_form2 {
+  width: 200px;
+  float: left;
+  margin: 10px 0px;
+}
+.in-img {
+    width: 188.398px;
+    min-height: 240px;
+    max-height: 240px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.clg1 {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #eaedf4;
+    border-radius: 12px;
+    width: 210px;
+}
+.clg2 {
+    float: right;
+    padding: 10px;
+    border: 1px solid #eaedf4;
+    border-radius: 12px;
+    width: 740px;
+    height: 312px;
+}
+.post_form1 {
+  height: 40px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: black;
+  width:100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+.post_form3 {
+  height: 40px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: black;
+  width:100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+.post_button_box {
+  width: 800px;
+  margin-left: 910px;
+}
+        
+      </style>
+      
+    </head>
+    
+    <body>
+  <!-- header section start -->
+  <div class="container-fluid windowWidth">
+    <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+      <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+          <li class="nav-item"><a class="nav-link" href="main">커뮤니티</a></li>
+          <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+        </ul>
+        <div class="login-bt">
+          <ul>
+            <li th:if="${session.loginMember == null}" ><a href="../auth/form" >로그인</a></li>
+            <li class="loginId" th:if="${session.loginMember != null}" th:id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
+            <li th:if="${session.loginMember != null}"><a href="../auth/logout" th:text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+  <!-- header section end -->
+      <!-- furnitures section start -->
+      <!-- 게시판 카테고리 이동 시작 -->
+      <div class="nav-line">
+        <ul class="nav nav-pills nav-justified windowWidth">
+          <li class="nav-item"><a class="nav-link" href="list?no=1">자유게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="list?no=2">식단게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="list?no=3">챌린지게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="list?no=4">질문게시판</a></li>
+          <li class="nav-item"><a class="nav-link" href="list?no=5">핫딜게시판</a></li>
+        </ul>
+      </div>
+      <!-- 게시판 카테고리 이동 끝 -->
+      
+      <div class="furnitures_sectionJD layout_padding windowWidth">
+         <div class="container cate-bottom-line">
+           <!-- main_글작성 -->
+                <form class="post_max_box" action='add' method="post" enctype="multipart/form-data">
+                  <input id='cateno' type="hidden" name="cateno" data-th-value="${category.cateno}">
+                    <table class="table_form" style="width: 960px; margin: auto;">
+                    <tr data-th-if="${category.cateno == 3}">
+                      <td>
+                          <div class="clg1">
+                            <img id="previewImg" src="../images/nothumbnail.png" alt="Avatar" class="image party_detail_img in-img">
+                            <input class="post_form2 image_inputType_file btn btn-primary"  id="fileTag" name='file' type="file">
+                    <button type="button" class="btn btn-outline-secondary file" id="btn-upload">사진첨부</button>
+                          </div>
+                            <div class="clg2">
+                              <span style="color: gray; font-size: 1.3em;">챌린지게시판이란 무엇인가요?</span> <br>
+                              <span style="color: gray;"> 챌린지게시판은 도전과 성취를 통해 삶의 변화를 만드는 게시판입니다.</span><br><br>
+                              <span style="color: gray;font-size: 1.3em;">어떤 사람들이 참여하나요?</span> <br>
+                              <span style="color: gray;">자신만의 목표를 세우고 이를 달성하기 위해 노력하는 모든 분들이라면 누구나 참여할 수 있습니다.</span><br><br>
+                              <span style="color: gray;font-size: 1.3em;">어떻게 작성하나요?</span><br>
+                              <span style="color: gray; font-weight: bold">쓰고싶은 내용을 작성하고 챌린지 인증을 하기위한 대표인증사진을 한장 설정하시면 됩니다.</span><br> 
+                                
+                            </div>
+                          <div>
+                            <input class="post_form3" name='title' type='text'  size='60' placeholder="제목을 입력해주세요.">
+                          </div>
+                      </td>
+                    </tr>
+                    <tr data-th-if="${category.cateno != 3}">
+                      <td>
+                          <div>
+                            <input class="post_form1" name='title' type='text' size='60' placeholder="제목을 입력해주세요.">
+                          </div>
+                      </td>
+                    </tr>  
+                    <tr>
+                        <td>
+                            <textarea class="form-content" id="summernote" name="content"></textarea>
+                        </td>
+                    </tr>
+                    </table>
+                    <div class="post_button_box">
+                        <input class="btn btn-outline-secondary"  id="subBtn" type="button" value="등록" onclick="goWrite(this.form);" style="background-color: #0d6efd; color: white;"/>
+                        <input class="btn btn-outline-secondary none"  id="subBtn" type="button" value="취소" onclick="insertCancel()"style="color: black;"/>
+                    </div>
+                </form>
+        </div>
+      </div>
+        
+         
+      <script>
+      /*  summernote submit메서드 */ 
+       function goWrite(frm) {
+           var title = frm.title.value;
+           var content = frm.content.value;
+           if (title.trim() == '') {
+        	   swal('','제목을 입력해주세요','warning');
+        	       return false;
+           }
+           if (content.trim() == '') {
+        	   swal('','내용을 입력해주세요','warning').then(() =>{
+                 return false;
+             });
+           } else {
+               swal({
+                   text : "게시글을 등록하시겠습니까?",
+                   icon : "info",
+                   buttons : ["아니요", "예"],
+                 }).then(function(isConfirm) {
+                   if (isConfirm) {
+                	   frm.submit();
+                   } else{
+                     return false;
+                   }
+               });
+           }
+
+       }
+      
+      
+        $(document).ready(function() {
+           $('textarea').summernote({height: 700});
+        });
+      </script>
+      
+      <script type="text/javascript">
+      const cateNo = document.getElementById('cateno').value;
+      
+$('#fileTag').on('change', function () {
+    if(window.FileReader){
+       
+    } else {
+        var filename = $(this).val().split('/').pop().split('\\').pop();
+    }
+    $(this).prev().val(filename); //input upload-name 에 파일명 설정해주기
+
+    readImage($(this)[0]); //미리보기
+});
+
+function validFileType(filename) {
+    const fileTypes = ["png", "jpg", "jpeg"];
+return fileTypes.indexOf(filename.substring(filename.lastIndexOf(".")+1, filename.length).toLowerCase()) >= 0;
+}
+
+function validFileSize(file){
+    if(file.size > 5000000){ //5MB
+        return false;
+    }else{
+        return true;
+    }
+}
+
+//이미지 띄우기
+function readImage(input) {
+    if(input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e){
+            const previewImage = document.getElementById("previewImg");
+            previewImage.src = e.target.result;
+        }
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+function insertCancel() {
+	swal({
+        text : "게시글을 등록을 취소하시겠습니까?",
+        icon : "info",
+        buttons : ["아니요", "예"],
+      }).then(function(isConfirm) {
+        if (isConfirm) {
+        	location.href='list?no=' + cateNo;
+        } else{
+          return false;
+        }
+    });
+}
+
+$(function () {
+    $('#btn-upload').click(function (e) {
+      e.preventDefault();
+      $('#fileTag').click();
+      });
+    });
+</script>
+      
+      <!-- Javascript files-->
+      <!-- <script src="../js/jquery.min.js"></script> -->
+      <!-- <script src="../js/popper.min.js"></script> -->
+      <!-- <script src="../js/bootstrap.bundle.min.js"></script> -->
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <script src="../js/plugin.js"></script>
+      
+      <!-- sidebar -->
+      <!-- <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script> -->
+      <!-- <script src="../js/custom.js"></script> -->
+      
+      <!-- javascript --> 
+      <!-- <script src="../js/owl.carousel.js"></script> -->
+      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
+      
+      <!-- sweetalert -->
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <!-- 공식부트스트랩 JS -->
+      <script src="../js/bootstrap/bootstrap.js"></script>
+
+    </body>
+
+</html>

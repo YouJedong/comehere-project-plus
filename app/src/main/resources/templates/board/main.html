@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+<title>여기모여</title>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- mobile metas -->
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+      <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <!-- Responsive-->
+      <!-- <link rel="stylesheet" href="../css/responsive.css"> -->
+      <!-- fevicon -->
+      <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <!-- <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"> -->
+      <!-- Tweaks for older IEs-->
+      <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+      <!-- owl stylesheets --> 
+      <!-- <link rel="stylesheet" href="../css/owl.carousel.min.css"> -->
+      <!-- <link rel="stylesheet" href="../css/owl.theme.default.min.css"> -->
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"> -->
+      
+      <!-- 공식부트스트랩 CSS -->
+      <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+      
+      <style>
+      .windowWidth {
+        max-width:1130px !important;
+        min-width:1130px !important;
+        margin: auto !important;
+        float: none !important;
+      }
+      
+      .nav-line {
+        border-bottom: 1px solid #e4e8eb;
+        border-top: 1px solid #e4e8eb;
+        margin-bottom: 30px;
+      }
+      
+      .category-name-wrapper {
+        border: 1px solid #e4e8eb;
+        background-color: #7e92c6; 
+        height: 300px;
+      }
+      
+      .table-jedong {
+        font-size: 17px;      
+        width: 100%;
+        margin-bottom: 1rem;
+        margin: auto;
+        color: var(--bs-table-color);
+        vertical-align: top;
+        border-color: var(--bs-table-border-color);
+        border-collapse: separate;
+        border-spacing: 0 20px;
+      }
+
+      .cate-button {
+        font-size: 15px;
+        text-align: center;
+        width: 70%;
+        border: 1px solid #e4e8eb;
+        border-radius: 12px;
+      }
+      
+      .cate-button {
+        text-align: center;
+        width: 70%;
+        border: 1px solid #e4e8eb;
+        margin: auto;
+        border-radius: 12px;
+        color: gray;
+      }
+      .cate-button:hover {
+        color: white;
+        background-color: #3B4BFF;
+      }
+      
+      #table-setting {
+        min-height: 100px; 
+      }
+      
+      #table-setting > :first-child {
+        width: 10%;
+      }
+      #table-setting > :nth-child(2) {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 70%;
+      }
+      #table-setting > :nth-child(3) {
+        color: gray;
+        width: 7%;
+      }
+      #table-setting > :nth-child(4) {
+        /* margin: 0 10px 0 10px;
+        background-size: cover; */ 
+        width: 2%; 
+        /* background-image: url(../images/view-icon2.png); */
+      }
+      #table-setting > :nth-child(5) {
+        color: gray;
+        font-size: 15px;
+        width: 7%;
+      }
+      .layout_padding-jedong {
+          padding-top: 50px;
+          padding-bottom: 0px;
+      }
+      
+
+      .clg {
+        display:inline-block;
+        min-height: 318px;
+        min-width: 19.5%;
+        padding:10px;
+        border: 1px solid #eaedf4;
+        border-radius: 12px;          
+      }
+      .clg-in {
+        position:absolute;
+        border-radius: 12px;
+      }
+      .clg-in-img {
+        width: 188.398px;
+        min-height: 240px;
+        max-height: 240px; 
+        border-radius: 12px;
+        object-fit: cover;
+      }
+      .clg-in-title {
+        position: relative;
+        height: 35px;
+        width:100%;
+      }
+      .clg-in-tt {
+        font-weight: bold;
+        margin: 0 10px 0 10px;
+        width: 170px;
+        min-height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 35px;
+      }
+      .clg-in-wt {
+        margin: 0 15px 0 10px;
+        width: 170px;
+        min-height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 22px;
+        font-size: 15px;
+        color: gray;
+      }
+      
+      .our_textJD {
+        background-image: url("../images/community_benner.png");
+        width: 100%;
+        height : 100%;
+        line-height:300px;
+        float: left;
+        font-size: 45px;
+        font-weight:bold;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+        /* padding-top: 120px; */
+        }
+        
+        .furnitures_sectionJD {
+          width: 100%;
+          min-height: 1300px;
+          float: left;
+          padding-bottom: 90px;
+        }
+        
+        .write-box {
+          border: 2px, black;
+          padding-top: 30px;
+          padding-left: 87%;
+        }
+        .page_center {
+          display : flex;
+          margin : auto;
+          /* width: 42px; */
+        }
+        .title-min-width2 {
+          min-width: 300px;
+        }
+        
+        .btn-outline-successJD {
+          color: #0d6efd;
+          background-color: transparent;
+          background-image: none;
+          border-color: #0d6efd;
+        }
+        .btn-outline-successJD:hover {
+          color: #fff;
+          background-color: #0d6efd;
+          border-color: #0d6efd;
+        }
+        
+        .cate-bottom-line {
+          border-bottom: 1px solid black;
+          border-top: 1px solid black;
+        }
+        
+        #community-title {
+          color: #ffb607;
+        }
+        
+        .mainList-title {
+          font-size: 27px;
+          font-weight: bold;
+          margin-bottom:  25px;
+        }
+        
+        .row1 {
+          width: 100%;
+          padding: 27px 28px 36px 32px;
+          border: 1px solid #eaedf4;
+          border-radius: 12px;
+          float: left;
+          margin-bottom: 50px;
+        }
+        
+        .row2 {
+          width: 100%;
+          float: left;
+          margin-bottom: 100px;
+        }
+        
+        .clg-plus {
+          color: gray;
+          float: right;
+          font-size: 17px;
+          font-weight: normal;
+          padding-top: 12px;
+          
+        }
+        
+        .recent-clg-list {
+          width: 100%;
+          margin: auto;
+          min-height: 500px;
+        }
+        .recent-clg-img-wapper {
+          height: 256.031px;
+          width: 256.031px;
+        }
+        .imgJD {
+          width: 50%;
+          height: 100%;
+          object-fit: cover;
+          margin: auto;
+          display: block;
+        }
+        .recent-clg-content-wapper {
+          background-color: white;
+          margin-top: 10px;
+          padding: 5px;
+          height: 60px;
+        }
+        .write-wrapper {
+          width: 95%;
+          margin: auto;
+          height: 50px;
+        }
+      </style>
+
+    </head>
+    <body>
+      <!-- header section start -->
+      <div class="header_section windowWidth" >
+        <div class="container-fluid windowWidth">
+          <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+            <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+                <li class="nav-item"><a class="nav-link" href="main">커뮤니티</a></li>
+                <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+              </ul>
+              <div class="login-bt">
+                <ul>
+                  <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+                  <li data-th-if="${session.loginMember != null}"><a href="../mypage/my-post">마이페이지</a></li>
+                  <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- header section end -->
+      
+      <!-- 메인 상단 시작 -->
+      <div class="main-top-wrapper">
+         <!-- <a href="main"><div class="container" style="font-size: 30px" id="community-title"></div></a> -->
+         <div class="nav-line">
+           <ul class="nav nav-pills nav-justified windowWidth">
+             <li class="nav-item"><a class="nav-link" href="list?no=1">자유게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=2">식단게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=3">챌린지게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=4">질문게시판</a></li>
+             <li class="nav-item"><a class="nav-link" href="list?no=5">핫딜게시판</a></li>
+           </ul>
+         </div>
+         <a href="main">
+          <div class="category-name-wrapper">
+            <div class="our_textJD  windowWidth" id="cateName"></div>
+          </div>
+         </a>
+      </div>
+      <!-- 메인 상단 끝 -->
+      
+      <!-- 메인 하단 시작 -->
+      <div class="furnitures_sectionJD windowWidth">
+         <div class="container windowWidth">
+           <div class="furnitures_section2 layout_padding-jedong windowWidth">
+               <div class="write-wrapper">
+               <!-- 인기글 파트 시작 -->
+                 <div class="mainList-title">커뮤니티 인기글</div>
+                 <div class="row1">
+                    <table class="table-jedong">
+                      <tr id="table-setting" th:each="board : ${bestList}">
+                        <td><a data-th-classappend="'boardCateNo' + ${board.cateno}" class="nav-link cate-button" th:href="@{list(no=${board.cateno})}"></a></td>
+                        <td class="title-min-width2 title_line"><a href='detail?no=1'
+                            th:href="@{detail(no=${board.no})}"
+                            th:text="${board.title == ''} ? '(제목없음)' : ${board.title}">제목없음</a></td>
+                        <td th:text="${board.writer.nickname}">유길동</td>
+                        <td><img style="object-fit: cover; width: 15px; height: 15px;" src="../images/view-icon2.png"></td>
+                        <td th:text="${board.viewCount}">17</td>
+                      </tr>
+                    </table> 
+                 </div>
+                <!-- 인기글 파트 끝 -->
+                
+                <!-- 최근 챌린지 파트 시작 -->
+                  <div class="mainList-title">최근 챌린지 인증<a href="list?no=3" class="clg-plus">더보기+</a></div>
+                  <div class="row2">
+                    <th:block th:each="board : ${clgList}">
+                      <span class="clg" style="position:relative;">
+                        <div class="clg-in">
+                          <a th:href="@{detail(no=${board.no})}">
+                            <img class="clg-in-img" th:if="${board.thumbnail == null}" src="../images/nothumbnail.png"/>
+                            <img class="clg-in-img" th:if="${board.thumbnail != null}" th:src="@{'/board/files/' + ${board.thumbnail}}"/>
+                          </a>
+                          <div class="clg-in-title">
+                          <div class="clg-in-tt">
+                            <a href='detail?no=1' th:href="@{detail(no=${board.no})}" th:text="${board.title == ''} ? '(제목없음)' : ${board.title}">제목없음</a><br>
+                          </div>
+                          <div class="clg-in-wt">
+                            <span th:text="${board.writer.nickname}" style="float: right;">유길동</span>
+                          </div>
+                          </div>
+                        </div>
+                      </span>
+                    </th:block>
+                 </div>
+                <!-- 최근 챌린지 파트 시작 -->
+              </div>
+           </div>
+         </div>
+      <!-- furnitures section end -->
+      
+      
+      
+      
+      <!-- Javascript files-->
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/popper.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <script src="../js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../js/custom.js"></script>
+      <!-- javascript --> 
+      <!-- <script src="../js/owl.carousel.js"></script> -->
+      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
+      
+      <!-- 공식부트스트랩 JS -->
+      <script src="../js/bootstrap/bootstrap.js"></script>   
+
+      <script>
+      "use strict"
+      window.onload = 
+    	  function findCategory() {
+        var para = document.location.href.split("no=");
+        
+        switch(para[1]) {
+          case '1' :
+        	  document.getElementById( 'cateName' ).innerHTML = "자유게시판";
+            document.getElementById( 'cateConment' ).innerHTML = "여기모여 회원들이 자유롭게 소통할 수 있는 자유게시판입니다. ";
+            break;
+          case '2' :
+        	  document.getElementById( 'cateName' ).innerHTML = "식단게시판";
+            document.getElementById( 'cateConment' ).innerHTML = "다이어트, 벌크업 등 식이요법에 대한 다양한 정보를 나누는 식단게시판입니다.";
+            break;
+          case '3' :
+        	  document.getElementById( 'cateName' ).innerHTML = "챌린지게시판";
+            document.getElementById( 'cateConment' ).innerHTML = "하루하루 도전하는 회원분들의 인증샷을 올리는 챌린지게시판입니다.";
+            break;
+          case '4' :
+        	  document.getElementById( 'cateName' ).innerHTML = "질문게시판";
+            document.getElementById( 'cateConment' ).innerHTML = "궁금한 건 어디에서 물어볼 지 고민인 분들을 위한 질문게시판입니다.";
+            break;
+          case '5' :
+        	  document.getElementById( 'cateName' ).innerHTML = "핫딜게시판";
+            document.getElementById( 'cateConment' ).innerHTML = "지금이 바로 득템 기회! 핫딜 제품들을 공유할 수 있는 핫딜게시판입니다.";
+            break;
+          default :
+        	  document.getElementById( 'cateName' ).innerHTML = "커뮤니티";
+        }
+        
+        
+        let category1 = document.getElementsByClassName( 'boardCateNo1' ),
+            category2 = document.getElementsByClassName( 'boardCateNo2' ),
+            category3 = document.getElementsByClassName( 'boardCateNo3' ),
+            category4 = document.getElementsByClassName( 'boardCateNo4' ),
+            category5 = document.getElementsByClassName( 'boardCateNo5' );
+        for (var i = 0; i < category1.length; i++) {
+        	category1[i].innerHTML = "자 유"
+        }
+        for (var i = 0; i < category2.length; i++) {
+        	category2[i].innerHTML = "식 단"
+        }
+        for (var i = 0; i < category3.length; i++) {
+        	category3[i].innerHTML = "챌린지"
+        }
+        for (var i = 0; i < category4.length; i++) {
+        	category4[i].innerHTML = "질 문"
+        }
+        for (var i = 0; i < category5.length; i++) {
+        	category5[i].innerHTML = "핫 딜"
+        }
+        
+      }
+      
+      function leftOpen() {
+    	    $('#timelinbx').css("width", $(window).width() - 280);
+    	}
+    	function leftClose() {
+    	    $('#timelinbx').css("width", "100%");
+    	}
+    	 
+    	$(window).resize(function() {        
+    	    $('.timelinbx').css('width', $(window).width() - 50 );        
+    	    $('.timelinbx').css('height', $(window).height() - 50 );   
+    	});
+      </script>
+   </body>
+         
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.AdminDao">
+
+	<resultMap type="member" id="adminMap">
+		<id column="adno" property="no" />
+		<result column="name" property="name" />
+		<result column="id" property="id" />
+		<result column="email" property="email" />
+		<result column="pwd" property="password" />
+		<result column="cdt" property="createdDate" />
+	</resultMap>
+	
+	<select id="findAdmin" resultMap="adminMap">
+    select
+      *
+    from
+      admin
+    where
+      id=#{id} and pwd=sha2(#{password},256)
+  </select>
+	
+
+</mapper>
+
+

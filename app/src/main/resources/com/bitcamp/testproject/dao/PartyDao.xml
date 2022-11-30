@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.PartyDao">
+
+  <resultMap type="party" id="partyMap">
+    <id column="pno" property="no"/>
+    <result column="title" property="title"/>
+    <result column="act" property="active"/>
+    <result column="cont" property="content"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="headcnt" property="headCount"/>
+    <result column="ptime" property="partyTime"/>
+    <result column="pdate" property="partyDate"/>
+    <result column="star" property="star"/>
+    <result column="thumbnail" property="thumbnail"/>
+    <result column="mapName" property="mapName"/>
+    <result column="mapAddress" property="mapAddress"/>
+    <result column="lat" property="latResult"/>
+    <result column="lng" property="lngResult"/>
+    <result column="act" property="active"/>
+    <result column="status" property="status"/>
+    <result column="reviewNo" property="reviewNo"/>
+
+    <!-- 조인 결과에서 같은 게시글에 대해 한 개의 회원 데이터를 담을 경우 -->
+    <association property="user" javaType="member">
+      <id column="mno" property="no"/>
+      <result column="nick" property="nickname"/>
+      <result column="bday" property="birthday"/>
+      <result column="sex" property="sex"/>
+      <result column="filepath" property="filepath"/>
+      <result column="ageGroup" property="ageGroup"/>
+      <result column="auth" property="auth"/>
+    </association>
+
+    <!-- 조인 결과에서 같은 게시글에 대해 한 개의 회원 데이터를 담을 경우 -->
+    <association property="region" javaType="region">
+      <id column="rno" property="no"/>
+      <result column="sido" property="sido"/>
+      <result column="sigu" property="sigu"/>
+    </association>
+
+    <!-- 조인 결과에서 같은 게시글에 대해 한 개의 회원 데이터를 담을 경우 -->
+    <association property="sports" javaType="sports">
+      <id column="sno" property="no"/>
+      <result column="name" property="name"/>
+    </association>
+
+  </resultMap>
+  
+  
+  
+  
+  <select id="findAll" resultMap="partyMap">
+    select
+      p.pno, 
+      r.sido,
+      r.sigu,
+      s.name,
+      p.title,
+      p.cdt,
+      p.headcnt,
+      p.ptime,
+      p.pdate,
+      r.rno,
+      s.sno,
+      m.mno,
+      p.thumbnail
+    from 
+      party p
+      join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+      join party_members pm on p.pno = pm.pno
+      join member m on m.mno = pm.mno
+    where
+      p.act = 1
+    and
+      pm.auth=1
+    and
+      p.pdate >= DATE_FORMAT(now(), '%Y-%m:%d')
+    order by 
+      p.pno desc
+    limit #{pagesStart}, #{perPageNum}
+  </select>
+  
+  <select id="findAllCount" resultType="Integer">
+    select
+      count(*)
+    from 
+      party
+    where
+      act = 1
+    and
+      pdate >= DATE_FORMAT(now(), '%Y-%m:%d')
+  </select>  
+  
+  <select id="findAllCount2" resultType="Integer">
+    select
+      count(*)
+    from 
+      party p
+      join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+    where
+      act = 1
+    and
+      p.pdate >= DATE_FORMAT(now(), '%Y-%m:%d')
+      <if test="gu != null">
+      and p.rno = #{gu}
+      </if>
+      <if test="sports != null">
+      and s.sno = #{sports}
+      </if>
+      <if test="partyDate != null">
+      and p.pdate = #{partyDate}
+      </if>
+      <if test="partyTime != null">
+      and p.ptime = #{partyTime}
+      </if>
+      <if test="searchText != null">
+      and p.title like concat("%", #{searchText}, "%")
+      </if>
+  </select>  
+
+  <select id="findAll2" resultMap="partyMap">
+    select
+      p.pno, 
+      r.sido,
+      r.sigu,
+      s.name,
+      p.title,
+      p.cdt,
+      p.headcnt,
+      p.ptime,
+      p.pdate,
+      r.rno,
+      s.sno,
+      m.mno,
+      p.thumbnail,
+      (select ifnull (truncate(avg(star), 1), 0) as star
+      from party_review pr
+        join member m on m.mno=pr.mno
+        join (select p2.pno pno2, p2.sno from party p2 join party_members pm on p2.pno=pm.pno where pm.auth=1) p3 on pr.pno=p3.pno2
+        join sports s on s.sno=p3.sno
+       where
+         pr.act=1 and pr.mno=m.mno and p3.pno2=p.pno) star
+    from 
+      party p
+      join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+			join party_members pm on p.pno = pm.pno
+			join member m on m.mno = pm.mno
+    where
+      p.act = 1
+    and
+      pm.auth=1
+    and
+      pdate >= DATE_FORMAT(now(), '%Y-%m:%d')
+      <if test="gu != null">
+      and p.rno = #{gu}
+      </if>
+      <if test="sports != null">
+      and s.sno = #{sports}
+      </if>
+      <if test="partyDate != null">
+      and p.pdate = #{partyDate}
+      </if>
+      <if test="partyTime != null">
+      and p.ptime = #{partyTime}
+      </if>
+      <if test="searchText != null">
+      and p.title like concat("%", #{searchText}, "%")
+      </if>
+    order by 
+      <if test="listStar == 1">
+      star desc
+      </if>
+      <if test="listStar == 1 and listCreate == 1 or listStar == 1 and listPartyDate == 1 or listStar == 1 and listCreate == 1 and listPartyDate == 1">
+      ,
+      </if>
+      <if test="listCreate == 1">
+      p.cdt desc
+      </if>
+      <if test="listCreate == 1 and listPartyDate == 1 or listStar == 1 and listCreate == 1 and listPartyDate == 1">
+      ,
+      </if>
+      <if test="listPartyDate == 1">
+      p.pdate desc
+      </if>
+      <if test="listStar == 0 and listCreate == 0 and listPartyDate == 0">
+      p.pno desc
+      </if>
+      limit #{pagesStart}, #{perPageNum}
+  </select>
+
+    <select id="findByNo" resultMap="partyMap">
+    <![CDATA[
+    select
+p.pno,
+r.sido,
+r.sigu,
+s.sno,
+s.name,
+p.title,
+p.cont,
+p.cdt,
+p.headcnt,
+p.ptime,
+p.pdate,
+p.mapName,
+p.mapAddress,
+p.lat,
+p.lng,
+p.act,
+m.mno,
+m.nick,
+m.bday,
+m.sex,
+m.filepath,
+p.thumbnail,
+CASE
+WHEN age < 20 THEN '10대 이하'
+WHEN age < 30 THEN '20대'
+WHEN age < 40 THEN '30대'
+WHEN age < 50 THEN '40대'
+WHEN age < 60 THEN '50대'
+WHEN age > 59 THEN '60대 이상'
+END AS ageGroup
+from
+party p
+join region r on p.rno = r.rno
+join sports s on p.sno = s.sno
+join party_members pm on p.pno = pm.pno
+join member m on m.mno = pm.mno
+join (SELECT *, FLOOR(date_format(now(), '%Y')-substring(bday,1,4)) age FROM member) ag on ag.mno=m.mno
+where
+pm.auth=1
+and
+p.pno=#{value}
+]]>
+  </select>
+  
+  <insert id="insert" parameterType="party"
+          useGeneratedKeys="true" keyColumn="pno" keyProperty="no">
+    insert into party(
+      rno,
+      sno,
+      title,
+      cont,
+      headcnt,
+      pdate,
+      ptime,
+      mapName,
+      mapAddress,
+      lat,
+      lng,
+      thumbnail) 
+    values(
+    #{regionNo},
+    #{sportsNo},
+    #{title},
+    #{content},
+    #{headCount},
+    #{partyDate},
+    #{partyTime},
+    #{mapName},
+    #{mapAddress},
+    #{latResult},
+    #{lngResult},
+    #{thumbnail})
+  </insert>
+  
+  <update id="update" parameterType="party">
+    update party set 
+      title=#{title}, 
+      cont=#{content},
+      headcnt=#{headCount},
+      pdate=#{partyDate},
+      ptime=#{partyTime},
+      thumbnail=#{thumbnail}
+    where 
+      pno=#{no}
+  </update>
+  
+  <delete id="delete">
+    delete from party
+    where pno=#{value}
+  </delete>
+
+  <select id="checkOwner" resultType="int">
+    select 
+      pm.mno
+    from 
+      party_members pm
+    where 
+      pm.auth=1
+    and
+      pm.pno=#{value}
+  </select>
+
+  <select id="findNowPartyNo" resultType="int">
+    SELECT
+      (AUTO_INCREMENT-1) no 
+    FROM 
+      information_schema.tables 
+    WHERE 
+      table_name = 'party'
+  </select>
+
+
+  <select id="getThumbnailByPartyNo" resultType="String">
+    select 
+      thumbnail
+    from 
+      party
+    where 
+      pno = #{value}
+  </select>
+  
+  
+  
+  
+  
+    <select id="findByMyParty" parameterType="map" resultMap="partyMap" >
+    SELECT
+      p.pno, 
+      r.sido,
+      r.sigu,
+      s.name,
+      p.title,
+      p.cdt,
+      p.headcnt,
+      p.ptime,
+      p.pdate
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+      join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+    WHERE
+      pm.mno = #{memberNo}
+    AND
+      p.act = 1
+    AND
+      pm.auth = 1
+    ORDER BY 
+      p.pno desc
+    limit #{pagesStart}, #{perPageNum}
+  </select>
+  
+  <select id="countMyParty" parameterType="int" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+
+    WHERE
+      pm.mno = #{memberNo}
+    AND
+      p.act=1 
+    AND
+      pm.auth = 1
+  </select>
+  
+
+    <select id="findByJoinParty" parameterType="map" resultMap="partyMap" >
+    SELECT
+      p.pno, 
+      r.sido,
+      r.sigu,
+      s.name,
+      p.title,
+      p.cdt,
+      p.headcnt,
+      p.ptime,
+      p.pdate,
+      ps.status
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+      join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+      join party_status ps on ps.psno = pm.psno
+    WHERE
+      pm.mno = #{memberNo}
+    AND
+      p.act = 1
+    AND
+      pm.auth = 0
+    ORDER BY 
+      p.pno desc
+    limit #{pagesStart}, #{perPageNum}
+  </select>
+  
+  <select id="countJoinParty" parameterType="int" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+    WHERE
+      pm.mno = #{memberNo}
+    AND
+      p.act=1 
+    AND
+      pm.auth = 0
+  </select>
+  
+
+    <select id="findByEndParty" parameterType="map" resultMap="partyMap" >
+    SELECT
+      p.pno, 
+      r.sido,
+      r.sigu,
+      s.name,
+      p.title,
+      p.cdt,
+      p.headcnt,
+      p.ptime,
+      p.pdate,
+      pr.prno,
+      ifnull(pr.mno,0) reviewNo,
+      p.act
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+      join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+      left join party_review pr on pr.pno = p.pno
+    WHERE
+      pm.auth = 0
+    AND
+      p.act = 0
+    AND
+      pm.mno = pr.mno
+    AND
+      pm.mno = #{memberNo}
+    ORDER BY 
+      p.pno desc
+    limit #{pagesStart}, #{perPageNum}
+  </select>
+
+    <select id="findByEndParty2" parameterType="map" resultMap="partyMap" >
+SELECT
+      p.pno, 
+     r.sido,
+     r.sigu,
+     s.name,
+     p.title,
+      p.cdt,
+      p.headcnt,
+      p.ptime,
+     p.pdate,
+     ifnull(pr.mno,0) reviewNo,
+     p.act
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+   join region r on p.rno = r.rno
+      join sports s on p.sno = s.sno
+     left join party_review pr on pr.pno = p.pno
+   WHERE
+     pm.auth = 0
+    AND
+      p.act = 0
+   AND
+   (pr.mno is null
+   or
+    pr.mno != pm.mno)
+        AND
+     pm.mno = #{memberNo}
+    ORDER BY 
+      p.pno desc
+  </select>
+  <select id="countEndParty" parameterType="int" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+    WHERE
+      pm.auth = 0
+    and
+      p.act = 0
+    AND
+      pm.mno = #{memberNo}
+  </select>
+  
+  <update id="partyEnd">
+    update party set 
+      act=0
+    where 
+      pno=#{partyNo}
+  </update>
+  
+</mapper>
+
+
+
+

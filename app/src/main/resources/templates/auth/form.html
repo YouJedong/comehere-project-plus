@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:display="http://www.w3.org/1999/xhtml" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- site metas -->
+<title>여기모여</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="../css/style3.css">
+<!-- Responsive-->
+<link rel="stylesheet" href="../css/responsive.css">
+<!-- fevicon -->
+<link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+<!-- Tweaks for older IEs-->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!-- owl stylesheets -->
+<link rel="stylesheet" href="../css/owl.carousel.min.css">
+<link rel="stylesheet" href="../css/owl.theme.default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+<style>
+.btnon1 {
+  height: 65px;
+  width: 360px;
+  margin-top: 1px;
+  margin-left: -30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #0d6efd !important; 
+  color: white;
+}
+
+.contact_text1 {
+  width: 100%;
+  float: left;
+  font-size: 36px;
+  color: #ffffff;
+  margin-left: 200px;
+}
+
+.center {
+  text-align: center;
+  margin-left: -28px;
+  margin-top: -40px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact_section9 {
+  min-width: 1100px;
+  width: 100%;
+  float: left;
+  background-image: url(../images/login_from.png);
+  height: auto;
+  background-color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 90px;
+  opacity: 0.8;
+}
+
+.layout_padding9 {
+  padding-top: 200px;
+  padding-bottom: 214px;
+}
+
+.email-bt9 {
+  color: #989696;
+  width: 440px;
+  height: 55px;
+  font-size: 18px;
+  padding: 20px;
+  margin-top: 26px;
+  margin-left: -28px;
+  border: 0px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+body .container {
+        width: 1200px;
+        max-width: none;
+      }
+
+</style>
+
+
+</head>
+<body>
+	<!-- header section start -->
+      <div class="header_section windowWidth" >
+        <div class="container-fluid windowWidth">
+          <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+            <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+                <li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+                <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- header section end -->
+	<!-- contact section start -->
+	<div class="contact_section9 layout_padding9">
+		<div class="container">
+			<div class="">
+				<div class="form-container">
+					<form action='login' method="post">
+						<table border='1'>
+							<input type="hidden" name="beforePageURL" data-th-value="${session.redirectURI}">
+							<!-- <h1 class="contact_text1">Login</h1> -->
+							<tr>
+								<input type="text" class="email-bt9" placeholder="ID를 입력해주세요" size='30' name="id" data-th-value="${id}" id="id">
+							</tr>
+							<tr>
+								<input type="password" class="email-bt9" placeholder="Password를 입력해주세요" name="password" id="password">
+							</tr>
+						</table>
+						<div data-th-if="${loginFail}">아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+						<p>
+							<button type="button" class="btnon1" id="login" onclick="bt(this.form);">로그인</button>
+						</p>
+						<p>
+						<div class="center">
+							<a href="find-id">아이디 찾기</a> | <a href="find-password">비밀번호 찾기</a> | <a href="../member/join">회원가입</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- contact section end -->
+
+
+
+		<script>
+       function bt(frm) {
+           var id = frm.id.value;
+           var password = frm.password.value;
+           
+           if (id.trim() == ''| password.trim()== '') {
+               swal("ID나 Password를 입력해주세요");
+               return false;
+           } 
+           $.ajax({
+               type: "POST",
+               url: "idPasswordCheck",
+               data: {id:id, password:password},
+               success: function(data) {
+                 console.log(data);
+                 if(data == 'true'){
+                    frm.submit();
+                 } else if (data == 'false'){
+                	 swal({
+                         text: "ID와 비밀번호를 확인해주세요.",
+                         icon: "error",
+                         button: "확인",
+                       });
+                 
+               } else if (data == 'active'){
+                   swal("존재하지 않는 계정입니다.")
+                 }
+               }
+             });
+           }
+
+       
+      </script>
+
+
+		<!-- Javascript files-->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/popper.min.js"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="../js/jquery-3.0.0.min.js"></script>
+		<script src="../js/plugin.js"></script>
+		<!-- sidebar -->
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="../js/custom.js"></script>
+		<!-- javascript -->
+		<script src="../js/owl.carousel.js"></script>
+		<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+	</div>
+</body>
+</html>

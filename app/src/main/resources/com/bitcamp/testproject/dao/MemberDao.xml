@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.MemberDao">
+
+	<!-- 자바 객체의 프로퍼티와 컬럼 이름을 연결한다. -->
+	<resultMap type="member" id="memberMap">
+    <id column="mno" property="no"/>
+    <result column="name" property="name"/>
+    <result column="id" property="id"/>
+    <result column="email" property="email"/>
+    <result column="pwd" property="password"/>
+    <result column="nick" property="nickname"/>
+    <result column="tel" property="tel"/>
+    <result column="bday" property="birthday"/>
+    <result column="sex" property="sex"/>
+    <result column="filepath" property="filepath"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="black" property="black"/>
+    <result column="act" property="active"/>
+    
+    <collection property="favoriteRegion" ofType="favoriteRegion">
+      <result column="rno" property="rno"/>
+        <association property="region" javaType="Region">
+          <id column="rno" property="no"/>
+          <result column="sigu" property="sigu"/>
+        </association>
+    </collection>
+    
+    <collection property="favoriteSports" ofType="favoriteSports">
+      <result column="sno" property="sno"/>
+        <association property="sports" javaType="Sports">
+          <id column="sno" property="no"/>
+          <result column="sname" property="name"/>
+        </association>
+    </collection>
+    
+	</resultMap>
+
+	<!-- 회원 기본 정보 등록 -->
+	<insert id="insert" parameterType="member"
+		useGeneratedKeys="true" keyColumn="mno" keyProperty="no">
+    INSERT INTO 
+      member(name,id,email,pwd,nick,tel,bday,sex,filepath) 
+    VALUES
+      (#{name},#{id},#{email},sha2(#{password},256),#{nickname},#{tel},#{birthday},#{sex},#{filepath})
+	</insert>
+
+  <!-- 아이디 중복체크 -->
+   <select id="idCheck" parameterType="String" resultType="Integer">
+    SELECT 
+      count(*)
+    FROM 
+      member
+    WHERE
+      id = #{id}
+  </select>
+
+  <!-- 비밀번호 재확인 -->
+   <select id="verificationPw" resultType="Integer">
+    SELECT 
+      count(*)
+    FROM 
+      member
+    WHERE
+      pwd = sha2(#{password},256)
+    AND
+      mno = #{mno}
+  </select>
+
+  <!-- 닉네임 중복체크 -->
+   <select id="nickCheck" parameterType="String" resultType="Integer">
+    SELECT 
+      count(*)
+    FROM 
+      member
+    WHERE
+      nick = #{nickname}
+  </select>
+  
+  <!-- 이메일 중복체크 -->
+   <select id="emailCheck" parameterType="String" resultType="Integer">
+    SELECT 
+      count(*)
+    FROM 
+      member
+    WHERE
+      email = #{email}
+  </select>
+
+
+	<select id="findById" resultType="member">
+		select
+		id
+		from
+		member
+		where
+		name=#{name} and email=#{email}
+	</select>
+
+
+ 
+  <select id="findByNo" resultMap="memberMap">
+    SELECT 
+      m.mno,
+      m.name,
+      m.id,
+      m.email,
+      m.tel,
+      m.cdt,
+      m.nick,
+      m.bday,
+      m.sex,
+      m.filepath,
+      fr.rno,
+      r.sigu,
+      fs.sno,
+      s.name sname
+    FROM 
+      member m
+    LEFT join 
+      favorite_region fr on fr.mno = m.mno
+    LEFT join
+    region r ON r.rno = fr.rno
+    LEFT join
+    favorite_sports fs ON fs.mno = m.mno
+    LEFT join
+    sports s ON s.sno = fs.sno
+    WHERE 
+      m.mno=#{no};
+  </select>
+  
+  <select id="findByFilepath" resultMap="memberMap">
+    SELECT
+      filepath
+    FROM
+      member
+    WHERE
+      mno=#{no}
+  </select>
+  
+  <select id="getFileByMemberNo" resultType="String">
+    SELECT 
+      filepath
+    FROM 
+      member
+    WHERE
+      act = 1 and
+      mno=#{value}
+  </select>
+  
+  <select id="findAll" resultMap="memberMap">
+    SELECT 
+      mno,
+      name,
+      email 
+    FROM 
+      member 
+    ORDER BY 
+      name
+  </select>
+
+   
+   <update id="updatePW" parameterType="String">
+    update member set
+    pwd=sha2(#{password},256)
+    where
+    email=#{email}
+    and id=#{id}
+  </update>
+  
+
+   <update id="delete" parameterType="int">
+    update member set
+      act=0
+    WHERE 
+      mno=#{value}
+   </update>
+
+<select id="findByIdPassword" resultMap="memberMap">
+    SELECT 
+      mno,
+      name,
+      id,
+      tel,
+      email,
+      cdt,
+      nick,
+      bday,
+      sex,
+      filepath
+    FROM 
+      member 
+    WHERE 
+      id=#{id} and pwd=sha2(#{password},256)
+  </select>
+  
+
+  <update id="update" parameterType="Member">
+    UPDATE member SET 
+      email=#{email}, 
+      pwd=sha2(#{password},256),
+      nick=#{nickname},
+      tel=#{tel},
+      filepath=#{filepath}
+    WHERE 
+      mno=#{no}
+  </update>
+  
+
+   <select id="findByPassword" resultMap="memberMap">
+    SELECT
+      name
+    FROM
+      member
+    WHERE
+      id=#{id} 
+    AND
+     email=#{email}
+  </select>
+
+  <select id="idEmailCheck" resultType="member">
+    select
+    name
+    from
+    member
+    where
+    id=#{id} and email=#{email}
+  </select>
+  
+  
+   <select id="idPasswordCheck" resultType="member">
+    select
+    name,
+    act active,
+    black
+    from
+    member
+    where
+    id=#{id} and pwd=sha2(#{password},256)
+  </select>
+  
+  <select id="findIdCheck" resultType="member">
+    select
+    id
+    from
+    member
+    where
+    name=#{name} and email=#{email}
+  </select>
+  
+
+</mapper>
+

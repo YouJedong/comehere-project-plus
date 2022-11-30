@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- mobile metas -->
+<!-- site metas -->
+<title>여기모여</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="../css/style2.css">
+<!-- Responsive-->
+<!-- fevicon -->
+<link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<!-- Tweaks for older IEs-->
+<!-- owl stylesheets -->
+<!-- <link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css"> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"> -->
+<style>
+.btn-outline-successJD {
+  color: #0d6efd;
+  background-color: transparent;
+  background-image: none;
+  border-color: #0d6efd;
+}
+
+.btn-outline-successJD:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.write-box {
+  border: 2px, black;
+  padding-top: 30px;
+  padding-left: 70%;
+}
+
+.form-selectJd {
+  display: block;
+  width: auto;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  -moz-padding-start: calc(0.75rem - 3px);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-image:
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-right: 5px;
+}
+
+.our_textJD {
+  width: 100%;
+  float: left;
+  font-size: 36px;
+  color: #121111;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 90px;
+}
+
+.furnitures_sectionJD {
+  width: 100%;
+  min-height: 1300px;
+  float: left;
+  padding-bottom: 90px;
+}
+
+.form-control {
+  padding: 3px 15px;
+  font-size: 18px;
+  color: #fff;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid #c9c9c9;
+}
+
+.white {
+  padding-top: 80px;
+}
+
+.row {
+  margin-top: -100px;
+  display:inline;
+}
+
+h1 {
+  margin: -30px 0px -70px;
+  font-size: 30px;
+}
+.search-border {
+  border: 1px solid #ced4da !important;
+}
+.search-border:focus {
+  border: 1px solid #ced4da !important;
+}
+
+</style>
+</head>
+<body>
+  <!-- header section start -->
+  <div class="header_section windowWidth" >
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+            <li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+            <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+          </ul>
+          <div class="login-bt">
+            <ul>
+              <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+              <li data-th-if="${session.loginMember != null and session.loginMember.id != 'admin'}"><a href="../mypage/my-post">마이페이지</a></li>
+              <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+            </ul>
+            </div>
+         </div>
+      </nav>
+   </div>
+</div>
+   <!-- header section end -->
+   
+      <!-- furnitures section start -->
+      <div class="furnitures_sectionJD layout_padding windowWidth">
+         <h1 class="container" id="community-title" >공지사항</h1>
+         <div class="container cate-bottom-line">
+            <div class="furnitures_section2 layout_padding">
+               <div class="row">
+                  <!-- 게시글 목록 시작 -->
+                  <table class="table" style="text-align: center" >
+                    <tr>
+                      <th>번호</th>
+                      <th>제목</th>
+                      <th>등록일</th>
+                      <th>조회수</th>
+                    </tr>
+                    <tr data-th-each="notice : ${noticeList}">
+                      <td data-th-text="${notice.no}"></td>
+                      <td style="text-align: left"><a data-th-href="@{detail(no=${notice.no})}" data-th-text="${notice.title}">제목</a></td>
+                      <td data-th-text="${notice.createdDate}">등록일</td>
+                      <td data-th-text="${notice.viewCount}">조회수</td>
+                    </tr>
+                  </table>
+                  <!-- 게시글 목록 끝 -->
+                  <div class="wb">
+                  <ul class="write-box">
+	                  <li class="write-box" >
+	                    <div id="postButton" class="btn btn-primary" role="button" data-th-if="${session.loginMember != null and session.loginMember.id == 'admin'}">글쓰기</div>
+	                  </li>
+                  </ul>
+                  </div>
+                  <!-- 페이징 버튼 시작 -->
+                  <nav aria-label="Page navigation" style="margin-left:50%">
+                    <div class="page_center">
+                      <ul class="pagination">
+                        <li class="page-item" data-th-if="${pageMaker.prev}">
+                          <a class="page-link" data-th-href="@{list(page=${pageMaker.startPage-1})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <th:block data-th-if="${pageMaker.endPage != 0}" data-th-each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                          <li data-th-id="${'pageButton' + pageNum}"  class="page-item">
+                            <a data-th-if="${search.noticeKeyword == null}" class="page-link" data-th-href="@{list(page=${pageNum})}"><i data-th-text="${pageNum}"></i></a>
+                            <a data-th-if="${search.noticeKeyword != null}" class="page-link" data-th-href="@{list(page=${pageNum}, keyword=${search.noticeKeyword}, type=${search.type})}"><i data-th-text="${pageNum}"></i></a>
+                          </li>
+                        </th:block>
+                        <li class="page-item" data-th-if="${pageMaker.next && pageMaker.endPage > 0}">
+                          <a data-th-if="${search.noticeKeyword == null}" class="page-link" data-th-href="@{list(page=${pageMaker.endPage+1})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                          <a data-th-if="${search.noticeKeyword != null}" class="page-link" data-th-href="@{list(page=${pageMaker.endPage+1}, keyword=${search.noticeKeyword}, type=${search.type})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+                  <!-- 페이징 버튼 끝 -->
+                 <nav class="navbar navbar-light">
+                 <div style="margin: auto">
+                  <!-- 검색 버튼 시작 -->
+                  <form class="form-inline" action='list' method="get" style="margin-top:30px">
+                    <select id="searchId" class="form-selectJd" name="type">
+                        <option value="T">제목</option>
+                        <option value="C">내용</option>
+                        <option value="TC">제목 + 내용</option>
+                    </select>   
+                    <input class="form-control mr-sm-2 search-border" type="search" name="noticeKeyword" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-successJD my-2 my-sm-0" type="submit" id="searchButton">Search</button>
+                  </form>
+                  </div>
+                  <!-- 검색 버튼 끝 -->
+                 </nav>
+			         </div>
+			        </div>
+			      </div>
+            </div>
+            <!-- furnitures section end -->
+      <!-- Javascript files-->
+      <script src="../js/jquery.min.js"></script>
+      <script src="../js/popper.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <script src="../js/plugin.js"></script>
+      
+      <!-- sidebar -->
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <!-- <script src="../js/custom.js"></script> --><!-- 검색때매 우선 막자 --> 
+      
+      <!-- javascript --> 
+      <!-- <script src="../js/owl.carousel.js"></script> -->
+      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
+      
+      <!-- 공식부트스트랩 JS -->
+      <script src="../js/bootstrap/bootstrap.js"></script>   
+
+    <script>
+    
+    // 검색기능 목록일 때 검색조건의 type을 selected하기 위한 메서드 
+    const searchOption = $("select").children();
+    for (let i = 0; i < searchOption.length; i++) {
+      if (searchOption.eq(i).val() == "[[${search.type}]]") {
+        $('#searchId').find("option").eq(i).attr("selected", true)
+      }
+    } 
+    
+    $('#postButton').click(function(){
+    	location.href='form';
+    })
+    </script>
+    <script>
+     window.addEventListener('DOMContentLoaded', function(){
+         var param = 1; 
+         if (window.location.search.match(/page=([^&]*)/) != null) {
+           param = window.location.search.match(/page=([^&]*)/)[1];
+         } 
+         $('#pageButton' + param).addClass('active');
+       });
+     </script>
+   </body>
+         
+</html>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.ReviewDao">
+
+  <resultMap type="review" id="reviewMap">
+    <id column="prno" property="no"/>
+    <result column="pno" property="partyNo"/>
+    <result column="title" property="title"/>
+    <result column="cont" property="content"/>
+    <result column="star" property="star"/>
+    <result column="cdt" property="createdDate"/>
+    
+    <!-- 조인 결과에서 같은 게시글에 대해 한 개의 회원 데이터를 담을 경우 -->
+    <association property="writer" javaType="member">
+      <id column="mno" property="no"/>
+      <result column="filepath" property="filepath"/>
+      <result column="nick" property="nickname"/>
+      <result column="sex" property="sex"/>
+      <result column="ageGroup" property="ageGroup"/>
+    </association>
+    
+    <!-- 조인 결과에서 같은 게시글에 대해 여러 개의 첨부 파일 데이터를 담을 경우 -->
+    <collection property="attachedFiles" ofType="attachedFile">
+      <id column="prfno" property="no"/>
+      <result column="reviewfilepath" property="filepath"/>
+    </collection>
+    
+  </resultMap>
+
+  <select id="findAll" resultMap="reviewMap">
+    <![CDATA[
+    select
+      m.filepath,
+      m.nick,
+      m.sex,
+      CASE
+      WHEN age < 20 THEN '10대 이하'
+      WHEN age < 30 THEN '20대'
+      WHEN age < 40 THEN '30대'
+      WHEN age < 50 THEN '40대'
+      WHEN age < 60 THEN '50대'
+      WHEN age > 59 THEN '60대 이상'
+    END AS ageGroup,
+      pr.star,
+      prf.filepath reviewfilepath,
+      pr.title,
+      pr.cont,
+      pr.cdt,
+      pr.prno
+    from
+      party_review pr
+      join member m on pr.mno=pr.mno
+      join (select p2.pno pno2, p2.sno from party p2 join party_members pm on p2.pno=pm.pno where pm.auth=1 and pm.mno=#{userNo}) p on pr.pno=p.pno2
+      join sports s on s.sno=p.sno
+      join (SELECT *, FLOOR(date_format(now(), '%Y')-substring(bday,1,4)) age FROM member) ag on ag.mno=m.mno
+      left join party_review_file prf on pr.prno=prf.prno
+    where
+      pr.act=1
+      and pr.mno=m.mno
+      and s.sno=#{sportNo}
+    order by
+      pr.prno desc,
+      pr.cdt desc
+    ]]>
+  </select>
+
+  <select id="findByNo" resultMap="reviewMap">
+    <![CDATA[
+    select
+      m.filepath,
+      m.nick,
+      m.sex,
+      CASE
+      WHEN age < 20 THEN '10대 이하'
+      WHEN age < 30 THEN '20대'
+      WHEN age < 40 THEN '30대'
+      WHEN age < 50 THEN '40대'
+      WHEN age < 60 THEN '50대'
+      WHEN age > 59 THEN '60대 이상'
+    END AS ageGroup,
+      pr.star,
+      prf.filepath reviewfilepath,
+      pr.title,
+      pr.cont,
+      pr.cdt,
+      pr.prno
+    from
+      party_review pr
+      join member m on pr.mno=pr.mno
+      join (SELECT *, FLOOR(date_format(now(), '%Y')-substring(bday,1,4)) age FROM member) ag on ag.mno=m.mno
+      left join party_review_file prf on pr.prno=prf.prno
+    where
+      pr.act=1
+      and pr.mno=m.mno
+      and pr.prno=#{value}
+    ]]>
+  </select>
+
+  <insert id="insert" parameterType="review"
+          useGeneratedKeys="true" keyColumn="prno" keyProperty="no">
+    insert into party_review(mno,pno,title,cont,star) 
+    values(#{writer.no},#{partyNo},#{title},#{content},#{star})
+  </insert>
+
+  <insert id="insertFiles" parameterType="review">
+    insert into party_review_file(filepath,prno) 
+    values 
+    <foreach collection="attachedFiles" item="file" separator=",">
+      (#{file.filepath},#{no})
+    </foreach>
+  </insert>
+
+  <select id="findStarByNo" resultType="double">
+
+    select
+      ifnull (truncate(avg(star), 1), 0)
+      as star
+    from
+      party_review pr
+      join member m on pr.mno=pr.mno
+      join (select p2.pno pno2, p2.sno from party p2 join party_members pm on p2.pno=pm.pno where pm.auth=1 and pm.mno=#{userNo}) p on pr.pno=p.pno2
+      join sports s on s.sno=p.sno
+    where
+      pr.act=1
+      and pr.mno=m.mno
+      and s.sno=#{sportNo}
+    order by
+      pr.prno desc,
+      pr.cdt desc
+
+  </select>
+
+
+ 
+
+
+</mapper>
+
+
+

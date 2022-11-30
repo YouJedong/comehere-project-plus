@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.NoticeDao">
+
+  <resultMap type="notice" id="noticeMap">
+    <id column="nno" property="no"/>
+    <result column="title" property="title"/>
+    <result column="cont" property="content"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="vw_cnt" property="viewCount"/>
+
+  </resultMap>
+  
+  <insert id="insert" parameterType="notice" 
+          useGeneratedKeys="true" keyColumn="nno" keyProperty="no">
+    INSERT INTO
+      notice(title,cont,thumbnail)
+    VALUES
+      (#{title},#{content},#{thumbnail})
+  </insert>
+  
+  
+  <select id="findAll" parameterType="map" resultMap="noticeMap">
+    SELECT
+      *
+    FROM
+      notice
+    WHERE
+      <choose>
+          <when test="search.type == 'T'.toString()">
+              title like concat('%',#{search.noticeKeyword},'%') 
+          </when>
+          <when test="search.type == 'C'.toString()">
+              cont like concat('%',#{search.noticeKeyword},'%') 
+          </when>
+            <when test="search.type == 'TC'.toString()">
+              title like concat('%',#{search.noticeKeyword},'%') OR cont like concat('%',#{search.noticeKeyword},'%') 
+          </when>
+      </choose>
+    ORDER BY 
+      nno desc
+    LIMIT #{pagesStart}, #{perPageNum}
+  </select>
+
+  <select id="countNotice" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      notice
+  </select>
+  
+  <select id="get" parameterType="int" resultMap="noticeMap">
+    SELECT
+      *
+    FROM
+      notice
+    WHERE
+      nno=#{no}
+  </select>
+  
+  <update id="increaseViews">
+    update 
+      notice 
+    set 
+      vw_cnt = vw_cnt + 1
+    where nno=#{value}
+  </update>
+  
+    <update id="update" parameterType="notice">
+    update 
+      notice
+    set 
+      title=#{title}, 
+      cont=#{content},
+      thumbnail=#{thumbnail}
+    where nno=#{no}
+  </update>
+
+  <select id="getThumbnailByNoticeNo" resultType="String">
+    select 
+      thumbnail
+    from 
+      notice
+    where 
+      nno = #{value}
+  </select>
+  
+  <delete id="delete">
+    delete 
+    from 
+      notice
+    where 
+      nno=#{value}
+  </delete>
+
+  
+</mapper>
+
+
+

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- site metas -->
+        <title>여기모여</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <!-- style css -->
+        <link rel="stylesheet" type="text/css" href="../css/style2.css">
+        <!-- Responsive-->
+        <!-- fevicon -->
+        <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+        <!-- Scrollbar Custom CSS -->
+        <!-- Tweaks for older IEs-->
+        <!-- owl stylesheets -->
+         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+    .mail_sectin{
+      float: left;
+      width:550px;
+      padding: 15px 60px;
+      border-radius: 10px;
+      box-shadow: inset 0 1px 1px 1px #c9c9d0;
+      background-color: #ffffff;
+    } 
+    .row {
+      margin-left: 25%;
+    }
+    .btn-outline-secondary.file {
+      font-size: 12px;
+      width: 60px;
+      padding-left: 10px;
+    }
+   .btn-outline-secondary {
+      margin-left:30px;
+    }
+    #real-input {
+      display:none; 
+    } 
+    .send_bt {
+	    float: left;
+	    margin: 50px 155px;
+	    margin: 40p;
+    }
+    </style>
+    </head>
+        <body>
+          <!-- header section start -->
+          <div class="header_section">
+            <div class="container-fluid">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                       <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+                       <li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+                       <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+                  </ul>
+                  <div class="search_icon">
+                    <ul>
+                      <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+                      <li data-th-if="${session.loginMember != null}"><a href="../mypage/my-post">마이페이지</a></li>
+                      <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <!-- header section end -->
+          <!-- contact section start -->
+          <div class="contact_section layout_padding">
+            <div class= "info">
+              <ul class="infoMenu">
+                <li class= "menu"><a href="../mypage/my-post" ><span >나의 활동</span></a></li>
+                <li class= "menu"><a href="../mypage/my-party"><span>모임 관리</span></a></li>
+                <li class= "menu"><a href="../member/viewer"><span class="menu-on">회원 정보 변경</span></a></li>
+              </ul>
+            </div>
+            <div class="container" >
+              <div class="row">
+                <div class="col-md-6">
+                  <h1 class="contact_text">개인정보 수정</h1>
+                   <div class="mail_sectin">
+                    <form action="update" enctype="multipart/form-data" method="post" id="updateForm" name="myForm"  style="width: 500px;">
+                       <!-- 사진첨부 -->
+                        <div id="imagePreview">
+                          <div class="imgimg">
+                          <div class="add-file">
+                            <img id="previewImg" th:src="@{'/member/files/' + ${member.filepath}}" onerror="this.src='../images/default-profile-pic.png'" class="profile_pic profile " alt="profile_picture"  >
+                            <button type="button" class="btn btn-outline-secondary file" id="btn-upload">사진변경</button>
+                          </div>
+                            <input type="file" id="real-input" class="image_inputType_file btn btn-primary" name="file">
+                          </div>
+                      </div>
+                      <!-- 사진첨부 끝 -->
+                        <div class="join_menu blank">이름</div>
+                      <input type="text" class="email-bt small-area2" data-th-value="${member.name}" name="name" readonly>
+                        <div class="join_menu">생년월일</div>
+                      <input type='date' class="email-bt small-area2" data-th-value="${member.birthday}" readonly>
+                      <div class="join_menu">아이디</div> 
+                      <input type="text" class="email-bt small-area" data-th-value="${member.id}" name="id" id="id" readonly>
+                        <div class="join_menu">이메일</div>
+                      <input type="email" class="email-bt small-area" data-th-value="${member.email}" id="email"  name="email" > 
+                      <button class="btn btn-outline-secondary check" type="button" id="button-addon2">중복확인</button>
+                      <div class="feedback"><font id="email-feedback" size="3"></font></div>
+                          <div class="join_menu">닉네임</div>
+                      <input type="text" class="email-bt small-area" id="nick" data-th-value="${member.nickname}" name="nickname">
+                          <button class="btn btn-outline-secondary check" type="button" id="button-addon3">중복확인</button>
+                      <div class="feedback"><font id="nick-feedback" size="3"></font></div>
+                          <div class="join_menu">전화번호</div>
+                      <input type="text" class="phoneNumber" data-th-value="${member.tel}" id="tel" name="tel" required pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13"><br/>
+                          <div class="join_menu">비밀번호
+                            <input type="password" class="email-bt" id="password" onchange="check_pw()" placeholder="비밀번호" name="password"> 
+                            <div id="passwordError" class="error"></div>
+                            <input type="password" class="email-bt" id="passwordCheck" onchange="check_pw()" placeholder="비밀번호 확인" name="password_check" >&nbsp;
+                            <div class="feedback"><font id="check" size="3"></font> </div>
+                          </div>
+                          <div class="join_menu">관심지역 <br>
+                          <select class="favorite-choice" id="favoriteRegion1" name="regionDomain" >
+                          <option data-th-each="region : ${regionList}"  data-th-value="${region.no}" data-th-text="${region.sigu}"></option>
+                      </select> 
+                      <select class="favorite-choice" id="favoriteRegion2" name="regionDomain">
+                        <option data-th-each="region : ${regionList}"  data-th-value="${region.no}" data-th-text="${region.sigu}"></option>
+                      </select><br />
+                      </div>
+                        <div class="join_menu">관심운동</div>
+                      <select class="favorite-choice" id="favoriteSports1" name="sportsDomain">
+                        <option data-th-each="sports : ${sportsList}" data-th-value="${sports.no}" data-th-text="${sports.name}"></option>
+                      </select> 
+                      <select class="favorite-choice" id="favoriteSports2" name="sportsDomain">
+                        <option data-th-each="sports : ${sportsList}" data-th-value="${sports.no}" data-th-text="${sports.name}"></option>
+                      </select><br />
+                      <div class="send_bt"><button type="button" onclick="joinform_check()">변경</button></div>
+                      <div class="delete_bt"><button type="button" data-th-onclick="'deleteMember(' + ${member.no} + ')'">>회원탈퇴</button></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                        <!-- Javascript files-->
+            <!-- <script src="js/jquery.min.js"></script> -->
+            <!-- <script src="js/popper.min.js"></script> -->
+            <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+            <!-- <script src="js/jquery-3.0.0.min.js"></script> -->
+            <!-- <script src="js/plugin.js"></script> -->
+            <!-- sidebar -->
+            <!-- <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> -->
+            <!-- <script src="js/custom.js"></script> -->
+            <!-- javascript -->
+            <!-- <script src="js/owl.carousel.js"></script> -->
+            <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script>
+            
+          //joinform_check 함수로 유효성 검사
+            function joinform_check() {
+              //변수에 담아주기
+              var tel = document.getElementById("tel");
+              var email = document.getElementById("email");
+              var nick = document.getElementById("nick");
+              var password = document.getElementById("password");
+              var password = document.getElementById("passwordCheck");
+
+               if (tel.value == "") {
+                alert("전화번호를 입력하세요.");
+                tel.focus();
+                return false;
+              }; 
+
+              if (email.value == "") {
+                alert("이메일 주소를 입력하세요.");
+                email.focus();
+                return false;
+              }
+              
+              if (nick.value == "") {
+                alert("닉네임을 입력하세요.");
+                nick.focus();
+                return false;
+              };
+
+              if (password.value == "") {
+                alert("비밀번호를 입력하세요.");
+                password.focus();
+                return false;
+              };
+              
+              if (passwordCheck.value == "") {
+                alert("비밀번호를 한번 더 입력하세요.");
+                password.focus();
+                return false;
+              };
+
+              //입력 값 전송
+            swal({
+            	 title: '회원수정 완료!',
+               text: '수정되었습니다.',
+               icon: 'success',
+               buttons : [ ,"확인"],
+              }).then(function(isConfirm){
+                   if (isConfirm) {
+   	                 document.myForm.submit();
+                   }
+              });
+            }
+
+
+          /* 전화번호 (-) 삽입 */
+            $(document).on("keyup", ".phoneNumber", function () {
+              $(this).val(
+                $(this)
+                  .val()
+                  .replace(/[^0-9]/g, "")
+                  .replace(
+                    /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+                    "$1-$2-$3"
+                  )
+                  .replace("—", "-")
+              );
+            });
+            
+            
+            /* 관심지역 선택한 값 불러오기 시작*/
+                 let memberRestion1 = [[${member.FavoriteRegion[0].Region.no}]]; // 예) 금천구의 번호
+                 console.log(memberRestion1);
+               
+                 let regionOptionLength1 = $("#favoriteRegion1").find("option").length; // select box 안에 option 개수 조회
+               
+                 for (let i=0; i<regionOptionLength1; i++) {
+                   let optionValue = $("#favoriteRegion1").find('option').eq(i).attr("value");
+                   if(memberRestion1 == optionValue) { //
+                     $("#favoriteRegion1").find('option').eq(i).attr('selected', true);
+                   }
+                 }
+            
+            let memberRestion2 = [[${member.FavoriteRegion[1].Region.no}]]; // 예) 금천구의 번호
+            console.log(memberRestion2);
+
+            let regionOptionLength2 = $("#favoriteRegion2").find("option").length; // select box 안에 option 개수 조회
+
+            for (let i=0; i<regionOptionLength2; i++) {
+              let optionValue = $("#favoriteRegion2").find('option').eq(i).attr("value");
+              if(memberRestion2 == optionValue) { //
+                $("#favoriteRegion2").find('option').eq(i).attr('selected', true);
+              }
+            }
+            /* 관심지역 선택한 값 불러오기 끝*/
+            
+            /* 관심운동 선택한 값 불러오기 시작*/
+            let memberRestion3 = [[${member.FavoriteSports[0].Sports.no}]]; // 예) 금천구의 번호
+            console.log(memberRestion3);
+
+            let sportsOptionLength1 = $("#favoriteSports1").find("option").length; // select box 안에 option 개수 조회
+
+            for (let i=0; i<sportsOptionLength1; i++) {
+              let optionValue = $("#favoriteSports1").find('option').eq(i).attr("value");
+              if(memberRestion3 == optionValue) { //
+                $("#favoriteSports1").find('option').eq(i).attr('selected', true);
+              }
+            }
+            
+            let memberRestion4 = [[${member.FavoriteSports[1].Sports.no}]]; // 예) 금천구의 번호
+            console.log(memberRestion4);
+
+            let sportsOptionLength2 = $("#favoriteSports2").find("option").length; // select box 안에 option 개수 조회
+
+            for (let i=0; i<sportsOptionLength2; i++) {
+              let optionValue = $("#favoriteSports2").find('option').eq(i).attr("value");
+              if(memberRestion4 == optionValue) { //
+                $("#favoriteSports2").find('option').eq(i).attr('selected', true);
+              }
+            }
+            /* 관심운동 선택한 값 불러오기 끝*/
+            
+            /* 이메일 중복체크 */
+            $('#button-addon2').click(function(){
+              let email = $('#email').val();
+              
+              $.ajax({
+                url : '/app/member/duplication-email-check',
+                type : "post",
+                data : {email : email},
+                dataType : 'json',
+                success : function(result) { 
+                  if(result == 1) {
+                    $("#email-feedback").html('이미 사용 중인 이메일입니다.');
+                    $("#email-feedback").attr('color', 'red');
+                  } else {
+                    $("#email-feedback").html('사용할 수 있는 이메일입니다.');
+                    $("#email-feedback").attr('color', 'green');
+                  }
+                }
+              })
+            })
+             
+            /* 닉네임 중복체크 */
+            $('#button-addon3').click(function(){
+              let nick = $('#nick').val();
+              
+              $.ajax({
+                url : '/app/member/duplication-nick-check',
+                type : "post",
+                data : {nickname : nick},
+                dataType : 'json',
+                success : function(result) { 
+                  if(result == 1) {
+                    $("#nick-feedback").html('이미 사용 중인 닉네임입니다.');
+                    $("#nick-feedback").attr('color', 'red');
+                  } else {
+                    $("#nick-feedback").html('사용할 수 있는 닉네임입니다.');
+                    $("#nick-feedback").attr('color', 'green');
+                  }
+                }
+              })
+            })
+            
+            /* 비밀번호 체크 */
+            function check_pw(){
+               var pw = document.getElementById('password').value;
+               var SC = ["!","@","#","$","%"];
+               var check_SC = 0;
+    
+               for(var i=0;i<SC.length;i++){
+                   if(pw.indexOf(SC[i]) == 0){
+                       check_SC = 1;
+                   }
+               }
+               
+               if(pw.length < 4 || pw.length>16) {
+                   window.alert('비밀번호는 4글자 이상, 16글자 이하만 이용 가능합니다.');
+                   document.getElementById('password').value='';
+               }
+               
+               if(check_SC == 0){
+                   window.alert('!,@,#,$,% 중 특수문자를 1개 이상 입력해주세요.')
+                   document.getElementById('password').value='';
+               }
+              
+              if(document.getElementById('password').value !='' && document.getElementById('passwordCheck').value!=''){
+                  if(document.getElementById('password').value==document.getElementById('passwordCheck').value){
+                      document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+                      document.getElementById('check').style.color='green';
+                  } else {
+                      document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
+                      document.getElementById('check').style.color='red';
+                  }
+              }
+          }
+          
+            /* 엔터 이벤트 막기 */
+            document.myForm.addEventListener('keydown', function(event) {
+                if (event.keyCode === 13) {
+                  event.preventDefault();
+                };
+              });
+            
+            </script>
+            <!--  이미지 미리보기 -->
+            <script>
+						$('#real-input').on('change', function () {
+						    if(window.FileReader){
+						        var filename = $(this)[0].files[0].name;
+						        if(!validFileType(filename)){
+						            alert("허용하지 않는 확장자 파일입니다.");
+						            return false;
+						        }else{
+						            if(!validFileSize($(this)[0].files[0])){
+						                alert("파일 사이즈가 5MB를 초과합니다.");
+						                return false;
+						            }
+						        }
+						    } else {
+						        var filename = $(this).val().split('/').pop().split('\\').pop();
+						    }
+						    $(this).prev().val(filename); //input upload-name 에 파일명 설정해주기
+						
+						    readImage($(this)[0]); //미리보기
+						});
+						
+						function validFileType(filename) {
+						    const fileTypes = ["png", "jpg", "jpeg"];
+						return fileTypes.indexOf(filename.substring(filename.lastIndexOf(".")+1, filename.length).toLowerCase()) >= 0;
+						}
+						
+						function validFileSize(file){
+						    if(file.size > 5000000){ //5MB
+						        return false;
+						    }else{
+						        return true;
+						    }
+						}
+						
+						//이미지 띄우기
+						function readImage(input) {
+						    if(input.files && input.files[0]) {
+						        const reader = new FileReader();
+						        reader.onload = function(e){
+						            const previewImage = document.getElementById("previewImg");
+						            previewImage.src = e.target.result;
+						        }
+						        // reader가 이미지 읽도록 하기
+						        reader.readAsDataURL(input.files[0]);
+						    }
+						}
+						
+						// 회원 비활성화
+						let no="";
+						  /*<![CDATA[*/
+						  function deleteMember(no) {
+							  console.log("GHKRDLS");
+						    let memberNo = no
+						    console.log(memberNo);
+						    location.href=`delete_pw_check_viewer?no=${memberNo}`;
+						  }
+						  /*]]>*/
+						
+          </script>
+          
+          <script>
+           // 인풋 태그 대신 버튼 태그로 보내기
+           $(function () {
+               $('#btn-upload').click(function (e) {
+                 e.preventDefault();
+                 $('#real-input').click();
+                 });
+               });
+           
+           function changeValue(obj){
+               alert(obj.value);
+           }
+           </script>
+          <script>
+          // 사진 초과시 짜르기
+					$('.profile').ready(function () {
+					  const img = new Image();
+					  const imgSize = "";
+					  let[imgUrl, imgPath] = $('.profile').attr('src').split('files/');
+					  img.src = imgPath;
+					    console.log(imgPath);
+					    console.log(img.src);
+					    console.log(imgPath.height);
+					    console.log(imgPath.width);
+					  if (img.width > img.height) {
+					    imgSize = img.height;
+					    console.log(imgSize + "dd");
+					    $('.profile').css('max-height', imgSize);
+					  } else if (img.width < img.height) {
+					    imgSize = img.width;
+					    console.log(imgSize + "dd");
+					    $('.profile').css('max-width', imgSize);
+					  }
+					  
+					});
+          </script>
+        </body>
+
+</html>

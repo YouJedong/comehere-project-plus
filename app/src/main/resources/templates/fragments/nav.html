@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:fragment="fragment-nav">
+      <div class="header_section windowWidth" >
+        <div class="container-fluid windowWidth">
+          <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+            <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+                <li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+                <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+              </ul>
+              <div class="login-bt">
+                <ul>
+                  <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+                  <li data-th-if="${session.loginMember != null}"><a href="../mypage/my-post">마이페이지</a></li>
+                  <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </head>
+
+</html>

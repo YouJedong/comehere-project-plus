@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.FavoriteSportsDao">
+
+  <resultMap type="FavoriteSports" id="favoriteSportsMap">
+    <result column="sno" property="sno"/>
+    <result column="mno" property="mno"/>
+  </resultMap>
+  
+  <!-- 관심 운동 등록  -->
+  <insert id="insertSports" parameterType="member">
+    INSERT INTO 
+      favorite_sports(sno,mno)
+    VALUES
+      <foreach collection="favoriteSports" item="sports" separator=",">
+        (#{sports.sno},#{no})
+      </foreach>
+  </insert>
+  
+  <!-- 관심지역 수정  -->
+  <select id="findAllSportsNosByMemberNo" parameterType="int" resultMap="favoriteSportsMap">
+    SELECT * 
+    FROM 
+      favorite_sports
+    WHERE 
+      mno=#{memberNo}
+  </select>
+  
+   <update id="updateSports" >
+      UPDATE
+        favorite_sports
+      SET 
+         sno = #{sportsDomain}
+      WHERE 
+        mno=#{mno} 
+      AND 
+        sno=#{sportsDomain}
+  </update>
+  
+  <delete id="deleteFavoriteSports" parameterType="int">
+    DELETE 
+    FROM 
+      favorite_sports
+    WHERE 
+      mno=#{memberNo}
+  </delete>
+  
+  <!-- 관심 운동 수정
+  <update id="updateSports" parameterType="member">
+  
+    insert into favorite_sports(sno,mno)
+    values
+      <foreach collection="favoriteSports" item="sports" separator=",">
+        (#{sports.sno},#{no})
+      </foreach>
+  </update> -->
+  
+  
+
+</mapper>
+
+
+

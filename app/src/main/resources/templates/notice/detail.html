@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>여기모여</title>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <!-- site metas -->
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="../css/style2.css">
+      <!-- Responsive-->
+      <!-- fevicon -->
+      <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <!-- Tweaks for older IEs-->
+      <!-- owl stylesheets --> 
+      <!-- <link rel="stylesheet" href="../css/owl.theme.default.min.css"> -->
+      <!-- 공식부트스트랩 CSS -->
+      <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+        
+      <style>
+.temp-line {
+  border: 1px solid black;
+}
+
+.furnitures_sectionJD {
+  width: 100%;
+  min-height: 897.36px;
+  float: left;
+  padding-bottom: 50px;
+}
+
+.form-content {
+  min-height: 400px;
+  margin-top: 60px;
+}
+
+.board-wrapper {
+  padding: 30px;
+  margin: 100px 0px 0px;
+  border: 1px solid  #edeef0;
+  border-radius: 8px;
+}
+
+.btn-outline-secondary {
+  margin-top: 10px;
+  color: #0d6efd;
+  background-color: #ffffff00;
+  border: 1px solid grey;
+}
+
+.btn-outline-secondary:hover {
+  color: #ffffff;
+  background-color: #0d6efd;
+  transition: all .3s ease;
+}
+a:not([href]):not([tabindex]) {
+    color: #0d6efd;
+}
+.btn-outline-secondary#delete-button:hover {
+  color: white;
+}
+.notice-title {
+  font-weight: bold;
+  font-size: 30px;
+}
+.edit-btn {
+  margin-top: 30px;
+  margin-right: -30px;
+  float: right;
+}
+.board-title {
+  font-size: 18px;
+  text-decoration: bold;
+}
+p {
+  margin:0px;
+}
+</style>
+
+    </head>
+    <body>
+  <!-- header section start -->
+  <div class="header_section windowWidth">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+            <li class="nav-item"><a class="nav-link" href="../board/main">커뮤니티</a></li>
+            <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+          </ul>
+          <div class="login-bt">
+            <ul>
+              <li data-th-if="${session.loginMember == null}"><a href="../auth/form" >로그인</a></li>
+              <li data-th-if="${session.loginMember != null and session.loginMember.id != 'admin'}"><a href="../mypage/my-post">마이페이지</a></li>
+              <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- header section end -->
+      <!-- furnitures section start -->
+      <div class="furnitures_sectionJD layout_padding windowWidth">
+         <div class="container-detail" >
+            <div style="height: 34px;">
+              <div class="notice-title">
+		            <span>공지사항</span>
+		          </div>
+              <span style="float: right;"><a data-th-href="@{list}" class="btn btn-primary" style=" margin-top: 40px;">목록</a></span>
+            </div>
+            <div class="board-wrapper">
+              <input data-th-value="${notice.no}" value=공지사항번호 id="noticeNo" name='no' type="hidden">
+		              <h3 class="board-title" data-th-text='${notice.title}'></h3>
+                  <img style="width:45px; border-radius: 50vw; margin-right:10px;"src="../images/profile-pic.png"><span>관리자</span>
+                <div style="float: right; margin-top: 15px;">
+                  <span th:text="${notice.createdDate}" style="margin-right: 10px;"></span>
+                  <img style="width: 18px; margin-left: 1px;" src="../images/view-icon2.png"><span th:text="${notice.viewCount}">0</span>
+                </div>
+               <hr class="black-line" style="color:grey;">
+              <div th:utext="${notice.content}" class="form-content">내용</div>
+            <div class="edit-btn" >
+              <a data-th-if="${session.loginMember != null and session.loginMember.id == 'admin'}" data-th-href="@{updateForm(no=${notice.no})}" class="btn btn-primary" role="button" style="margin-top: 10px;">수정</a>
+              <a data-th-if="${session.loginMember != null and session.loginMember.id == 'admin'}" class="btn btn-outline-secondary" role="button" id="delete-button">삭제</a>
+            </div>
+            </div>
+            </div>
+            </div>
+
+      <!--  footer section end -->
+      <!-- Javascript files-->
+<!--       <script src="../js/jquery.min.js"></script>
+      <script src="../js/popper.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="../js/jquery-3.0.0.min.js"></script>
+      <script src="../js/plugin.js"></script>
+      sidebar
+      <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../js/custom.js"></script>
+      javascript  -->
+      <!-- <script src="../js/owl.carousel.js"></script> -->
+      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <!-- 공식부트스트랩 JS -->
+      <script src="../js/bootstrap/bootstrap.js"></script>   
+      <!-- sweetalert -->
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+
+      <script>
+      "use strict"
+      const noticeNo = document.getElementById( 'noticeNo').value;
+    	  
+        if ($('#delete-button').length != 0) {
+          document.getElementById('delete-button').addEventListener('click', deleteBoard);
+        }
+        function deleteBoard() {
+            swal({
+                text : "게시글을 삭제하시겠습니까?",
+                icon : "warning",
+                buttons : ["아니요", "예"],
+              }).then(function(isConfirm) {
+                if (isConfirm) {
+                	console.log("되냐?");
+                   location.href = 'delete?no=' + noticeNo;
+                } else{
+                  return false;
+                }
+             });
+          }
+        </script>
+        <script>
+          // 뒤로가기하면 자동으로 새로고침 (조회수 반영을 위해)
+          window.onpageshow = function(e) {
+            if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
+              window.location.reload();
+            }
+          }
+        </script>
+
+   </body>
+         
+</html>

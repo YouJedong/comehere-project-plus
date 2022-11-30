@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.ScrapDao">
+
+  <resultMap type="Scrap" id="scrapMap">
+    <result column="mno" property="memberNo"/>
+    <result column="bno" property="boardNo"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="scrap"> 
+    insert into 
+     scrap(mno, bno) 
+    select #{memberNo},#{boardNo}
+    where not exists
+     (select
+       mno 
+      from 
+       scrap 
+      where mno = #{memberNo} and bno = #{boardNo})
+  </insert>
+  
+  <delete id="delete" parameterType="scrap">
+    delete from scrap
+    where mno=#{memberNo} and bno = #{boardNo}
+  </delete>
+
+  <delete id="deleteAll">
+    delete from scrap
+    where bno = #{value}
+  </delete>
+  
+  <select id="findScrapsCount" resultType="Integer">
+    select 
+      count(*) 
+    from 
+      scrap 
+    where 
+      mno = #{value}
+  </select>
+
+
+</mapper>
+
+
+

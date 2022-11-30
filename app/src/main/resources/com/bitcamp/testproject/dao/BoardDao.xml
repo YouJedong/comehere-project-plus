@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.BoardDao">
+
+  <resultMap type="board" id="boardMap">
+    <id column="bno" property="no"/>
+    <result column="cateno" property="cateno"/>
+    <result column="title" property="title"/>
+    <result column="act" property="act"/>
+    <result column="cont" property="content"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="vw_cnt" property="viewCount"/>
+    <result column="thumbnail" property="thumbnail"/>
+    <result column="ment_cnt" property="commentCount"/>
+    
+    <association property="writer" javaType="member">
+      <id column="mno" property="no"/>
+      <result column="name" property="name"/>
+      <result column="nick" property="nickname"/>
+      <result column="filepath" property="filepath"/>
+    </association>
+
+  </resultMap>
+  
+  <!-- hashmap resultMap으로.. -->
+  <resultMap type="hashMap" id="hashBoardMap">
+    <id column="bno" property="no"/>
+    <result column="cateno" property="cateno"/>
+    <result column="title" property="title"/>
+    <result column="act" property="active"/>
+    <result column="cont" property="content"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="vw_cnt" property="viewCount"/>
+    
+    <association property="writer" javaType="member">
+      <id column="mno" property="no"/>
+      <result column="name" property="name"/>
+      
+    </association>
+  
+  </resultMap>
+  <!--  -->
+  
+  <resultMap type="boardCategory" id="boardCategoryMap">
+    <id column="cateno" property="cateno"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+
+<!--   
+  <select id="findAll" resultMap="boardMap">
+    select
+      b.bno,
+      b.title,
+      m.name,
+      b.cdt,
+      b.vw_cnt,
+      b.cateno
+    from 
+      board b
+      join member m on b.mno = m.mno
+      join board_category bc on b.cateno = bc.cateno
+    where
+      b.cateno = #{value}
+    order by 
+      bno desc
+  </select>
+   -->
+   
+   <select id="findBestList" resultMap="boardMap">
+        select
+          b.bno,
+          b.title,
+          m.nick,
+          b.vw_cnt,
+          b.cateno
+        from 
+          board b
+          join member m on b.mno = m.mno
+          join board_category bc on b.cateno = bc.cateno
+        where
+          b.act = 1
+        order by 
+          vw_cnt desc
+        limit 0, 10;
+  </select>
+  
+   <select id="findClgList" resultMap="boardMap">
+      select
+        b.bno,
+        b.title,
+        m.nick,
+        b.cdt,
+        b.thumbnail
+      from 
+        board b
+        join member m on b.mno = m.mno
+        join board_category bc on b.cateno = bc.cateno
+      where
+        b.act = 1 and
+        b.cateno = 3
+      group by
+        b.bno
+      order by 
+        b.bno desc
+      limit 0, 5
+  </select>
+  
+  <select id="findAll" resultMap="boardMap" parameterType="criteria">
+     <![CDATA[
+		    select
+ 		      b.bno,
+		      b.title,
+		      m.nick,
+		      b.cdt,
+		      b.vw_cnt,
+		      b.cateno,
+		      b.thumbnail
+		    from 
+		      board b
+		      join member m on b.mno = m.mno
+		      join board_category bc on b.cateno = bc.cateno
+		    where
+		      b.act = 1 and
+		      b.cateno = #{catenoToPage}
+        group by
+          b.bno
+		    order by 
+		      bno desc
+		    limit #{pagesStart}, #{perPageNum}
+		  ]]>
+  </select>
+  
+  <select id="findListTotalCount" resultType="integer">
+    select 
+      count(*)
+    from 
+      board 
+    where 
+      cateno = #{value}
+  </select>
+  
+  <select id="findListTotalCountWithSearch" resultType="integer" parameterType="hashMap">
+    select 
+      count(*) 
+    from 
+      board b
+      join member m on b.mno = m.mno
+    where 
+      b.act = 1 and
+      cateno = #{cateno}
+      <trim prefix="and (" suffix=")" prefixOverrides="OR">
+          <foreach collection="search.typeArr" item="type">
+              <trim prefix="OR">
+                  <choose>
+                      <when test="type == 'T'.toString()">
+                          b.title like concat('%',#{search.keyword},'%') 
+                      </when>
+                      <when test="type == 'C'.toString()">
+                          b.cont like concat('%',#{search.keyword},'%') 
+                      </when>
+                      <when test="type == 'W'.toString()">
+                          m.nick like concat('%',#{search.keyword},'%' )
+                      </when>
+                  </choose>
+              </trim>
+          </foreach>
+      </trim>
+  </select>
+  
+  <insert id="insert" parameterType="board"
+          useGeneratedKeys="true" keyColumn="bno" keyProperty="no">
+    insert into board(cateno, mno, title, cont, thumbnail) 
+    values(#{cateno},#{writer.no},#{title},#{content},#{thumbnail})
+  </insert>
+  
+  
+  <select id="findByNo" resultMap="boardMap">
+    select
+      b.bno,
+      b.cateno,
+      b.title,
+      b.cont,
+      m.mno,
+      m.name,
+      m.nick,
+      m.filepath,
+      b.cdt,
+      b.vw_cnt,
+      b.thumbnail
+    from 
+      board b
+      join member m on b.mno = m.mno
+    where
+      b.act = 1 and
+      b.bno = #{value}
+    order by
+      bno desc
+  </select>
+
+  
+  <select id="findByThumbnail" resultMap="boardMap">
+    select
+      b.bno,
+      b.cateno,
+      b.title,
+      b.cont,
+      m.mno,
+      m.name,
+      m.nick,
+      m.filepath,
+      b.cdt,
+      b.vw_cnt,
+      b.thumbnail
+    from 
+      board b
+      join member m on b.mno = m.mno
+    where
+      b.act = 1 and
+      b.thumbnail = #{thumbnail}
+    order by
+      bno desc
+  </select>
+  
+  <delete id="delete">
+    delete from board 
+    where bno=#{value}
+  </delete>
+  
+  <update id="update" parameterType="board">
+    update 
+      board 
+    set 
+      title=#{title}, 
+      cont=#{content},
+      thumbnail=#{thumbnail}
+    where bno=#{no}
+  </update>
+
+  <select id="getThumbnailByBoardNo" resultType="String">
+    select 
+      thumbnail
+    from 
+      board
+    where 
+      act = 1 and
+      bno = #{value}
+  </select>
+
+  <update id="increaseViews">
+    update 
+      board 
+    set 
+      vw_cnt = vw_cnt + 1
+    where bno=#{value}
+  </update>
+  
+  <select id="findCategoryByNo" resultMap="boardCategoryMap">
+    select 
+      cateno, 
+      name
+    from 
+      board_category
+    where 
+      cateno = #{value}
+  </select>
+  
+  <update id="daleteThumbnailByNo">
+    update
+      board
+    set
+      thumbnail= null
+    where 
+      bno=#{value}
+  </update>
+
+  <select id="findByKeyword" resultMap="boardMap" parameterType="hashMap">
+        select
+          b.bno,
+          b.title,
+          m.nick,
+          b.cdt,
+          b.vw_cnt,
+          b.cateno,
+          b.thumbnail
+        from
+          board b
+          join member m on b.mno = m.mno
+          join board_category bc on b.cateno = bc.cateno
+        where
+          b.act = 1 and
+          b.cateno = #{cri.catenoToPage}
+					<trim prefix="and (" suffix=")" prefixOverrides="OR">
+					    <foreach collection="search.typeArr" item="type">
+					        <trim prefix="OR">
+					            <choose>
+					                <when test="type == 'T'.toString()">
+					                    b.title like concat('%',#{search.keyword},'%') 
+					                </when>
+					                <when test="type == 'C'.toString()">
+					                    b.cont like concat('%',#{search.keyword},'%') 
+					                </when>
+					                <when test="type == 'W'.toString()">
+					                    m.nick like concat('%',#{search.keyword},'%' )
+					                </when>
+					            </choose>
+					        </trim>
+					    </foreach>
+					</trim>
+        order by 
+          bno desc
+        limit #{cri.pagesStart}, #{cri.perPageNum}
+  </select>
+  
+  <select id="findBoardsOfScrap" resultMap="boardMap" parameterType="HashMap">
+    select
+      b.bno,
+      b.cateno,
+      b.title,
+      b.cdt,
+      b.act
+    from
+      scrap s 
+      join board b on b.bno=s.bno
+    where
+      s.mno=#{memberNo}
+    order by
+      bno desc
+    limit #{cri.pagesStart}, #{cri.perPageNum}
+  </select>
+
+<!-- 은지 -->
+<!-- 
+  <select id="findByMyPost" parameterType="map" resultMap="boardMap" >
+    SELECT
+      *
+    FROM
+      board
+    WHERE
+      mno = #{memberNo}
+    AND
+      act = 1
+    ORDER BY 
+      bno desc
+    limit #{pagesStart}, #{perPageNum}
+  </select>
+   -->
+  <select id="findByMyPost" parameterType="map" resultMap="boardMap" >
+    SELECT
+    b.*,
+    cmt.cnt ment_cnt
+    FROM
+      board b
+    left join
+      (
+      SELECT
+        tb.bno tbno,
+        count(*) cnt
+      FROM
+        board_comment tc
+        join board tb on tb.bno = tc.bno
+      WHERE
+        tb.mno = #{memberNo}
+        AND
+        tb.act = 1
+      GROUP BY
+        tc.bno
+      ) cmt on cmt.tbno = b.bno
+    WHERE
+      b.mno = #{memberNo}
+      AND
+      b.act = 1
+    ORDER BY 
+      b.bno desc
+    limit #{pagesStart}, #{perPageNum}
+  </select>
+  
+  <select id="countMyPost" parameterType="int" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      board
+    WHERE
+      mno=#{no}
+    AND
+      act=1 
+  </select>
+
+</mapper>
+
+
+

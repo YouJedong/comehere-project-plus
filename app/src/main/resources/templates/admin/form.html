@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:display="http://www.w3.org/1999/xhtml" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- Responsive-->
+<link rel="stylesheet" href="css/responsive.css">
+<!-- fevicon -->
+<link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<!-- Tweaks for older IEs-->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!-- owl stylesheets -->
+<!-- <link rel="stylesheet" href="css/owl.carousel.min.css"> -->
+<!-- <link rel="stylesheet" href="css/owl.theme.default.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+<style>
+.btnon1 {
+    height: 65px;
+    width: 460px;
+    margin-top: 1px;
+    border: none;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: #000;
+    color: white;
+}
+
+.contact_textJD {
+  /* margin:auto; */
+  width: 50%;
+  text-align: center;
+  font-size: 36px;
+  color: #313131;
+}
+
+
+.col-md-7 {
+margin-left: 14vw;
+margin-right: 14vw;
+}
+
+
+</style>
+
+
+</head>
+<body>
+	<!-- header section start -->
+	<div class="header_section">
+		<div class="container-fluid">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="main_logo"><a href="/app"><img src="images/logo.png"></a></div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" href="index.html">운동하기</a></li>
+						<li class="nav-item"><a class="nav-link" href="about.html">커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="shop.html">공지사항</a></li>
+					</ul>
+					</div>
+			</nav>
+		</div>
+	</div>
+	<!-- header section end -->
+	<!-- contact section start -->
+	<div class="contact_section layout_padding">
+		<div class="container">
+		<div class="col-md-7">
+			<div class="col-md">
+
+				<form id="to-center" action='admin/login' method="post">
+					<table>
+            <!-- <input type="hidden" name="beforePageURL" data-th-value="${session.redirectURI}"> -->
+						<h1 class="contact_textJD">관리자 로그인</h1>
+						<tr>
+              <input type="text" class="email-bt" placeholder="ID를 입력해주세요" name="id">
+            </tr>
+						<tr>
+              <input type="password" class="email-bt" placeholder="Password를 입력해주세요" name="password">
+            </tr>
+            
+            <div data-th-if="${loginFail}">아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+					</table>
+					<p>
+						<button type='submit'class="btnon1" >로그인</button>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- contact section end -->
+	<!-- copyright section start -->
+	<div class="copyright_section">
+		<div class="container">
+			<div class="social_icon">
+				<ul>
+					<li><a href="#"><img src="images/fb-icon.png"></a></li>
+					<li><a href="#"><img src="images/twitter-icon.png"></a></li>
+					<li><a href="#"><img src="images/instagram-icon.png"></a></li>
+					<li><a href="#"><img src="images/linkedin-icon.png"></a></li>
+				</ul>
+			</div>
+			<p class="copyright_text">
+				2022 All Rights Reserved. by Comehere
+			</p>
+		</div>
+		<!-- copyright section end -->
+		<!-- Javascript files-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/jquery-3.0.0.min.js"></script>
+		<script src="js/plugin.js"></script>
+		<!-- sidebar -->
+		<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script src="js/custom.js"></script>
+		<!-- javascript -->
+		<!-- <script src="js/owl.carousel.js"></script> -->
+		<!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
+	</div>
+  
+</body>
+</html>

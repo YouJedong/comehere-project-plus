@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:display="http://www.w3.org/1999/xhtml" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- site metas -->
+<title>여기모여</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<!-- Responsive-->
+<link rel="stylesheet" href="../css/responsive.css">
+<!-- fevicon -->
+<link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+<!-- Tweaks for older IEs-->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!-- owl stylesheets -->
+<link rel="stylesheet" href="../css/owl.carousel.min.css">
+<link rel="stylesheet" href="../css/owl.theme.default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+<meta data-th-if="${member != null}" http-equiv='Refresh' content='1; url=../'>
+<meta data-th-if="${member == null}" http-equiv='Refresh' content='1; url=form'>
+<style>
+.btnon1 {
+  height: 65px;
+  width: 490px;
+  margin-top: 1px;
+  border: none;
+  border-radius: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #000;
+  color: white;
+}
+
+.furniture_text{
+    width: 100%;
+    float: left;
+    font-size: 40px;
+    color: #090808;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.col-md-7 {
+  margin-left: 14vw;
+  margin-right: 14vw;
+}
+
+.contact_section9 {
+  width: 100%;
+  float: left;
+  background-image: url(../images/);
+  height: auto;
+  background-color: #3B4BFF;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 90px;
+  opacity: 0.8;
+}
+
+.layout_padding9 {
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
+</style>
+
+</head>
+<body>
+  <!-- header section start -->
+  <div class="header_section">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="logo">
+          <a href="/app"><img src="../images/comehere_logo.png"></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">운동하기</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">건강관리</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">커뮤니티</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html">공지사항</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">마이페이지</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- header section end -->
+  <!-- contact section start -->
+  <div class="contact_section9 layout_padding9">
+    <div class="container">
+      <div class="col-md-7">
+        <div class="col-md">
+            <table border='1'>
+              <p data-th-if="${member != null}" class="furniture_text">로그인 성공입니다!</p>
+              <p data-th-if="${member == null}" class="furniture_text">회원이 존재하지 않습니다!</p>
+            </table>
+          </form>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="copyright_section">
+    <div class="container">
+      <div class="social_icon">
+        <ul>
+          <li><a href="#"><img src="../images/fb-icon.png"></a></li>
+          <li><a href="#"><img src="../images/twitter-icon.png"></a></li>
+          <li><a href="#"><img src="../images/instagram-icon.png"></a></li>
+          <li><a href="#"><img src="../images/linkedin-icon.png"></a></li>
+        </ul>
+      </div>
+      <p class="copyright_text">
+        2020 All Rights Reserved. Design by <a href="https://html.design">Comehere</a>
+      </p>
+    </div>
+    <!-- copyright section end -->
+    <!-- Javascript files-->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.0.0.min.js"></script>
+    <script src="../js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../js/custom.js"></script>
+    <!-- javascript -->
+    <script src="../js/owl.carousel.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  </div>
+</body>
+</html>

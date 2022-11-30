@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.testproject.dao.PartyMemberDao">
+
+  <resultMap type="partymember" id="partyMemberMap">
+    <id column="pno" property="partyNo"/>
+    <result column="psno" property="statusNo"/>
+    <result column="auth" property="auth"/>
+
+    <!-- 조인 결과에서 같은 게시글에 대해 한 개의 회원 데이터를 담을 경우 -->
+    <association property="member" javaType="member">
+      <id column="mno" property="no"/>
+      <result column="nick" property="nickname"/>
+      <result column="bday" property="birthday"/>
+      <result column="sex" property="sex"/>
+      <result column="filepath" property="filepath"/>
+      <result column="ageGroup" property="ageGroup"/>
+    </association>
+
+    <!-- 조인 결과에서 같은 게시글에 대해 한 개의 회원 데이터를 담을 경우 -->
+    <association property="party" javaType="party">
+      <id column="pno" property="no"/>
+    <result column="title" property="title"/>
+    <result column="act" property="active"/>
+    <result column="cont" property="content"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="headcnt" property="headCount"/>
+    <result column="ptime" property="partyTime"/>
+    <result column="pdate" property="partyDate"/>
+    <result column="star" property="star"/>
+    </association>
+
+  </resultMap>
+
+  <resultMap type="partymember" id="partyMembersMap">
+    <id column="pno" property="partyNo"/>
+    <result column="psno" property="statusNo"/>
+    <result column="auth" property="auth"/>
+
+    <!-- 조인 결과에서 같은 명단에 대해 한 개의 모임 데이터를 담을 경우 -->
+    <association property="party" javaType="party">
+      <id column="pno" property="no"/>
+    <result column="title" property="title"/>
+    <result column="act" property="active"/>
+    <result column="cont" property="content"/>
+    <result column="cdt" property="createdDate"/>
+    <result column="headcnt" property="headCount"/>
+    <result column="ptime" property="partyTime"/>
+    <result column="pdate" property="partyDate"/>
+    <result column="star" property="star"/>
+    </association>
+
+    <!-- 조인 결과에서 같은 명단에 대해 여러 개의 회원 데이터를 담을 경우 -->
+    <collection property="members" ofType="member">
+     <id column="mno" property="no"/>
+      <result column="nick" property="nickname"/>
+      <result column="bday" property="birthday"/>
+      <result column="sex" property="sex"/>
+      <result column="filepath" property="filepath"/>
+      <result column="ageGroup" property="ageGroup"/>
+    </collection>
+
+  </resultMap>
+  
+
+
+  <select id="findAll" resultMap="partyMemberMap">
+    select
+      p.pno,
+      m.nick,
+      m.bday,
+      m.sex,
+      m.filepath,
+      p.pno,
+      p.title,
+      p.headcnt,
+      p.ptime,
+      p.pdate,
+      (select truncate(avg(star), 1) from party_review where pno=p.pno) as star,
+      pm.psno,
+      pm.auth
+    from 
+      member m
+      join party_members pm on m.mno=pm.mno
+      join party p on pm.pno=p.pno
+    where
+      p.pno = #{value}
+    order by 
+      pm.auth desc, m.nick
+  </select>
+  
+    <select id="findByNo" resultMap="partyMemberMap">
+    select
+      m.nick,
+      m.bday,
+      m.sex,
+      m.filepath,
+      p.pno,
+      p.title,
+      p.headcnt,
+      p.ptime,
+      p.pdate,
+      (select truncate(avg(star), 1) from party_review where pno=p.pno) as star,
+      pm.psno,
+      pm.auth
+    from 
+      member m
+      join party_members pm on m.mno=pm.mno
+      join party p on pm.pno=p.pno
+    where
+      p.pno = #{value}
+    order by 
+      pm.auth desc, m.nick
+  </select>
+  
+  <insert id="insertUser" parameterType="partyMember"
+          useGeneratedKeys="true" keyColumn="pmno" keyProperty="no">
+    insert into party_members(
+      mno,
+      pno,
+      psno,
+      auth) 
+    values(
+    #{memberNo},
+    #{partyNo},
+    2,
+    1)
+  </insert>
+  
+  <insert id="insertMember" parameterType="partyMember"
+          useGeneratedKeys="true" keyColumn="pmno" keyProperty="no">
+    insert into party_members(
+      mno,
+      pno,
+      psno,
+      auth) 
+    values(
+    #{memberNo},
+    #{partyNo},
+    1,
+    0)
+  </insert>
+
+  <select id="checkOwner" resultMap="partyMemberMap">
+    select 
+      pm.mno
+    from 
+      party_members pm
+    where 
+      pm.auth=1
+    and
+      pm.pno=#{value}
+  </select>
+
+
+  <select id="findMyPartyMemberAll" resultMap="partyMemberMap">
+    <![CDATA[
+    select 
+      m.mno,
+      m.filepath,
+      m.nick,
+      m.sex,
+      CASE
+      WHEN age < 20 THEN '10대 이하'
+      WHEN age < 30 THEN '20대'
+      WHEN age < 40 THEN '30대'
+      WHEN age < 50 THEN '40대'
+      WHEN age < 60 THEN '50대'
+      WHEN age > 59 THEN '60대 이상'
+      END AS ageGroup
+    from 
+      party_members pm
+      join member m on pm.mno=m.mno
+      join party p on p.pno=pm.pno
+      join (SELECT *, FLOOR(date_format(now(), '%Y')-substring(bday,1,4)) age FROM member) ag 
+      on ag.mno=m.mno
+    where 
+      pm.auth=0
+    and
+      pm.psno=1
+    AND
+      p.act=1 
+    and
+      pm.pno=#{partyNo}
+    limit #{pagesStart}, #{perPageNum}
+      ]]>
+  </select>
+
+
+  <select id="countMyPartyMember" parameterType="int" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      party_members pm
+      join member m on pm.mno=m.mno
+      join party p on p.pno=pm.pno
+    WHERE
+      pm.auth = 0
+    AND
+      p.act=1 
+    and
+      pm.psno=1
+    AND
+      pm.pno = #{value}
+  </select>
+
+  <select id="partyMemberCheck" parameterType="int" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      party_members pm
+      join member m on pm.mno=m.mno
+      join party p on p.pno=pm.pno
+    WHERE
+      pm.auth = 0
+    AND
+      p.act=1 
+    AND
+      pm.mno = #{memberNo}
+    AND
+      pm.pno = #{partyNo}
+  </select>
+
+  
+  <update id="updateOk" parameterType="partyMember">
+    update party_members set 
+      psno=#{status}
+    where 
+      mno=#{memberNo}
+    and
+      pno=#{partyNo}
+  </update>
+  
+  <update id="updateNo" parameterType="partyMember">
+    update party_members set 
+      psno=#{status}
+    where 
+      mno=#{memberNo}
+    and
+      pno=#{partyNo}
+  </update>
+  
+  <update id="updateSecession" parameterType="partyMember">
+    update party_members set 
+      psno=#{status}
+    where 
+      mno=#{memberNo}
+    and
+      pno=#{partyNo}
+  </update>
+  
+    <delete id="delete">
+    delete from party_members
+    where pno=#{value}
+  </delete>
+  
+  <select id="countPartyMember" parameterType="int" resultType="int">
+  SELECT
+      COUNT(*)
+    FROM
+      party p
+      join party_members pm on p.pno=pm.pno
+    WHERE
+      pm.psno = 2
+    and
+      p.pno = #{partyNo}
+  </select>
+  
+  
+</mapper>
+
+
+
