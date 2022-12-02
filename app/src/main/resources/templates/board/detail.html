@@ -6,420 +6,14 @@
     <!-- basic -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" >
     <!-- fevicon -->
-    <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
+    <link href="../images/comehere_con.ico" type="image/gif" rel="icon"/>
     <!-- 공식부트스트랩 CSS -->
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
-        
-<style>
-.windowWidth {
-  max-width:1130px !important;
-  min-width:1130px !important;
-  margin: auto !important;
-  float: none !important;
-}
-.nav-line {
-  border-bottom: 1px solid #e4e8eb;
-  border-top: 1px solid #e4e8eb;
-  margin-bottom: 30px;
-}
-.container-detail {
-  width: 960px;
-  margin: auto;
-}
-.bnt-setting1 {
-  font-size: 13px;
-  float: right; 
-  position: relative; 
-  top:0; 
-  left:0; 
-  z-index: 998; 
-  margin-left: 5px;
-}
-.bnt-setting {
-  color: white !important;
-  font-size: 13px;
-}
-.board-title {
-  font-size: 18px;
-}
-.board-info {
-  color: gray;
-  position: relative;
-  margin-top: 22px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid #e4e8eb;
-}
-      
-.comment_input_wrap {
-    overflow: hidden;
-    position: relative;
-    margin-top: 10px;
-    border: 1px solid #d7dce5;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-.comment_input_wrap .comment_input_bot {
-    height: 47px;
-    box-sizing: border-box;
-}
-.comment_input_wrap .comment_submit {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-    width: 128px;
-    border-radius: 0;
-}
-.comment_input_wrap .comment_input textarea {
-    margin-top: 12px;
-    width: 100%;
-    height: 98px;
-    border: 0;
-    box-sizing: border-box;
-    color: #373f57;
-    font-size: 14px;
-    letter-spacing: -1px;
-    line-height: 24px;
-    background-color: #fff;
-    resize: none;
-}
-.comment_input_wrap .comment_input {
-    padding: 22px 24px 0 24px;
-    border-bottom: 1px solid #d7dce5;
-}
-.comment_input_wrap .comment_input.img_add {
-    padding-right: 108px;
-}
-.btnSizeL {
-    padding: 10px 16px 12px;
-    height: 48px;
-    font-size: 16px;
-    line-height: 24px;
-}
-[class*="btnSize"] {
-    display: inline-block;
-    border: 1px solid #4876ef;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: #fff;
-    letter-spacing: -1px;
-    text-align: center;
-    background-color: #0d6efd;
-}
-      
-.our_textJD {
-width: 100%;
-float: left;
-font-size: 36px;
-color: #121111;
-text-transform: uppercase;
-text-align: center;
-border-top: solid gray 1px;
-padding-top: 90px;
-}
+    
+    <link href="../css/board/detail.css" rel="stylesheet">
 
-.furnitures_sectionJD {
-    width: 100%;
-    min-height: 1300px;
-    float: left;
-    padding-bottom: 90px;
-}
-
-.write-box {
-  border: 2px, black;
-  padding-top: 30px;
-  padding-left: 87%;
-}
-.page_center {
-  display : flex;
-  margin : auto;
-  /* width: 42px; */
-}
-.title-min-width2 {
-  min-width: 300px;
-}
-
-.btn-outline-successJD {
-  color: #0d6efd;
-  background-color: transparent;
-  background-image: none;
-  border-color: #0d6efd;
-}
-.btn-outline-successJD:hover {
-  color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
-.cate-bottom-line {
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
-}
-
-#community-title {
-  color: #0d6efd;
-}
-
- .mainList-title {
-  margin: 0 66px 0 66px;
-  font-weight: bold;
-}
-
-.clg-plus {
-  float: right;
-  font-size: 17px;
-  font-weight: normal;
-  padding-top: 12px;
-  
-}
-
-.recent-clg-list {
-  /* border: 1px solid blue; */
-  width: 90%;
-  margin: auto;
-  min-height: 500px;
-}
-.recent-clg-wapper {
-  display: inline-block;
-  width: 48%;
-  padding: 2%;
-  margin: 4px;
-  background-color: #0d6efd;
-}
-.recent-clg-img-wapper {
-  height: 256.031px;
-  width: 256.031px;
-}
-.imgJD {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  margin: auto;
-  display: block;
-}
-.recent-clg-content-wapper {
-  background-color: white;
-  margin-top: 10px;
-  padding: 5px;
-  height: 60px;
-}
-
-.form-content {
-  margin-top: 32px;
-  min-height: 400px;
-}
-
-.profile_pic {
-  margin-right: 5px;
-  border: 1px solid rgba(55, 63, 87, 0.15);
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-}
-.board-wrapper {
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding: 30px;
-  border: 1px solid #d7dce5;
-  border-radius: 8px;      
-}
-
-.thumbnail-temp {
-  width: 30%;
-  height: 30%;
-}
-
-.ud-wrapper {
-  height: 34px;
-}
-.ud-wrapper > span {
-  float: right;
-}
-        
-/* Modal */
-#modal.modal-overlay {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  z-index: 999;
-}
-
-#modal .modal-window {
-  background: rgba(13, 110, 253, 0.70);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(13.5px);
-  -webkit-backdrop-filter: blur(13.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 500px;
-  height: 300px;
-  position: absolute;
-  top: 200px;
-  padding: 10px;
-  z-index: 10;
-}
-
-#modal .title {
-  padding-left: 10px;
-  display: inline;
-  text-shadow: 1px 1px 2px gray;
-  color: white;
-}
-
-#modal .title h2 {
-  display: inline;
-}
-
-#modal .close-area {
-  display: inline;
-  float: right;
-  padding-right: 10px;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px gray;
-  color: white;
-}
-
-#modal .content {
-  margin-top: 20px;
-  padding: 0px 10px;
-  text-shadow: 1px 1px 2px gray;
-  color: white;
-}
-
-.email-bt3 {
-  color: #989696;
-  width: 300px;
-  height: 55px;
-  font-size: 18px;
-  padding: 15px;
-  margin-top: 30px;
-  margin-left: 80px;
-  margin-bottom: -20px;
-  border: 0px;
-  border-radius: 5px;
-  height: 55px;
-  font-size: 18px;
-}
-
-.report_menu {
-  text-align: center;
-  font-size: 40px;
-  margin-top: 20px;
-}
-
-.massage-bt1 {
-  color: #989696;
-  width: 100%;
-  height: 300px;
-  font-size: 18px;
-  padding: 50px 20px 10px 20px;
-  margin-top: 50px;
-  border: 0px;
-  border-radius: 5px;
-}
-
-.send_bt3 {
-  width: 30%;
-  float: left;
-  font-size: 20px;
-  color: #0d6efd;
-  text-align: center;
-  border: 2px solid #ffffff;
-  border-radius: 5px;
-  padding: 10px 0px;
-  font-weight: bold;
-  margin-top: 18px;
-  margin-left: 160px;
-  display: inline;
-  padding-right: 10px;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px gray;
-  color: white;
-  /* f8b81f7a */
-}
-
-.comment-wrapper {
-  margin-top: 30px;
-} 
-.commentList {
-  border-bottom: 1px solid #d7dce5;
-}
-.comment-area {
-  position: relative;
-  padding: 24px 16px;
-  border-top: 1px solid #d7dce5;
-}
-.comment-cont {
-  display: inline-block;
-  width: 90.0%;
-  min-height: 60px;
-  margin-bottom: 20px;
-}
-.comment-info {
-    right: 22px;
-    top: 24px;
-    position: absolute;
-}
-.comment-writer {
-    position: absolute;
-    left: 30px;
-    top: 90px;
-    color: gray;
-}
-.btn-jd {
-    color: black !important;
-    border: #d7dce5 1px solid;
-}
-.btn-jd:hover {
-    background-color: #d7dce5;
-    border: #d7dce5 1px solid;
-}
-.update-form {
-    resize: none;
-    border: #d7dce5 1px solid !important;
-    z-index: 300;
-    background-color: white !important;
-    border-radius: 8px !important;
-}
-.in-img {
-    width: 188.398px;
-    min-height: 240px;
-    max-height: 240px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-.clg1 {
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid #eaedf4;
-    border-radius: 12px;
-    width: 210px;
-}
-.login-bt-d {
- margin-left: 520px;
- font-size: 15px;
-}
-
-
-.swal-text {
-  text-align: center;
-} 
-        
-</style>
     </head>
     <body>
       <!-- header section 시작 -->
@@ -438,9 +32,9 @@ padding-top: 90px;
               </ul>
               <div class="login-bt-d">
                 <ul>
-                  <li th:if="${session.loginMember == null}" ><a href="../auth/form" >로그인</a></li>
-                  <li class="loginId" th:if="${session.loginMember != null}" th:id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
-                  <li th:if="${session.loginMember != null}"><a href="../auth/logout" th:text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                  <li data-th-if="${session.loginMember == null}" ><a href="../auth/form" >로그인</a></li>
+                  <li class="loginId" data-th-if="${session.loginMember != null}" data-th-id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
+                  <li data-th-if="${session.loginMember != null}"><a href="../auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
                 </ul>
               </div>
             </div>
@@ -469,28 +63,28 @@ padding-top: 90px;
           </div>
           <!-- 게시글 내용 box 시작 -->
           <div class="board-wrapper">
-            <input th:value="${board.no}" value=게시글번호 id="boardNo" name='no' type="hidden">
+            <input data-th-value="${board.no}" value=게시글번호 id="boardNo" name='no' type="hidden">
             <a data-th-if="${session.loginMember} != null and ${session.loginMember.no} != ${board.writer.no}" 
                class="btn btn-primary bnt-setting1" role="button" id="scrap-button">스크랩</a>
             <a data-th-if="${session.loginMember} != null and ${session.loginMember.no} != ${board.writer.no}" 
                class="btn btn-primary bnt-setting1 btn-modal" role="button">신고</a>
-            <h3 class="board-title" th:text='${board.title}'>제목없음</h3>
+            <h3 class="board-title" data-th-text='${board.title}'>제목없음</h3>
             <div class="board-info">
-              <img th:src="@{'/member/files/' + ${board.writer.filepath}}" class="profile_pic" alt="profile_picture" onerror="this.src='../images/default-profile-pic.png';" >
-              <span th:text="${board.writer.nickname}"></span>
+              <img data-th-src="@{'/member/files/' + ${board.writer.filepath}}" class="profile_pic" alt="profile_picture" onerror="this.src='../images/default-profile-pic.png';" >
+              <span data-th-text="${board.writer.nickname}"></span>
               <div style="float: right; margin-top: 28px">
-                <span th:text="${board.createdDate}"></span>
-                <img style="width: 18px; margin-left: 1px;" src="../images/view-icon2.png"><span th:text="${board.viewCount}">0</span>
+                <span data-th-text="${board.createdDate}"></span>
+                <img style="width: 18px; margin-left: 1px;" src="../images/view-icon2.png"><span data-th-text="${board.viewCount}">0</span>
               </div>
             </div>
-            <div th:if="${board.cateno == 3}">
+            <div data-th-if="${board.cateno == 3}">
               <h5 style="margin-top: 15px; margin-left: 40px; margin-bottom: 0px; color: gray; font-size: 20px;">챌린지 인증 사진</h5>
               <div class="clg1">
-                <img th:if="${board.thumbnail == null}" src="../images/nothumbnail.png" alt="thumbnail" class="in-img"/>
-                <img th:if="${board.thumbnail != null}" th:src="@{'/board/files/' + ${board.thumbnail}}" alt="Avatar" class="in-img"/>
+                <img data-th-if="${board.thumbnail == null}" src="../images/nothumbnail.png" alt="thumbnail" class="in-img"/>
+                <img data-th-if="${board.thumbnail != null}" data-th-src="@{'/board/files/' + ${board.thumbnail}}" alt="Avatar" class="in-img"/>
               </div>
             </div>
-            <div th:utext="${board.content}" class="form-content">내용</div>
+            <div data-th-utext="${board.content}" class="form-content">내용</div>
           </div>
           <!-- 게시글 내용 box 끝 -->
           <div class="ud-wrapper">
@@ -509,8 +103,8 @@ padding-top: 90px;
           <!-- 댓글 session 시작 -->
           <div>
             <!-- 댓글 등록 시작 -->
-            <div th:if="${session.loginMember}">        
-              <input type="hidden" id="memberNo"  th:value="${session.loginMember.no}">
+            <div data-th-if="${session.loginMember}">        
+              <input type="hidden" id="memberNo"  data-th-value="${session.loginMember.no}">
               <div class="comment_input_wrap">
                 <div class="comment_input img_add">
                   <textarea id="commentCont" class="scrollbar" placeholder="내용을 입력하세요." onkeypress="block_enter(event)"></textarea>
@@ -520,7 +114,7 @@ padding-top: 90px;
                 </div>
               </div>
             </div>
-            <div th:if="${session.loginMember == null}">  
+            <div data-th-if="${session.loginMember == null}">  
               <input type="hidden" id="memberNo"  value=0>      
               <div class="comment_input_wrap" onclick="alertToLogin();">
                 <div class="comment_input img_add">
@@ -550,11 +144,11 @@ padding-top: 90px;
                     </a>
                   </li>
                    -->
-                  <th:block th:if="${pageMaker.endPage != 0}" th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                  <data-th-block data-th-if="${pageMaker.endPage != 0}" data-th-each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
                     <li data-th-id="${'pageButton' + pageNum}"  class="page-item">
-                      <a data-th-id="'pageNo' + ${pageNum}" class="page-link" onclick="getId(this.id)"><i th:text="${pageNum}"></i></a>
+                      <a data-th-id="'pageNo' + ${pageNum}" class="page-link" onclick="getId(this.id)"><i data-th-text="${pageNum}"></i></a>
                     </li>
-                  </th:block>
+                  </data-th-block>
                   <!-- 다음 페이지 보류               
                   <li class="page-item" th:if="${pageMaker.next && pageMaker.endPage >0}">
                     <a th:href="@{detail(page=${pageMaker.endPage+1}, no=${board.no})}" class="page-link" aria-label="Next">
