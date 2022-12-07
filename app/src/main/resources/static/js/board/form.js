@@ -12,6 +12,7 @@ document.getElementById('fileTag').addEventListener('change', (e) => {
 })
 function readImage(input) {
     if(input.files && input.files[0]) {
+      
         const reader = new FileReader();
         reader.onload = function(e){
             const previewImage = document.getElementById("previewImg");

@@ -1,0 +1,174 @@
+.windowWidth {
+  max-width:1130px !important;
+  min-width:1130px !important;
+  margin: auto !important;
+  float: none !important;
+}
+.nav-line {
+  border-bottom: 1px solid #e4e8eb;
+  border-top: 1px solid #e4e8eb;
+  margin-bottom: 30px;
+}
+.category-name-wrapper {
+  border: 1px solid #e4e8eb;
+  background-color: #7e92c6;
+  height: 300px;
+}
+
+.write-button {
+  float: right;
+}
+.search-border {
+  border: 1px solid #ced4da !important;
+}
+.table-th > * {
+  text-align: center;
+  /* font-size: 20px; */
+}
+.board-title {
+  width:765.389px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.my-page {
+  min-width: 970px;
+  max-width: 970px;
+  background-color: white;
+}
+.my-page tr {
+  text-align:center;
+  padding: 5px;
+}
+.my-page tr .title-td {
+  text-align:left;
+}
+.my-page th {
+  border-top:1px solid rgb(0 0 0 / 20%);
+  border-bottom:1px solid rgb(0 0 0 / 20%);
+  padding: 10px;
+}
+.my-page td {
+  font-size: 14px;
+  border-bottom:1px solid rgb(0 0 0 / 20%);
+  padding: 12px 0px;
+}
+
+.layout_padding-jd {
+  padding-top: 50px;
+  padding-bottom: 0px;
+}
+
+.our_textJD_free {
+  background-image: url("../../images/free-banner1.png");
+  width: 100%;
+  height : 100%;
+  line-height:300px;
+  float: left;
+  font-size: 45px;
+  font-weight:bold;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  /* padding-top: 120px; */
+}
+.our_textJD_food {
+  background-image: url("../../images/food-banner1.png");
+  width: 100%;
+  height : 100%;
+  line-height:300px;
+  float: left;
+  font-size: 45px;
+  font-weight:bold;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  /* padding-top: 120px; */
+}
+.our_textJD_q {
+  background-image: url("../../images/q-banner.png");
+  width: 100%;
+  height : 100%;
+  line-height:300px;
+  float: left;
+  font-size: 45px;
+  font-weight:bold;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  /* padding-top: 120px; */
+}
+.our_textJD_hotdeal {
+  background-image: url("../../images/free-board.png");
+  width: 100%;
+  height : 100%;
+  line-height:300px;
+  float: left;
+  font-size: 45px;
+  font-weight:bold;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  /* padding-top: 120px; */
+}
+
+
+
+.write-box {
+  border: 2px, black;
+  padding-top: 30px;
+  padding-left: 87%;
+}
+.page_center {
+  display : flex;
+  margin : auto;
+  /* width: 42px; */
+}
+
+.btn-outline-successJD {
+  color: #0d6efd;
+  background-color: transparent;
+  background-image: none;
+  border-color: #0d6efd;
+}
+.btn-outline-successJD:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+#community-title {
+  color: #ffb607;
+}
+.temp-height {
+  min-height: 500px;
+}
+.form-selectJd {
+  margin-left: 45px;
+  margin-right: 8px;
+  display: block;
+  width: 20%;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  -moz-padding-start: calc(0.75rem - 3px);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.swal-text {
+  text-align: center;
+} 

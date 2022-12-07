@@ -1,112 +1,88 @@
 const boardNo = document.getElementById( 'boardNo').value;
 const memberNo = document.getElementById( 'memberNo' ).value;
 const lastPageNo = document.getElementsByClassName('page-link').length;
-document.getElementById('commentButton').addEventListener('click', insertCommentProcess);
-document.getElementById('commentButton').addEventListener('click', countCommentToInsert);
+let pageNo = lastPageNo; // 로딩할 때 마지막 댓글 페이지가 보이게 셋팅
+document.getElementById('commentButton').addEventListener('click', insertAndReplay);
 
-// 로그인 회원 유효성을 위한 셋팅
+// 로그인 상태일 때 유효성 검사를 위한 번호 저장
 let loginMemberNo = -1;
 if($(".loginId").attr("id") != undefined) {
  loginMemberNo = $(".loginId").attr("id");
 };
 
-// 처음 페이지 로드했을 때 마지막 댓글 페이지가 보이게 셋팅
-// 그 후 페이징 버튼 클릭 후 이벤트 제어를 위한 페이지 번호 셋팅
-let pageNo = lastPageNo;
+// 특정 댓글 페이지로 이동
 function getId(pageId) {
   pageNo = pageId.replace('pageNo', '')
   commentList();
 }
 
-// 페이지 버튼 active 시키기
+// 현재 페이지 버튼 active 시키기
 window.addEventListener('DOMContentLoaded', function(){
     $('#pageButton' + pageNo).addClass('active');
 });
-// 페이지 버튼을 누르면 버튼을 active시키기
 document.querySelectorAll('.page-item').forEach((pageBtn) => {
   pageBtn.addEventListener('click', function(e) {
       $('.page-item').removeClass('active');
       $(e.currentTarget).addClass('active');
   });
 });
-// 댓글 등록 시 과정 (댓글 유효성 체크 -> 등록(ajax) -> 댓글 개수 카운트)
-function insertCommentProcess(){
-  if (document.getElementById('commentCont').value == '') {
-    swal('등록 실패!', "내용을 입력해주세요.", 'error');
-    return false;
-  }
-  insertAndReplay();
-}
-// 댓글을 등록했을 때 한 페이지에 보일수 있는 댓글수 초과 시(현재 5개) 페이지 reload() 
-function countCommentToInsert() {
-  var count = document.getElementsByClassName('commentArea').length;
-  if (count == 5) {
-    window.location.reload();
-  }
-};
-// 댓글을 삭제했을 때 댓글이 0개일 때 reload
-function countCommentToDelete() {
-  var count = document.getElementsByClassName('commentArea').length;
-  if (count == 0) {
-    window.location.reload();
-  }
-};
 
-// 페이지 시작할 때 댓글 목록 출력 
+// 로딩 시 댓글 목록 출력 
 $(document).ready(function(){
   commentList(); //페이지 로딩시 댓글 목록 출력 
 });
 // 댓글 목록 
 function commentList(){
-  $.ajax({
-    url : '/app/boardComment/list',
-    type : 'get',
-    data : {boardNo: boardNo,
-            pageNo: pageNo
-            },
-    success : function(result){
-      var a =''; 
-      $.each(result, function(key, value){ 
-        a += '<div class="commentArea comment-area">';
-        a += '<div class="commentInfo' + value.no + ' comment-info">';
-        if (loginMemberNo == value.writer.no) {
-          a += '<a id="udBnt' +value.no+ '" class="btn btn-outline-primary btn-sm btn-jd" onclick="commentUpdate(' + value.no + ',\'' + value.content + '\');"> 수정 </a>';
-          a += '<a id="dlBnt' +value.no+ '" class="btn btn-outline-primary btn-sm btn-jd" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';
-        }
-        if (loginMemberNo != -1 && loginMemberNo != value.writer.no) {
-            a += '<a class="btn btn-outline-primary btn-sm btn-jd" onclick="commentComplain('+value.no+');"> 신고 </a></div>';
-        }
-        if (loginMemberNo == -1) {
-            a += '<a class="btn btn-outline-primary btn-sm btn-jd" onclick="alertToLoginByTattle();"> 신고 </a></div>';
-        }
-        a += '<div class="commentContent'+value.no+' comment-cont">'+value.content;
-        a += '<div class="comment-writer">' +value.writer.nickname + '</div>';
-        a += '</div></div></div>';
-      });
-      $(".commentList").html(a);
-    }
-  });
+    $.ajax({
+      url : '/app/boardComment/list',
+      type : 'get',
+      data : {boardNo: boardNo,
+              pageNo: pageNo
+              },
+      success : function(result){
+        var a =''; 
+        $.each(result, function(key, value){ 
+          a += '<div class="commentArea comment-area">';
+          a += '<div class="commentInfo' + value.no + ' comment-info">';
+          if (loginMemberNo == value.writer.no) {
+            a += '<a id="udBnt' +value.no+ '" class="btn btn-outline-primary btn-sm btn-jd" onclick="commentUpdate(' + value.no + ',\'' + value.content + '\');"> 수정 </a>';
+            a += '<a id="dlBnt' +value.no+ '" class="btn btn-outline-primary btn-sm btn-jd" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';
+          }
+          if (loginMemberNo != -1 && loginMemberNo != value.writer.no) {
+              a += '<a class="btn btn-outline-primary btn-sm btn-jd" onclick="commentComplain('+value.no+');"> 신고 </a></div>';
+          }
+          if (loginMemberNo == -1) {
+              a += '<a class="btn btn-outline-primary btn-sm btn-jd" onclick="alertToLoginByTattle();"> 신고 </a></div>';
+          }
+          a += '<div class="commentContent'+value.no+' comment-cont">'+value.content;
+          a += '<div class="comment-writer">' +value.writer.nickname + '</div>';
+          a += '</div></div></div>';
+        });
+        $(".commentList").html(a);
+      }
+    });
 }
-
 // 댓글 등록
 function insertAndReplay(){
-  $.ajax({
-    url : "/app/boardComment/insertAndReplay",
-    data : {
-      content : $("#commentCont").val(),
-      boardNo : boardNo,
-      memberNo : memberNo
-    },
-    type : "post",
-    success : function(result){
-      if(result != null){
-        commentList();
-        $("#commentCont").val("");
+  if (!checkContentEmpty()) {
+    $.ajax({
+      url : "/app/boardComment/insertAndReplay",
+      data : {
+        content : $("#commentCont").val(),
+        boardNo : boardNo,
+        memberNo : memberNo
+      },
+      type : "post",
+      success : function(result){
+        if(result != null){
+          checkMaxCommentCount()
+          commentList();
+          $("#commentCont").val("");
+        }
       }
-    }
-  })
+    })
+  }
 }
-
 //댓글 삭제 
 function commentDelete(no){
     swal({
@@ -126,7 +102,7 @@ function commentDelete(no){
                         icon: 'success',
                         closeOnClickOutside: false
                       }).then(() => {
-                        countCommentToDelete() // 웹 상에서 댓글이 0개면 reload
+                        checkMinCommentCount() // 웹 상에서 댓글이 0개면 reload
                       });
                     } else {
                       swal('','댓글을 삭제할 수 없습니다!','error');
@@ -138,7 +114,6 @@ function commentDelete(no){
         }
     });
 }
-
 //댓글 수정 모드- 댓글 내용 출력을 input 폼으로 변경 
 function commentUpdate(commentNo, content){
   $('#udBnt'+commentNo).css('display', 'none');
@@ -153,7 +128,6 @@ function commentUpdate(commentNo, content){
     
     $('.commentContent'+commentNo).html(a);
 }
-
 // 댓글 수정
 function commentUpdateProc(commentNo){
     var updateContent = $('[name=content_'+commentNo+']').val();
@@ -168,7 +142,30 @@ function commentUpdateProc(commentNo){
         }
     });
 }
-// 비회원 댓글 작성시 로그인 유도
+
+// 유효성 체크
+function checkContentEmpty(){
+  if (document.getElementById('commentCont').value == '') {
+    swal('등록 실패!', "내용을 입력해주세요.", 'error');
+    return true;
+  } else {
+    return false;
+  }
+}
+function checkMaxCommentCount() {
+  let count = document.getElementsByClassName('commentArea').length;
+  if (count == 5) {
+    window.location.reload();
+  }
+};
+function checkMinCommentCount() {
+  var count = document.getElementsByClassName('commentArea').length;
+  if (count == 0) {
+    window.location.reload();
+  }
+};
+
+// 비회원 댓글 작성 시 로그인 유도
 function alertToLogin(){
     swal({
         text :  "댓글을 작성하려면 로그인을 해야합니다.\n로그인하시겠습니까?",
@@ -196,10 +193,11 @@ function alertToLoginByTattle(){
         }
     });
 }
-// 댓글 우선 엔터 막자
+
+// 댓글 작성 시 엔터 막기 (오류)
 function block_enter(e){
    if(e.keyCode == 13){
-     event.preventDefault();
+     window.event.preventDefault();
    }
 }
 
@@ -207,7 +205,6 @@ function block_enter(e){
 if ($('#scrap-button').length != 0) {
   document.getElementById('scrap-button').addEventListener('click', insertScrap);
 }
-
 // 스크랩 등록
 function insertScrap() {
     swal({

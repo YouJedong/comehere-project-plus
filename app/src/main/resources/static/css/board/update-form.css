@@ -1,0 +1,102 @@
+.windowWidth {
+  max-width:1130px !important;
+  min-width:1130px !important;
+  margin: auto !important;
+  float: none !important;
+}
+.nav-line {
+  border-bottom: 1px solid #e4e8eb;
+  border-top: 1px solid #e4e8eb;
+  margin-bottom: 30px;
+}
+
+.post_form1 {
+  height: 40px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: black;
+  width:100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.post_form2 {
+  width: 200px;
+  float: left;
+  margin: 10px 0px;
+}
+
+
+.post_form3 {
+  height: 40px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: black;
+  width:100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.furnitures_sectionJD {
+  width: 100%;
+  min-height: 800px;
+  float: left;
+  padding-bottom: 90px;
+  margin-left: 60px;
+}
+
+.post_button_box {
+  width: 800px;
+  margin-left: 920px;
+}
+
+.btn-outline-secondary {
+  margin-top: 10px;
+  color: #0d6efd;
+  background-color: #ffffff00;
+  border: 1px solid grey;
+}
+.btn-outline-secondary:hover {
+  color: #ffffff;
+  background-color: #0d6efd;
+  transition: all .3s ease;
+}
+.in-img {
+    width: 188.398px;
+    min-height: 240px;
+    max-height: 240px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+.clg1 {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #eaedf4;
+    border-radius: 12px;
+    width: 210px;
+    height: 312px;
+}
+.clg2 {
+    float: right;
+    padding: 10px;
+    border: 1px solid #eaedf4;
+    border-radius: 12px;
+    width: 740px;
+    height: 312px;
+    text-align: 312px;
+}
+.clg2 > div:nth-child(2n-1) {
+  padding-top: 10px;
+  color: gray; 
+  font-size: 1.3em;
+} 
+.clg2 > div:nth-child(2n) {
+  padding-bottom: 30px;
+  color: gray; 
+} 
+.clg2 > div:last-child {
+  font-weight: bold;
+  color: black;
+}

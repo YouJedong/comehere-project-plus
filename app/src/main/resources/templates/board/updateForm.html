@@ -20,223 +20,118 @@
 
     <!-- 공식부트스트랩 CSS -->
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
-
-<style>
-.windowWidth {
-  max-width:1130px !important;
-  min-width:1130px !important;
-  margin: auto !important;
-  float: none !important;
-}
-.nav-line {
-  border-bottom: 1px solid #e4e8eb;
-  border-top: 1px solid #e4e8eb;
-  margin-bottom: 30px;
-}
-
-.post_form1 {
-  height: 40px;
-  padding-left: 10px;
-  margin-bottom: 20px;
-  font-size: 15px;
-  color: black;
-  width:100%;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-}
-
-.post_form2 {
-  width: 200px;
-  float: left;
-  margin: 10px 0px;
-}
-
-
-.post_form3 {
-  height: 40px;
-  padding-left: 10px;
-  margin-bottom: 20px;
-  font-size: 15px;
-  color: black;
-  width:100%;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-}
-
-.furnitures_sectionJD {
-  width: 100%;
-  min-height: 800px;
-  float: left;
-  padding-bottom: 90px;
-  margin-left: 60px;
-}
-
-.post_button_box {
-  width: 800px;
-  margin-left: 920px;
-}
-
-.btn-outline-secondary {
-  margin-top: 10px;
-  color: #0d6efd;
-  background-color: #ffffff00;
-  border: 1px solid grey;
-}
-.btn-outline-secondary:hover {
-  color: #ffffff;
-  background-color: #0d6efd;
-  transition: all .3s ease;
-}
-.in-img {
-    width: 188.398px;
-    min-height: 240px;
-    max-height: 240px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-.clg1 {
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid #eaedf4;
-    border-radius: 12px;
-    width: 210px;
-    height: 312px;
-}
-.clg2 {
-    float: right;
-    padding: 10px;
-    border: 1px solid #eaedf4;
-    border-radius: 12px;
-    width: 740px;
-    height: 312px;
-    text-align: 312px;
-}
-.clg2 > div:nth-child(2n-1) {
-  padding-top: 10px;
-  color: gray; 
-  font-size: 1.3em;
-} 
-.clg2 > div:nth-child(2n) {
-  padding-bottom: 30px;
-  color: gray; 
-} 
-.clg2 > div:last-child {
-  font-weight: bold;
-  color: black;
-}
-</style>
+    
+    <link href="../css/board/update-form.css" rel="stylesheet">
+    
   </head>
   <body>
-  	<!-- header section start -->
+  	<!-- header section 시작 -->
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light windowWidth">
-          <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
-              <li class="nav-item"><a class="nav-link" href="main">커뮤니티</a></li>
-              <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+      <nav class="navbar navbar-expand-lg navbar-light windowWidth">
+        <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
+            <li class="nav-item"><a class="nav-link" href="main">커뮤니티</a></li>
+            <li class="nav-item"><a class="nav-link" href="../notice/list">공지사항</a></li>
+          </ul>
+          <div class="login-bt">
+            <ul>
+              <li th:if="${session.loginMember == null}" ><a href="../auth/form" >로그인</a></li>
+              <li class="loginId" th:if="${session.loginMember != null}" th:id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
+              <li th:if="${session.loginMember != null}"><a href="../auth/logout" th:text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
             </ul>
-            <div class="login-bt">
-              <ul>
-                <li th:if="${session.loginMember == null}" ><a href="../auth/form" >로그인</a></li>
-                <li class="loginId" th:if="${session.loginMember != null}" th:id=${session.loginMember.no}><a href="../mypage/my-post">마이페이지</a></li>
-                <li th:if="${session.loginMember != null}"><a href="../auth/logout" th:text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
-              </ul>
-            </div>
           </div>
-        </nav>
+        </div>
+      </nav>
+    </div>
+  	<!-- header section 끝 -->
+    <!-- 게시판 카테고리 이동 시작 -->
+    <div class="nav-line">
+      <ul class="nav nav-pills nav-justified windowWidth">
+        <li class="nav-item"><a class="nav-link" href="list?no=1">자유게시판</a></li>
+        <li class="nav-item"><a class="nav-link" href="list?no=2">식단게시판</a></li>
+        <li class="nav-item"><a class="nav-link" href="list?no=3">챌린지게시판</a></li>
+        <li class="nav-item"><a class="nav-link" href="list?no=4">질문게시판</a></li>
+        <li class="nav-item"><a class="nav-link" href="list?no=5">핫딜게시판</a></li>
+      </ul>
+    </div>
+    <!-- 게시판 카테고리 이동 끝 -->
+    <!-- 메인 section 시작 -->
+    <div class="furnitures_sectionJD layout_padding windowWidth">
+      <div class="row"  style="justify-content: center;">
+        <form class="post_max_box" action='update' method="post" enctype="multipart/form-data">
+          <input id="boardNo" name='no' type="hidden" data-th-value="${board.no}">
+          <input name='cateno' type="hidden" data-th-value="${board.cateno}">
+          <table class="table_form" style="width: 960px; margin: auto;">
+            <tr data-th-if="${board.cateno == 3}">
+              <td>
+                <div class="clg1">
+                  <img id="previewImg" th:if="${board.thumbnail != null}"  th:src="@{'/board/files/' + ${board.thumbnail}}" alt="Avatar" class="image party_detail_img in-img">
+                  <img id="previewImg" th:if="${board.thumbnail == null}"  src="../images/nothumbnail.png" alt="Avatar" class="in-img">
+                  <input class="post_form2 image_inputType_file btn btn-primary"  id="fileTag" name='file' type="file" accept="image/png, image/jpeg, image/jpg">
+                  <button type="button" class="btn btn-outline-secondary file" id="btn-upload">사진첨부</button>
+                </div>
+                <div class="clg2">
+                  <div>챌린지게시판이란 무엇인가요?</div>
+                  <div> 챌린지게시판은 도전과 성취를 통해 삶의 변화를 만드는 게시판입니다.</div>
+                  <div>어떤 사람들이 참여하나요?</div>
+                  <div>자신만의 목표를 세우고 이를 달성하기 위해 노력하는 모든 분들이라면 누구나 참여할 수 있습니다.</div>
+                  <div>어떻게 작성하나요?</div>
+                  <div>쓰고싶은 내용을 작성하고 챌린지 인증을 하기위한 대표인증사진을 한장 설정하시면 됩니다.</div>
+                </div>
+                <div>
+                  <input class="post_form3" name='title' type='text' value='제목' data-th-value='${board.title}' size='60'>
+                </div>
+              </td>
+            </tr> 
+              <tr data-th-if="${board.cateno != 3}">
+                <td>
+                    <div>
+                      <input class="post_form1" name='title' type='text' value='제목' data-th-value='${board.title}' size='60'>
+                    </div>
+                </td>
+              </tr> 
+              <tr>
+                <td>
+                  <textarea class="form-content" id="summernote" name='content' th:text="${board.content}"></textarea>
+                </td> 
+              </tr>
+          </table>
+          <div class="post_button_box">
+              <input class="btn btn-outline-secondary" id="subBtn" type="button" value="수정" onclick="goWrite(this.form);" style="background-color: #0d6efd; color: white;"/>
+              <input class="btn btn-outline-secondary none" id="subBtn" type="button" value="취소" onclick="cancel()" style="color: black;"/>
+          </div>
+        </form>
       </div>
-  	<!-- header section end -->
-        <!-- furnitures section start -->
-       <!-- 게시판 카테고리 이동 시작 -->
-       <div class="nav-line">
-         <ul class="nav nav-pills nav-justified windowWidth">
-           <li class="nav-item"><a class="nav-link" href="list?no=1">자유게시판</a></li>
-           <li class="nav-item"><a class="nav-link" href="list?no=2">식단게시판</a></li>
-           <li class="nav-item"><a class="nav-link" href="list?no=3">챌린지게시판</a></li>
-           <li class="nav-item"><a class="nav-link" href="list?no=4">질문게시판</a></li>
-           <li class="nav-item"><a class="nav-link" href="list?no=5">핫딜게시판</a></li>
-         </ul>
-       </div>
-       <!-- 게시판 카테고리 이동 끝 -->
-        
-        <div class="furnitures_sectionJD layout_padding windowWidth">
-          <div class="row"  style="justify-content: center;">
-             <!-- 게시글 수정폼 시작 -->
-              <form class="post_max_box" action='update' method="post" enctype="multipart/form-data">
-                  <input id="boardNo" name='no' type="hidden" data-th-value="${board.no}">
-                  <input name='cateno' type="hidden" data-th-value="${board.cateno}">
-                  <table class="table_form" style="width: 960px; margin: auto;">
-                      <tr data-th-if="${board.cateno == 3}">
-                        <td>
-                            <div class="clg1">
-                              <img id="previewImg" th:if="${board.thumbnail != null}"  th:src="@{'/board/files/' + ${board.thumbnail}}" alt="Avatar" class="image party_detail_img in-img">
-                              <img id="previewImg" th:if="${board.thumbnail == null}"  src="../images/nothumbnail.png" alt="Avatar" class="in-img">
-                              <input class="post_form2 image_inputType_file btn btn-primary"  id="fileTag" name='file' type="file" accept="image/png, image/jpeg, image/jpg">
-                              <button type="button" class="btn btn-outline-secondary file" id="btn-upload">사진첨부</button>
-                            </div>
-                            <div class="clg2">
-                              <div>챌린지게시판이란 무엇인가요?</div>
-                              <div> 챌린지게시판은 도전과 성취를 통해 삶의 변화를 만드는 게시판입니다.</div>
-                              <div>어떤 사람들이 참여하나요?</div>
-                              <div>자신만의 목표를 세우고 이를 달성하기 위해 노력하는 모든 분들이라면 누구나 참여할 수 있습니다.</div>
-                              <div>어떻게 작성하나요?</div>
-                              <div>쓰고싶은 내용을 작성하고 챌린지 인증을 하기위한 대표인증사진을 한장 설정하시면 됩니다.</div>
-                            </div>
-                            <div>
-                              <input class="post_form3" name='title' type='text' value='제목' data-th-value='${board.title}' size='60'>
-                            </div>
-                        </td>
-                      </tr> 
-                      <tr data-th-if="${board.cateno != 3}">
-                        <td>
-                            <div>
-                              <input class="post_form1" name='title' type='text' value='제목' data-th-value='${board.title}' size='60'>
-                            </div>
-                        </td>
-                      </tr> 
-                      <tr>
-                        <td>
-                          <textarea class="form-content" id="summernote" name='content' th:text="${board.content}"></textarea>
-                        </td> 
-                      </tr>
-                  </table>
-                  <div class="post_button_box">
-                      <input class="btn btn-outline-secondary" id="subBtn" type="button" value="수정" onclick="goWrite(this.form);" style="background-color: #0d6efd; color: white;"/>
-                      <input class="btn btn-outline-secondary none" id="subBtn" type="button" value="취소" onclick="cancel()" style="color: black;"/>
-                  </div>
-                </form>
-  	         </div>
-             <!-- 게시글 수정폼 끝 -->
-           </div>
-       <!-- furnitures section end -->
+    </div>
+    <!-- 메인 section 끝 -->
   
-      <script>
-        const boardNo = document.getElementById( 'boardNo').value;
-      </script>
-      <!-- Javascript files -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <script src="../js/jquery-3.0.0.min.js"></script>
-      <script src="../js/plugin.js"></script>
-      
-      <!-- 썸머노트 -->
-      <script src="../js/summernote/summernote-lite.js"></script>
-      <script src="../js/summernote/lang/summernote-ko-KR.js"></script>
-      
-      <!-- sweetalert -->
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      <!-- 공식부트스트랩 JS -->
-      <script src="../js/bootstrap/bootstrap.js"></script>   
-      
-      <!-- 작성 JS -->
-      <script src="../js/board/write-editor.js"></script>
-      <script src="../js/board/form.js"></script>
-
-    </body>
+    <script>
+      const boardNo = document.getElementById( 'boardNo').value;
+    </script>
+    <!-- Javascript files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.0.0.min.js"></script>
+    <script src="../js/plugin.js"></script>
+    
+    <!-- 썸머노트 -->
+    <script src="../js/summernote/summernote-lite.js"></script>
+    <script src="../js/summernote/lang/summernote-ko-KR.js"></script>
+    
+    <!-- 작성 JS -->
+    <script src="../js/board/write-editor.js"></script>
+    <script src="../js/board/form.js"></script>
+    
+    <!-- sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- 공식부트스트랩 JS -->
+    <script src="../js/bootstrap/bootstrap.js"></script>   
+    
+  </body>
 </html>
