@@ -94,7 +94,6 @@ public class BoardController {
     pageMaker.setCri(cri);
     pageMaker.setTotalCount(boardCommentService.countCommentListTotal(no));
 
-
     // 조회수 증가     
     viewCountUp(no, request, response);
 

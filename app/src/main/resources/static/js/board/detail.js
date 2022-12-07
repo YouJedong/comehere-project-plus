@@ -246,7 +246,7 @@ function insertScrap() {
 
 // 스크랩 취소
 function deleteScrap() {
-    $.ajax({
+    $.ajax({ 
         url : '/app/scrap/delete',
         type : 'post',
         data : { 

@@ -1,4 +1,4 @@
-// 사진첨부 버튼눌렀을 때 input 실행
+// 사진첨부 버튼을 눌렀을 때 input 실행
 $(function () {
     $('#btn-upload').click(function (e) {
       e.preventDefault();
@@ -23,6 +23,7 @@ function readImage(input) {
     }
 }
 
+// 등록 취소
 function cancel() {
   swal({
         text : "게시글을 등록을 취소하시겠습니까?",

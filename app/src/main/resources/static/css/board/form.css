@@ -10,15 +10,15 @@
   margin-bottom: 30px;
 }
 
-        .our_textJD {
-        width: 100%;
-        float: left;
-        font-size: 36px;
-        color: #121111;
-        text-transform: uppercase;
-        text-align: center;
-        padding-top: 90px;
-        }
+.our_textJD {
+  width: 100%;
+  float: left;
+  font-size: 36px;
+  color: #121111;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 90px;
+}
         
 .furnitures_sectionJD {
   width: 100%;
@@ -27,36 +27,36 @@
   padding-bottom: 90px;
   margin-left: 60px;
 }
-        
-        .write-box {
-          border: 2px, black;
-          padding-top: 30px;
-          padding-left: 87%;
-        }
-        .page_center {
-          display : flex;
-          margin : auto;
-          /* width: 42px; */
-        }
-        .title-min-width {
-          min-width: 700px;
-        }
-        
-        .btn-outline-successJD {
-          color: #0d6efd;
-          background-color: transparent;
-          background-image: none;
-          border-color: #0d6efd;
-        }
-        .btn-outline-successJD:hover {
-          color: #fff;
-          background-color: #0d6efd;
-          border-color: #0d6efd;
-        }
 
-        #community-title {
-          color: #ffb607;
-        }
+.write-box {
+  border: 2px, black;
+  padding-top: 30px;
+  padding-left: 87%;
+}
+.page_center {
+  display : flex;
+  margin : auto;
+  /* width: 42px; */
+}
+.title-min-width {
+  min-width: 700px;
+}
+
+.btn-outline-successJD {
+  color: #0d6efd;
+  background-color: transparent;
+  background-image: none;
+  border-color: #0d6efd;
+}
+.btn-outline-successJD:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+#community-title {
+  color: #ffb607;
+}
         
 .post_form2 {
   width: 200px;

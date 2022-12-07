@@ -23,9 +23,6 @@
       <div class="container-fluid windowWidth">
         <nav class="navbar navbar-expand-lg navbar-light windowWidth">
           <div class="main_logo"><a href="/app"><img src="../images/logo.png"></a></div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a class="nav-link" href="../party/list">운동찾기</a></li>
@@ -162,89 +159,13 @@
     
     <!-- sidebar -->
     <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- <script src="../js/custom.js"></script> --><!-- 검색때매 우선 막자 --> 
-    
-    <!-- javascript --> 
-    <!-- <script src="../js/owl.carousel.js"></script> -->
-    <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  -->
     
     <!-- 공식부트스트랩 JS -->
     <script src="../js/bootstrap/bootstrap.js"></script>  
     <!-- sweetalert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-    <script>
-      // 뒤로가기하면 자동으로 새로고침 (조회수 반영을 위해)
-      window.onpageshow = function(e) {
-        if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
-          window.location.reload();
-        }
-      }
-    </script>
-
-    <script>
-    document.getElementById('postButton').addEventListener('click', checkLogin);
     
-    // 로그인 회원 번호 저장
-    let loginMemberNo = -1;
-    if($(".loginId").attr("id") != -1) {
-     loginMemberNo = $(".loginId").attr("id");
-    };
-    
-    // 비회원일때 로그인으로 유도
-    function checkLogin() {
-      if (loginMemberNo == undefined || loginMemberNo == -1) {
-        swal({
-          text :  "회원만 이용가능합니다.\n로그인하시겠습니까?",
-          icon : "warning",
-          buttons : ["아니요", "예"],
-        }).then(function(isConfirm) {
-          if (isConfirm) {
-            location.href = '../auth/form';
-          } else{
-            return false;
-          }
-        });
-      } else{
-        location.href = $("#postButton").attr("value"); 
-      }
-    }
-    
-    // 검색기능 목록일 때 검색조건의 type을 selected하기 위한 메서드 
-    const searchOption = $("select").children();
-    for (let i = 0; i < searchOption.length; i++) {
-  	  if (searchOption.eq(i).val() == "[[${search.type}]]") {
-  		  $('#searchId').find("option").eq(i).attr("selected", true)
-  	  }
-    } 
-    
-    window.addEventListener('DOMContentLoaded', function findCategory() {
-        var param = window.location.search.match(/no=([^&]*)/)[1];
-          switch(param) {
-            case '1' :
-              document.getElementById( 'cateName' ).innerHTML = "자유게시판";
-              break;
-            case '2' :
-              document.getElementById( 'cateName' ).innerHTML = "식단게시판";
-              break;
-            case '3' :
-              document.getElementById( 'cateName' ).innerHTML = "챌린지게시판";
-              break;
-            case '4' :
-              document.getElementById( 'cateName' ).innerHTML = "질문게시판";
-              break;
-            case '5' :
-              document.getElementById( 'cateName' ).innerHTML = "핫딜게시판";
-        }
-      });
-      
-      window.addEventListener('DOMContentLoaded', function(){
-        var param = 1; 
-        if (window.location.search.match(/page=([^&]*)/) != null) {
-          param = window.location.search.match(/page=([^&]*)/)[1];
-        } 
-        $('#pageButton' + param).addClass('active');
-      });
-    </script>
+    <!-- list.js -->
+    <script src="../js/board/list.js"></script>
   </body>        
 </html>
