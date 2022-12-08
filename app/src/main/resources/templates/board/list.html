@@ -56,12 +56,12 @@
       </div>
       <!-- 게시판 카테고리 이동 끝 -->
       <!-- 게시판 타이틀 시작 -->
-      <a data-th-href="@{list(no=${catenoInBoard.cateno})}">
+      <a data-th-href="@{list(no=${cateno})}">
         <div class="category-name-wrapper">
-          <div data-th-if="${catenoInBoard.cateno} == 1" class="our_textJD_free windowWidth" id="cateName"></div>
-          <div data-th-if="${catenoInBoard.cateno} == 2" class="our_textJD_food windowWidth" id="cateName"></div>
-          <div data-th-if="${catenoInBoard.cateno} == 4" class="our_textJD_q windowWidth" id="cateName"></div>
-          <div data-th-if="${catenoInBoard.cateno} == 5" class="our_textJD_hotdeal windowWidth" id="cateName"></div>
+          <div data-th-if="${cateno} == 1" class="our_textJD_free windowWidth" id="cateName"></div>
+          <div data-th-if="${cateno} == 2" class="our_textJD_food windowWidth" id="cateName"></div>
+          <div data-th-if="${cateno} == 4" class="our_textJD_q windowWidth" id="cateName"></div>
+          <div data-th-if="${cateno} == 5" class="our_textJD_hotdeal windowWidth" id="cateName"></div>
         </div>
       </a>
       <!-- 게시판 타이틀 시작 -->
@@ -94,7 +94,7 @@
               </tr>
             </table>
             <div class="write-box windowWidth">
-              <div id="postButton" class="btn btn-primary write-button" th:value="@{form(cateno=${catenoInBoard.cateno})}" role="button" style="margin-right: 80px;">글쓰기</div>
+              <div id="postButton" class="btn btn-primary write-button" th:value="@{form(cateno=${cateno})}" role="button" style="margin-right: 80px;">글쓰기</div>
             </div>
             <!-- 게시글 목록 끝 -->
 
@@ -103,21 +103,21 @@
               <ul class="pagination">
                 <div class="page_center">
                   <li class="page-item" th:if="${pageMaker.prev}">
-                    <a class="page-link" th:href="@{list(page=${pageMaker.startPage-1}, no=${catenoInBoard.cateno})}" aria-label="Previous">
+                    <a class="page-link" th:href="@{list(page=${pageMaker.startPage-1}, no=${cateno})}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <th:block th:if="${pageMaker.endPage != 0}" th:each="pageNum: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
                     <li data-th-id="${'pageButton' + pageNum}"  class="page-item">
-                      <a data-th-if="${search.keyword == null}" class="page-link" th:href="@{list(page=${pageNum}, no=${catenoInBoard.cateno})}"><i th:text="${pageNum}"></i></a>
-                      <a data-th-if="${search.keyword != null}" class="page-link" th:href="@{list(page=${pageNum}, no=${catenoInBoard.cateno}, keyword=${search.keyword}, type=${search.type})}"><i th:text="${pageNum}"></i></a>
+                      <a data-th-if="${search.keyword == null}" class="page-link" th:href="@{list(page=${pageNum}, no=${cateno})}"><i th:text="${pageNum}"></i></a>
+                      <a data-th-if="${search.keyword != null}" class="page-link" th:href="@{list(page=${pageNum}, no=${cateno}, keyword=${search.keyword}, type=${search.type})}"><i th:text="${pageNum}"></i></a>
                     </li>
                   </th:block>
                   <li class="page-item" th:if="${pageMaker.next && pageMaker.endPage > 0}">
-                    <a data-th-if="${search.keyword == null}" class="page-link" th:href="@{list(page=${pageMaker.endPage+1}, no=${catenoInBoard.cateno})}" aria-label="Next">
+                    <a data-th-if="${search.keyword == null}" class="page-link" th:href="@{list(page=${pageMaker.endPage+1}, no=${cateno})}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
-                    <a data-th-if="${search.keyword != null}" class="page-link" th:href="@{list(page=${pageMaker.endPage+1}, no=${catenoInBoard.cateno}, keyword=${search.keyword}, type=${search.type})}" aria-label="Next">
+                    <a data-th-if="${search.keyword != null}" class="page-link" th:href="@{list(page=${pageMaker.endPage+1}, no=${cateno}, keyword=${search.keyword}, type=${search.type})}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -129,7 +129,7 @@
             <nav class="navbar navbar-light windowWidth">
               <div style="margin: auto">
               <form class="form-inline" action='list' method="GET">
-                <input data-th-value="${catenoInBoard.cateno}" type="hidden" name="no" aria-label="category">
+                <input data-th-value="${cateno}" type="hidden" name="no" aria-label="category">
                 <select id="searchId" class="form-selectJd" name="type">
                     <option value="T">제목</option>
                     <option value="C">내용</option>

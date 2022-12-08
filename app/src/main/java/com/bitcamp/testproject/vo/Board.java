@@ -125,9 +125,6 @@ public class Board {
     this.act = act;
   } 
 
-
-
-
 }
 
 

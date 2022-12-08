@@ -110,7 +110,7 @@
       bcno=#{no}
   </update> 
   
-  <select id="findCommentsCount" resultType="Integer">
+  <select id="findCommentCount" resultType="Integer">
     select 
       count(*) 
     from 

@@ -61,9 +61,9 @@
     <div class="furnitures_sectionJD layout_padding windowWidth">
        <div class="container cate-bottom-line">
               <form class="post_max_box" action='add' method="post" enctype="multipart/form-data">
-                <input id='cateno' type="hidden" name="cateno" data-th-value="${category.cateno}">
+                <input id='cateno' type="hidden" name="cateno" data-th-value="${cateno}">
                   <table class="table_form" style="width: 960px; margin: auto;">
-                  <tr data-th-if="${category.cateno == 3}">
+                  <tr data-th-if="${cateno == 3}">
                     <td>
                         <div class="clg1">
                           <img id="previewImg" src="../images/nothumbnail.png" alt="Avatar" class="image party_detail_img in-img">
@@ -83,7 +83,7 @@
                         </div>
                     </td>
                   </tr>
-                  <tr data-th-if="${category.cateno != 3}">
+                  <tr data-th-if="${cateno != 3}">
                     <td>
                         <div>
                           <input class="post_form1" name='title' type='text' size='60' placeholder="제목을 입력해주세요.">

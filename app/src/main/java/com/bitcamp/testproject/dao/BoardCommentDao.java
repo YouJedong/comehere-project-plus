@@ -8,7 +8,7 @@ import com.bitcamp.testproject.vo.Comment;
 @Mapper
 public interface BoardCommentDao {
 
-  //  List<Map<String, Object>> findAll(int boardNo);
+
 
   int insertComment(Comment comment);
 
@@ -20,12 +20,12 @@ public interface BoardCommentDao {
 
   int updateComment(Comment comment);
 
-  int findCommentsCount(int boardNo);
+  int findCommentCount(int boardNo);
 
   int deleteAll(int boardNo);
 
   int findTotalCommentOfMember(int memberNo);
-  
+
   List<Comment> findCommentsByMemberNo(Map<String, Object> paramMap);
 
 }

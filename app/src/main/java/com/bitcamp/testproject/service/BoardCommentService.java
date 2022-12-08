@@ -6,7 +6,7 @@ import com.bitcamp.testproject.vo.Comment;
 
 public interface BoardCommentService {
 
-  //  List<Comment> list(int boardNo, int pageNo);
+  int countTotalComment(int boardNo);
 
   int insert(Comment comment);
 
@@ -16,7 +16,6 @@ public interface BoardCommentService {
 
   int update(Comment comment);
 
-  int countCommentListTotal(int boardNo);
 
   List<Comment> getComments(Map<String, Object> map);
 

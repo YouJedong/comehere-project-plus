@@ -13,10 +13,11 @@ public class DefaultBoardCommentService implements BoardCommentService {
   @Autowired 
   BoardCommentDao boardCommentDao;
 
-  //  @Override
-  //  public List<Comment> list(int boardNo, int pageNo) {
-  //    return boardCommentDao.findByBoardNo(boardNo, pageNo);
-  //  }
+  @Override
+  public int countTotalComment(int boardNo) {
+    return boardCommentDao.findCommentCount(boardNo);
+  }
+
 
   @Override
   public int insert(Comment comment) {
@@ -45,11 +46,6 @@ public class DefaultBoardCommentService implements BoardCommentService {
   @Override
   public int update(Comment comment) {
     return boardCommentDao.updateComment(comment);
-  }
-
-  @Override
-  public int countCommentListTotal(int boardNo) {
-    return boardCommentDao.findCommentsCount(boardNo);
   }
 
   @Override
