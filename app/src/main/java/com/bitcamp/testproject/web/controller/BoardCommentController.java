@@ -22,34 +22,30 @@ public class BoardCommentController {
 
   @Autowired
   ServletContext sc;
-
   @Autowired
   BoardService boardService;
   @Autowired
   BoardCommentService boardCommentService;
 
 
-  @PostMapping("insertAndReplay")
+  @PostMapping("add")
   @ResponseBody
-  public int insertAndReplay(String content, int boardNo, int memberNo) {
-
-    // ajax가 보낸 데이터 댓글 vo에 넣기
+  public int add(String content, int boardNo, int memberNo) {
     Comment comment = new Comment(content, boardNo, memberNo);
-
     return boardCommentService.insert(comment);
   }
 
   @GetMapping("list")
   @ResponseBody
   public Object list(int pageNo, int boardNo) {
-
-    // 몇번 페이지인지 기록하고 넘기기
+    // 댓글의 몇 페이지인지 저장하기
     Criteria cri = new Criteria();
     cri.setPerPageNum(5);
     if (pageNo != 0) {
       cri.setPage(pageNo);
     }
 
+    // 출력할 게시글 번호와 페이지 번호를 Map에 담아서 보내기
     Map<String, Object> map = new HashMap<>();
     map.put("boardNo", boardNo);
     map.put("cri", cri);
@@ -59,20 +55,16 @@ public class BoardCommentController {
     return list;
   }
 
+  @PostMapping("update")
+  @ResponseBody
+  public int update(Comment comment) { 
+    return boardCommentService.update(comment);
+  }
+
   @PostMapping("delete/{no}")
   @ResponseBody
   public int delete(@PathVariable int no) {
     return boardCommentService.delete(no);
-  }
-
-
-  @PostMapping("update")
-  @ResponseBody
-  public int update(Comment comment) {
-
-    int result = boardCommentService.update(comment);
-
-    return result;
   }
 
 }

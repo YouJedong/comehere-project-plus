@@ -28,6 +28,12 @@
     </association>
 
   </resultMap>
+  
+  <insert id="insertComment" parameterType="comment"
+    useGeneratedKeys="true" keyColumn="bcno" keyProperty="no"> 
+    insert into board_comment(bno, mno, cont) 
+    values(#{objectNo},#{writer.no},#{content})
+  </insert>
 
   <select id="findByBoardNo" resultMap="commentMap" parameterType="HashMap">
     select
@@ -88,13 +94,6 @@
     limit 1
   </select>
   
-  
-  <insert id="insertComment" parameterType="comment"
-    useGeneratedKeys="true" keyColumn="bcno" keyProperty="no"> 
-    insert into board_comment(bno, mno, cont) 
-    values(#{objectNo},#{writer.no},#{content})
-  </insert>
-
 
   <delete id="deleteComment">
     delete from board_comment 

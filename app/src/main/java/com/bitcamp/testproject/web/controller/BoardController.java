@@ -101,7 +101,7 @@ public class BoardController {
   @GetMapping("detail")
   public Model detail(int no, Model model, HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
 
-    // 페이징하기 위한 연산 
+    // 댓글 페이징하기 위한 연산 
     cri.setPerPageNum(5);
     PageMaker pageMaker = readyPageMaker(cri, boardCommentService.countTotalComment(no));
 

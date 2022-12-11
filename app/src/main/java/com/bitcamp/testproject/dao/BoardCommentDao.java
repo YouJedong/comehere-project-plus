@@ -8,11 +8,13 @@ import com.bitcamp.testproject.vo.Comment;
 @Mapper
 public interface BoardCommentDao {
 
-
-
   int insertComment(Comment comment);
 
   List<Comment> findByBoardNo(Map<String, Object> map);
+
+
+
+
 
   Comment findCommentByNo(int commentNo);
 

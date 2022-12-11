@@ -66,7 +66,7 @@ function commentList(){
 function insertAndReplay(){
   if (!checkContentEmpty()) {
     $.ajax({
-      url : "/app/boardComment/insertAndReplay",
+      url : "/app/boardComment/add",
       data : {
         content : $("#commentCont").val(),
         boardNo : boardNo,

@@ -14,12 +14,6 @@ public class DefaultBoardCommentService implements BoardCommentService {
   BoardCommentDao boardCommentDao;
 
   @Override
-  public int countTotalComment(int boardNo) {
-    return boardCommentDao.findCommentCount(boardNo);
-  }
-
-
-  @Override
   public int insert(Comment comment) {
     return boardCommentDao.insertComment(comment);
   }
@@ -28,6 +22,14 @@ public class DefaultBoardCommentService implements BoardCommentService {
   public List<Comment> getComments(Map<String, Object> map) {
     return boardCommentDao.findByBoardNo(map);
   }
+
+  @Override
+  public int countTotalComment(int boardNo) {
+    return boardCommentDao.findCommentCount(boardNo);
+  }
+
+
+
   @Override
   public List<Comment> getCommentsOfMember(Map<String, Object> paramMap) {
     return boardCommentDao.findCommentsByMemberNo(paramMap);
