@@ -229,6 +229,14 @@ public class AuthController {
 
   // 헌식 끝
 
+
+  @PostMapping("kakao")
+  public void kakao(String code) {
+    System.out.println("제발제발 "+code);
+
+
+  }
+
 }
 
 
