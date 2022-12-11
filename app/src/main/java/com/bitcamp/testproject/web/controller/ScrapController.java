@@ -1,7 +1,6 @@
 package com.bitcamp.testproject.web.controller;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,13 +20,13 @@ public class ScrapController {
 
   @PostMapping("add")
   @ResponseBody
-  public int add(Scrap scrap, HttpSession session) throws Exception {
+  public int add(Scrap scrap) throws Exception {
     return scrapService.insert(scrap);
   }
 
   @PostMapping("delete")
   @ResponseBody
-  public int delete(Scrap scrap, HttpSession session) throws Exception {
+  public int delete(Scrap scrap) throws Exception {
     return scrapService.delete(scrap);
   }
 }

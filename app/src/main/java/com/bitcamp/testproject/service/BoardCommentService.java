@@ -14,7 +14,7 @@ public interface BoardCommentService {
 
   int update(Comment comment);
 
-  int delete(int boardNo);
+  int delete(int commentNo);
 
   List<Comment> getCommentsOfMember(Map<String, Object> paramMap);
 

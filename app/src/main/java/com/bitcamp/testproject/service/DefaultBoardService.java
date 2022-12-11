@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.bitcamp.testproject.dao.BoardCommentDao;
 import com.bitcamp.testproject.dao.BoardDao;
+import com.bitcamp.testproject.dao.BoardReportDao;
 import com.bitcamp.testproject.dao.ScrapDao;
 import com.bitcamp.testproject.vo.Board;
 import com.bitcamp.testproject.vo.Criteria;
@@ -22,6 +23,8 @@ public class DefaultBoardService implements BoardService {
   BoardCommentDao boardCommentDao;
   @Autowired
   ScrapDao scrapDao;
+  @Autowired
+  BoardReportDao boardReportDao;
 
   @Override
   public List<Map<String, Object>> bestList() throws Exception {
@@ -103,6 +106,8 @@ public class DefaultBoardService implements BoardService {
     boardCommentDao.deleteAll(no);
     // 스크랩 삭제
     scrapDao.deleteAll(no);
+    // 받은 신고 삭제
+    boardReportDao.deleteReportOfBoard(no);
 
     return boardDao.delete(no) > 0;
   }

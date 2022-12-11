@@ -11,9 +11,8 @@ public interface ScrapService {
 
   int delete(Scrap scrap);
 
-  int countTotalScrapOfMember(int no);
-
   List<Board> getScrapsOfMember(Map<String, Object> paramMap);
 
+  int countTotalScrapOfMember(int no);
 
 }

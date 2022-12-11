@@ -24,6 +24,11 @@
 		insert into board_tatlle(trno,mno,decbno)
 		values(#{trno},#{mno},#{decbno})
 	</insert>
+	  
+  <delete id="deleteReportOfBoard">
+    delete from board_tatlle
+    where decbno=#{value}
+  </delete>
 
 </mapper>
 

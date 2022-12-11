@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BoardCommentReportDao {
 
-  //  List<Map<String, Object>> findAll(int boardNo);
-
   int insertReport(Map<String, Object> reportMap);
+
+  int deleteReportOfComment(int commentNo);
 
 }

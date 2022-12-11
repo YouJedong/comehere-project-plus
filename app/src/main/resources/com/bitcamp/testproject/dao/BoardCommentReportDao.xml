@@ -25,6 +25,11 @@
 		insert into board_comment_tatlle(trno,mno,bcno)
 		values(#{trno},#{mno},#{decbno})
 	</insert>
+	
+	 <delete id="deleteReportOfComment">
+    delete from board_comment_tatlle
+    where bcno=#{value}
+  </delete>
 
 </mapper>
 
