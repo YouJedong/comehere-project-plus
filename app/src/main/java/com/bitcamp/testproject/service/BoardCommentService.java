@@ -8,24 +8,16 @@ public interface BoardCommentService {
 
   int insert(Comment comment);
 
-  List<Comment> getComments(Map<String, Object> map);
+  List<Comment> getCommentsOfBoard(Map<String, Object> map);
 
-  int countTotalComment(int boardNo);
-
-
-  Comment getComment(int commentNo);
-
-  int delete(int boardNo);
+  int countTotalCommentOfBoard(int boardNo);
 
   int update(Comment comment);
 
-
-
-  int deleteAll(int no);
-
-  int countTotalCommentOfMember(int no);
+  int delete(int boardNo);
 
   List<Comment> getCommentsOfMember(Map<String, Object> paramMap);
 
+  int countTotalCommentOfMember(int memberNo);
 
 }

@@ -35,7 +35,7 @@
     values(#{objectNo},#{writer.no},#{content})
   </insert>
 
-  <select id="findByBoardNo" resultMap="commentMap" parameterType="HashMap">
+  <select id="findCommentsByBoardNo" resultMap="commentMap" parameterType="HashMap">
     select
       bc.bcno,
       m.mno,
@@ -53,6 +53,38 @@
     order by
       bcno
     limit #{cri.pagesStart}, #{cri.perPageNum}
+  </select>
+    
+  <update id="updateComment" parameterType="comment">
+    update 
+      board_comment 
+    set 
+      cont=#{content} 
+    where 
+      bcno=#{no}
+  </update> 
+  
+  <delete id="deleteComment">
+    delete from board_comment 
+    where bcno=#{value}
+  </delete>
+  
+  <select id="findTotalCommentOfBoard" resultType="Integer">
+    select 
+      count(*) 
+    from 
+      board_comment 
+    where 
+      bno = #{value}
+  </select>
+  
+  <select id="findTotalCommentOfMember" resultType="Integer">
+    select 
+      count(*) 
+    from 
+      board_comment 
+    where 
+      mno = #{value}
   </select>
   
   <select id="findCommentsByMemberNo" resultMap="commentMap" parameterType="HashMap">
@@ -94,46 +126,11 @@
     limit 1
   </select>
   
-
-  <delete id="deleteComment">
-    delete from board_comment 
-    where bcno=#{value}
-  </delete>
-  
-  <update id="updateComment" parameterType="comment">
-    update 
-      board_comment 
-    set 
-      cont=#{content} 
-    where 
-      bcno=#{no}
-  </update> 
-  
-  <select id="findCommentCount" resultType="Integer">
-    select 
-      count(*) 
-    from 
-      board_comment 
-    where 
-      bno = #{value}
-  </select>
-  
   <delete id="deleteAll">
     delete from board_comment 
     where bno=#{value}
   </delete>
-
-  <select id="findTotalCommentOfMember" resultType="Integer">
-    select 
-      count(*) 
-    from 
-      board_comment 
-    where 
-      mno = #{value}
-  </select>
   
-  
-
 </mapper>
 
 

@@ -103,7 +103,7 @@ public class BoardController {
 
     // 댓글 페이징하기 위한 연산 
     cri.setPerPageNum(5);
-    PageMaker pageMaker = readyPageMaker(cri, boardCommentService.countTotalComment(no));
+    PageMaker pageMaker = readyPageMaker(cri, boardCommentService.countTotalCommentOfBoard(no));
 
     // 조회수 증가     
     viewCountUp(no, request, response);

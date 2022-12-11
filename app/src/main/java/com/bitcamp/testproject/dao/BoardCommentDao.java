@@ -10,24 +10,18 @@ public interface BoardCommentDao {
 
   int insertComment(Comment comment);
 
-  List<Comment> findByBoardNo(Map<String, Object> map);
-
-
-
-
-
-  Comment findCommentByNo(int commentNo);
+  int updateComment(Comment comment);
 
   int deleteComment(int boardNo);
 
-  int updateComment(Comment comment);
+  List<Comment> findCommentsByBoardNo(Map<String, Object> map);
 
-  int findCommentCount(int boardNo);
+  int findTotalCommentOfBoard(int boardNo);
 
-  int deleteAll(int boardNo);
+  List<Comment> findCommentsByMemberNo(Map<String, Object> paramMap);
 
   int findTotalCommentOfMember(int memberNo);
 
-  List<Comment> findCommentsByMemberNo(Map<String, Object> paramMap);
+  int deleteAll(int boardNo);
 
 }

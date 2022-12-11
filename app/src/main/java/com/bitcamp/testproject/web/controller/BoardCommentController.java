@@ -50,7 +50,7 @@ public class BoardCommentController {
     map.put("boardNo", boardNo);
     map.put("cri", cri);
 
-    List<Comment> list = boardCommentService.getComments(map);
+    List<Comment> list = boardCommentService.getCommentsOfBoard(map);
 
     return list;
   }
