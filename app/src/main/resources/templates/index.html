@@ -173,7 +173,8 @@ body .container {
                 <ul>
                   <li data-th-if="${session.loginMember == null}"><a href="auth/form" >로그인</a></li>
                   <li data-th-if="${session.loginMember != null}"><a href="mypage/my-post">마이페이지</a></li>
-                  <li data-th-if="${session.loginMember != null}"><a href="auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                  <li data-th-if="${session.loginMember != null and session.loginMember.kakaoId != 0}"><a href="auth/kakaoLogout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
+                  <li data-th-if="${session.loginMember != null and session.loginMember.kakaoId == 0}"><a href="auth/logout" data-th-text="${session.loginMember.name} + '(로그아웃)'">동동(로그아웃)</a></li>
                 </ul>
               </div>
             </div>

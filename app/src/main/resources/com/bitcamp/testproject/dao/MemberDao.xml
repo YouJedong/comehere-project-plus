@@ -19,6 +19,7 @@
     <result column="cdt" property="createdDate"/>
     <result column="black" property="black"/>
     <result column="act" property="active"/>
+    <result column="kakao_id" property="kakaoId"/>
     
     <collection property="favoriteRegion" ofType="favoriteRegion">
       <result column="rno" property="rno"/>
@@ -262,7 +263,8 @@
       nick,
       bday,
       sex,
-      filepath
+      filepath,
+      kakao_id
     FROM 
       member 
     WHERE 

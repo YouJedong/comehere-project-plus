@@ -1,5 +1,10 @@
 package com.bitcamp.testproject.web.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -175,7 +180,6 @@ public class AuthController {
 
   @GetMapping("logout")
   public String logout(HttpSession session, HttpServletRequest request) throws Exception {
-
     session.invalidate();
     return "redirect:../";
   }
@@ -275,41 +279,92 @@ public class AuthController {
     OAuthToken oauthToken = null;
     try {
       oauthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
+      System.out.println("oauthToken" + oauthToken);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
 
-    // 카카오 유저 정보 가지고 오기
+    // 카카오 유저 정보 가져오기
     KakaoProfile profile = getProfile(oauthToken);
 
+    // 카카오 id와 일치하는 member 가져오기
     Member member = memberService.getWithKakao(profile.id);
 
+    // 일치하는 member가 있다면 로그인
     if (member != null) {
       session.setAttribute("loginMember", member);
+      session.setAttribute("access_token", oauthToken.getAccess_token());
       mv = new ModelAndView("redirect:/");
       mv.addObject("member", member);
       return mv;
     }
-
-    //    String id = member.getId();
-    //    Cookie cookie = new Cookie("id", id);
-    //    if (id == null) {
-    //      cookie.setMaxAge(0);
-    //    } else {
-    //      cookie.setMaxAge(60 * 60 * 24 * 7); // 7일
-    //    }
-    //    res.addCookie(cookie);
-
     else {
       mv = new ModelAndView("redirect:form");
       return mv;
     }
 
-
-
-    // 로그인 쿠키 삭제
-
   }
+  @GetMapping("kakaoLogout")
+  public String kakaoLogout(HttpSession session) throws Exception {
+    kakaoLogoutProcess((String)session.getAttribute("access_token"));
+    session.invalidate();
+    return "redirect:../";
+  }
+
+  // 로그아웃
+  private void kakaoLogoutProcess(String access_Token) {
+    System.out.println("뭐야???" + access_Token);
+    String reqURL = "https://kapi.kakao.com/v1/user/logout";
+    try {
+      URL url = new URL(reqURL);
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      conn.setRequestMethod("POST");
+      conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+      int responseCode = conn.getResponseCode();
+      System.out.println("responseCode : " + responseCode);
+
+      BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+      String result = "";
+      String line = "";
+
+      while ((line = br.readLine()) != null) {
+        result += line;
+      }
+      System.out.println(result);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  // 회원 탈퇴 시 카카오 아이디 연결끊기
+  private void kakaoUnlinkProcess(String access_Token) {
+    System.out.println("뭐야???" + access_Token);
+    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+    try {
+      URL url = new URL(reqURL);
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      conn.setRequestMethod("POST");
+      conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+      int responseCode = conn.getResponseCode();
+      System.out.println("responseCode : " + responseCode);
+
+      BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+      String result = "";
+      String line = "";
+
+      while ((line = br.readLine()) != null) {
+        result += line;
+      }
+      System.out.println(result);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 
   private KakaoProfile getProfile(OAuthToken oauthToken) {
     RestTemplate rt = new RestTemplate(); // http 요청을 간단하게 해줄 수 있는 클래스
@@ -331,7 +386,6 @@ public class AuthController {
 
     ObjectMapper objectMapper = new ObjectMapper();
     KakaoProfile profile  = null;
-    //Model과 다르게 되있으면 그리고 getter setter가 없으면 오류가 날 것이다.
     try {
       profile = objectMapper.readValue(response.getBody(), KakaoProfile.class);
     } catch (JsonProcessingException e) {

@@ -24,18 +24,13 @@ public class Member {
   private int[] regionDomain;
   private int[] sportsDomain;
 
+  private long kakaoId;
+
   // 모임참여 명단에서 주최자 여부
   private boolean auth;
 
   // 모임 참여 명단에서 나이대
   private String ageGroup;
-
-  public Member() {}
-
-  public Member(int no) {
-    this.no = no;
-  }
-
 
   @Override
   public String toString() {
@@ -44,7 +39,14 @@ public class Member {
         + sex + ", filepath=" + filepath + ", createdDate=" + createdDate + ", active=" + active
         + ", black=" + black + ", favoriteRegion=" + favoriteRegion + ", favoriteSports="
         + favoriteSports + ", regionDomain=" + Arrays.toString(regionDomain) + ", sportsDomain="
-        + Arrays.toString(sportsDomain) + ", auth=" + auth + ", ageGroup=" + ageGroup + "]";
+        + Arrays.toString(sportsDomain) + ", kakaoId=" + kakaoId + ", auth=" + auth + ", ageGroup="
+        + ageGroup + "]";
+  }
+
+  public Member() {}
+
+  public Member(int no) {
+    this.no = no;
   }
 
   public int getNo() {
@@ -199,5 +201,12 @@ public class Member {
     this.ageGroup = ageGroup;
   }
 
+  public long getKakaoId() {
+    return kakaoId;
+  }
+
+  public void setKakaoId(long kakaoId) {
+    this.kakaoId = kakaoId;
+  }
 
 }
