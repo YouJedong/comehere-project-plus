@@ -250,6 +250,26 @@
     name=#{name} and email=#{email}
   </select>
   
+    
+  <select id="findMemberWithKakao" resultMap="memberMap">
+    SELECT 
+      mno,
+      name,
+      id,
+      tel,
+      email,
+      cdt,
+      nick,
+      bday,
+      sex,
+      filepath
+    FROM 
+      member 
+    WHERE 
+      kakao_id=#{value}
+  </select>
+  
+  
 
 </mapper>
 

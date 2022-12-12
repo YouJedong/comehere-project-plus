@@ -33,7 +33,6 @@ dependencies {
     // 개발 편의성을 제공하는 라이브러리 ==> 개발 완료 후 제거한다.
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     
-    
     // 단위 테스트 관련 라이브러리    
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -50,6 +49,10 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.24'
     
     annotationProcessor('org.projectlombok:lombok')
+    
+    // 카카오 로그인을 위한 라이브러리
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     
 
     

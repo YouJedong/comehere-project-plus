@@ -38,6 +38,9 @@ public interface MemberService {
   Member idPasswordCheck(String id, String password) throws Exception;
 
   Member findIdCheck(String name, String email) throws Exception;
+
+
+  Member getWithKakao(long id);
 }
 
 

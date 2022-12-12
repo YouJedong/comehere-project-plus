@@ -69,6 +69,9 @@ public interface MemberDao {
       @Param("email") String email);
 
 
+  Member findMemberWithKakao(long id);
+
+
 
 }
 

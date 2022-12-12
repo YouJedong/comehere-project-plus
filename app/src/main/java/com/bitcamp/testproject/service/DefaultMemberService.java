@@ -126,6 +126,11 @@ public class DefaultMemberService implements MemberService {
   public Member findIdCheck(String name, String email) throws Exception {
     return memberDao.findIdCheck(name, email);
   }
+
+  @Override
+  public Member getWithKakao(long id) {
+    return memberDao.findMemberWithKakao(id);
+  }
 }
 
 
