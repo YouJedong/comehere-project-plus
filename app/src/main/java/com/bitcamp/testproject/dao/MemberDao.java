@@ -71,6 +71,8 @@ public interface MemberDao {
 
   Member findMemberWithKakao(long id);
 
+  Member matcheKakaoEmail(String email);
+
 
 
 }

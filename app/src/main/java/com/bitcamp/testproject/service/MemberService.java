@@ -41,6 +41,8 @@ public interface MemberService {
 
 
   Member getWithKakao(long id);
+
+  Member matcheKakaoEmail(String email);
 }
 
 

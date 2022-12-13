@@ -131,6 +131,11 @@ public class DefaultMemberService implements MemberService {
   public Member getWithKakao(long id) {
     return memberDao.findMemberWithKakao(id);
   }
+
+  @Override
+  public Member matcheKakaoEmail(String email) {
+    return memberDao.matcheKakaoEmail(email);
+  }
 }
 
 

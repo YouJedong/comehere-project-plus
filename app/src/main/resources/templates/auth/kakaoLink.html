@@ -140,28 +140,11 @@ body .container {
 				<div class="form-container">
 					<form action='login' method="post">
 						<table border='1'>
-							<input type="hidden" name="beforePageURL" data-th-value="${session.redirectURI}">
-							<!-- <h1 class="contact_text1">Login</h1> -->
-							<tr>
-								<input type="text" class="email-bt9" placeholder="ID를 입력해주세요" size='30' name="id" data-th-value="${id}" id="id">
-							</tr>
-							<tr>
-								<input type="password" class="email-bt9" placeholder="Password를 입력해주세요" name="password" id="password">
-							</tr>
 						</table>
-						<div data-th-if="${loginFail}">아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</div>
+						<div>카카오 이메일([[${session.member.email}]])과 같은 이메일을 사용하고 있는 아이디([[${session.member.id}]])가 이미 존재합니다. 연동하시겠습니까?</div>
 						<p>
-							<button type="button" class="btnon1" id="login" onclick="bt(this.form);">로그인</button>
+							<button type="button" class="btnon1" id="login" onclick="bt(this.form);">연동하기</button>
 						</p>
-            <div class="kakao">
-              <a href="https://kauth.kakao.com/oauth/authorize?client_id=09f3aec873e0398543ff3ca7c88ded87&redirect_uri=http://localhost:8888/app/auth/kakaoLogin&response_type=code">
-                <img src="../images/kakao_login01.png">
-              </a>
-            </div>
-						<p>
-						<div class="center">
-							<a href="find-id">아이디 찾기</a> | <a href="find-password">비밀번호 찾기</a> | <a href="../member/join">회원가입</a>
-						</div>
 					</form>
 				</div>
 			</div>

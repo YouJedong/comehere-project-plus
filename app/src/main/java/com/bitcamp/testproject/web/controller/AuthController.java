@@ -244,27 +244,23 @@ public class AuthController {
 
   // 헌식 끝
 
+  @GetMapping("kakaoLogin")
+  public ModelAndView kakaoLogin(String code, HttpSession session, HttpServletResponse res, ModelAndView mv) {
 
-  @GetMapping("kakao")
-  public ModelAndView kakao(String code, HttpSession session, HttpServletResponse res, ModelAndView mv) {
-
-    // Post 방식으로 key=value 데이터 요청(카카오로)
+    // key=value 데이터 요청(카카오로)
     RestTemplate rt = new RestTemplate();
 
     // HttpHeader 오브젝트 생성
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
     // HttpBody 오브젝트 생성
     MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     params.add("grant_type", "authorization_code");
     params.add("client_id", "3e127c745fa2928767e1e53af087b50f");
-    params.add("redirect_uri", "http://localhost:8888/app/auth/kakao");
+    params.add("redirect_uri", "http://localhost:8888/app/auth/kakaoLogin");
     params.add("code", code);
-
     // HttpHeader와 HttpBody를 하나의 오브젝트에 넣기
     HttpEntity<MultiValueMap<String, String>> kakaoRequest = new HttpEntity<>(params, headers);
-
     // Http요청하기(post 방식으로) 그 후 response 변수의 응답을 받음
     ResponseEntity<String> response = rt.exchange(
         "https://kauth.kakao.com/oauth/token",
@@ -290,17 +286,23 @@ public class AuthController {
     // 카카오 id와 일치하는 member 가져오기
     Member member = memberService.getWithKakao(profile.id);
 
-    // 일치하는 member가 있다면 로그인
-    if (member != null) {
+    if (member != null) { // 일치하는 member가 있다면 로그인
       session.setAttribute("loginMember", member);
       session.setAttribute("access_token", oauthToken.getAccess_token());
       mv = new ModelAndView("redirect:/");
-      mv.addObject("member", member);
       return mv;
-    }
-    else {
-      mv = new ModelAndView("redirect:form");
-      return mv;
+    } else {
+      // 카카오 이메일과 일치하는 member 찾기
+      member = memberService.matcheKakaoEmail(profile.kakao_account.email);
+      if (member != null) { // kakaoId는 없지만 카카오 email과 같은 email을 가진 member가 있다면 
+        session.setAttribute("kakaoId", profile.id);
+        session.setAttribute("member", member);
+        mv = new ModelAndView("redirect:kakaoLink");
+        return mv;
+      } else {
+        mv = new ModelAndView("redirect:form");
+        return mv;
+      }
     }
 
   }
@@ -313,8 +315,7 @@ public class AuthController {
 
   // 로그아웃
   private void kakaoLogoutProcess(String access_Token) {
-    System.out.println("뭐야???" + access_Token);
-    String reqURL = "https://kapi.kakao.com/v1/user/logout";
+    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
     try {
       URL url = new URL(reqURL);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -394,6 +395,10 @@ public class AuthController {
     System.out.println(profile);
 
     return profile;
+  }
+
+  @GetMapping("kakaoLink")
+  public void kakaoLink() {
   }
 
 }

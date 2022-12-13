@@ -271,7 +271,14 @@
       kakao_id=#{value}
   </select>
   
-  
+  <select id="matcheKakaoEmail" resultMap="memberMap">
+    select
+      *
+    from
+      member
+    where
+      email=#{value}
+  </select>
 
 </mapper>
 
