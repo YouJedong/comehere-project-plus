@@ -43,9 +43,9 @@
 	<insert id="insert" parameterType="member"
 		useGeneratedKeys="true" keyColumn="mno" keyProperty="no">
     INSERT INTO 
-      member(name,id,email,pwd,nick,tel,bday,sex,filepath) 
+      member(name,id,email,pwd,nick,tel,bday,sex,filepath,kakao_Id) 
     VALUES
-      (#{name},#{id},#{email},sha2(#{password},256),#{nickname},#{tel},#{birthday},#{sex},#{filepath})
+      (#{name},#{id},#{email},sha2(#{password},256),#{nickname},#{tel},#{birthday},#{sex},#{filepath},#{kakaoId})
 	</insert>
 
   <!-- 아이디 중복체크 -->
@@ -87,7 +87,8 @@
     FROM 
       member
     WHERE
-      email = #{email}
+      email = #{email} and
+      act = 1
   </select>
 
 
@@ -277,7 +278,8 @@
     from
       member
     where
-      email=#{value}
+      email=#{value} and
+      act=1
   </select>
   
   <update id="linkKakaoId" parameterType="hashMap">
@@ -286,6 +288,14 @@
     where
       mno=#{memberNo}
   </update>
+  
+  <update id="deleteKakaoId" parameterType="int">
+    update member set
+      kakao_id = 0,
+      email =#{memberNo}
+    WHERE 
+      mno=#{memberNo}
+   </update>
 
 </mapper>
 

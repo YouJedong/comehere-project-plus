@@ -45,6 +45,8 @@ public interface MemberService {
   Member matcheKakaoEmail(String email);
 
   int linkKakaoId(long kakaoId, int memberNo);
+
+  int deleteKakaoId(int no);
 }
 
 

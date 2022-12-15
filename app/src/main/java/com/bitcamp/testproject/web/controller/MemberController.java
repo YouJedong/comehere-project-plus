@@ -58,23 +58,18 @@ public class MemberController {
       ModelAndView mv = new ModelAndView("redirect:../auth/form");
       return mv;
     }
-    System.out.println(file);
-    System.out.println(file.getName());
 
     String dirPath = sc.getRealPath("/member/files");
 
     if (file != null) {
       String filename = UUID.randomUUID().toString();
       file.write(dirPath + "/" + filename);
-      System.out.println(filename + "\n파일네임 들어왔냐!>!>!");
       member.setFilepath(filename);
     }
 
     member.setFavoriteRegion(saveRegion(member));
     member.setFavoriteSports(saveSports(member));
-    //    member.setFilepath(saveAttachedFile(file));
     memberService.add(member);
-    System.out.println("member=" + member);
     ModelAndView mv = new ModelAndView("redirect:../auth/form");
     return mv;
   }
@@ -119,6 +114,14 @@ public class MemberController {
   @GetMapping("delete")
   @ResponseBody
   public boolean deleteMember(int no, HttpSession session) throws Exception{
+
+    String accessToken = (String)session.getAttribute("access_token");
+    System.out.println("뭐닝? : " + accessToken);
+    if(accessToken != null) {
+      AuthController.kakaoUnlinkProcess(accessToken);
+      memberService.deleteKakaoId(no);
+    }
+
     boolean result = memberService.delete(no);
     if (result) {
       session.invalidate();

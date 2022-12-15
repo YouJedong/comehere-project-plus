@@ -83,9 +83,11 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-6">
-                  <h1 class="contact_text">회원가입</h1>
+                  <h1 data-th-if="${kakaoProfile == null}" class="contact_text">회원가입</h1>
+                  <h1 data-th-if="${kakaoProfile != null}" class="contact_text">카카오로 회원가입</h1>
                   <div class="mail_sectin">
                     <form action="/app/member/addjoin" method="post" id="joinForm" name="joinForm"  enctype="multipart/form-data" style="width: 500px;">
+                      <input name="kakaoId" data-th-if="${kakaoProfile != null}" type="hidden" data-th-value="${kakaoProfile.id}">
                       <div id="imagePreview">
                       <div class="imgimg">
                       <div class="add-file" >
@@ -99,10 +101,10 @@
                       </div>
                       </div>
                         <div class="join_menu blank">이름</div>
-                      <input type="text" class="email-bt small-area2" placeholder="이름" id="name" name="name">
+                      <input data-th-if="${kakaoProfile != null}" data-th-value="${kakaoProfile.properties.nickname}" type="text" class="email-bt small-area2" placeholder="이름" id="name" name="name">
+                      <input data-th-if="${kakaoProfile == null}" type="text" class="email-bt small-area2" placeholder="이름" id="name" name="name">
                         <div class="join_menu">생년월일</div>
-                      <input data-th-if="kakaoProfile == null" type='date' class="email-bt small-area2" placeholder="생년월일" id="birthday" name="birthday">
-                      <input data-th-if="kakaoProfile != null" type='date' class="email-bt small-area2" placeholder="생년월일" id="birthday" name="birthday">
+                      <input type='date' class="email-bt small-area2" placeholder="생년월일" id="birthday" name="birthday">
                         <div class="join_menu">성별<br/>
                           <div class= "join_gender">
                         <span class =gender>남성</span>
@@ -116,7 +118,8 @@
                       <button class="btn btn-outline-secondary check" type="button" id="button-addon1">중복확인</button>
                       <div class="feedback"><font id="id-feedback" size="3" ></font></div>
                         <div class="join_menu">이메일</div>
-                      <input type="email" class="email-bt small-area"  id="email" placeholder="이메일" name="email" > 
+                      <input data-th-if="${kakaoProfile == null}"  type="email" class="email-bt small-area"  id="email" placeholder="이메일" name="email" >
+                      <input data-th-if="${kakaoProfile != null}" data-th-value="${kakaoProfile.kakao_account.email}"  type="email" class="email-bt small-area"  id="email" placeholder="이메일" name="email" > 
                       <button class="btn btn-outline-secondary check" type="button" id="button-addon2">중복확인</button>
                       <div class="feedback"><font id="email-feedback" size="3"></font></div>
                           <div class="join_menu">닉네임</div>

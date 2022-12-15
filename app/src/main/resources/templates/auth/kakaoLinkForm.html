@@ -156,10 +156,10 @@ body .container {
 			<div class="">
 				<div class="form-container">
 					<div>
-						<table border='1'>
-						</table>
 						<div class="link_text">
-              현재 <b>카카오 이메일([[${session.member.email}]])</b>과 같은 이메일을 사용하고 있는 <b>아이디([[${session.member.id}]])</b>가 이미 존재합니다.
+              <input type="hidden" id="kakaoId" data-th-value="${kakaoId}">
+              <input type="hidden" id="memberNo" data-th-value="${member.no}">
+              현재 <b>카카오 이메일([[${member.email}]])</b>과 같은 이메일을 사용하고 있는 <b>아이디([[${member.id}]])</b>가 이미 존재합니다.
               <br>
               <br>
               <b>카카오 아이디와 연동하시겠습니까?</b>
@@ -192,12 +192,17 @@ body .container {
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
   
 <script>
-
+const kakaoId = document.getElementById( 'kakaoId').value;
+const memberNo = document.getElementById( 'memberNo' ).value;
 
 function kakaoLink(){
   $.ajax({
       url : '/app/auth/kakaoLink',
-      type : 'get',
+      data : {
+    	        kakaoId : kakaoId,
+              memberNo : memberNo
+             },
+      type : 'post',
       success : function(result){
           if(result == 1) {
             swal({

@@ -76,6 +76,8 @@ public interface MemberDao {
 
   int linkKakaoId(Map<String, Object> mapToLink);
 
+  int deleteKakaoId(int memberNo);
+
 
 
 }

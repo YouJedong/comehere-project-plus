@@ -148,6 +148,10 @@ public class DefaultMemberService implements MemberService {
 
     return memberDao.linkKakaoId(mapToLink);
   }
+  @Override
+  public int deleteKakaoId(int memberNo) {
+    return memberDao.deleteKakaoId(memberNo);
+  }
 }
 
 

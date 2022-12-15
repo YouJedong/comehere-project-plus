@@ -28,6 +28,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import com.bitcamp.testproject.service.EmailService;
 import com.bitcamp.testproject.service.MemberService;
+import com.bitcamp.testproject.service.RegionService;
+import com.bitcamp.testproject.service.SportsService;
 import com.bitcamp.testproject.vo.KakaoProfile;
 import com.bitcamp.testproject.vo.Mail;
 import com.bitcamp.testproject.vo.Member;
@@ -44,6 +46,11 @@ public class AuthController {
 
   @Autowired
   MemberService memberService;
+  @Autowired
+  RegionService regionService;
+  @Autowired
+  SportsService sportsService;
+
 
   public AuthController(MemberService memberService) {
     System.out.println("AuthController() 호출됨!");
@@ -244,12 +251,67 @@ public class AuthController {
 
   // 헌식 끝
 
+  // 카카오 로그인
   @GetMapping("kakaoLogin")
   public ModelAndView kakaoLogin(String code, HttpSession session, HttpServletResponse res, ModelAndView mv) {
 
+    // 카카오로부터 받은 code로 다시 카카오에 토큰 요청하기 
+    // => client -> 카카오서버(code를 줌) -> 우리 server-kakaoLogin(code를 받음) 
+    OAuthToken oauthToken = kakaoLoginProcess(code);
+
+    // 카카오로부터 받은 토큰으로 카카오 프로필 요청하기
+    KakaoProfile profile = getProfile(oauthToken);
+
+    // 카카오 id를 가지고 있는 회원 찾기
+    Member member = memberService.getWithKakao(profile.getId());
+    if (member != null) { // 회원이 있다면 로그인
+      session.setAttribute("loginMember", member);
+      session.setAttribute("access_token", oauthToken.getAccess_token());
+      mv = new ModelAndView("redirect:/");
+      return mv;
+    } else { // 회원이 없다면? 연동 or 회원가입 유도
+      member = memberService.matcheKakaoEmail(profile.getKakao_account().getEmail()); // kakao 이메일과 같은 이메일을 가진 회원 찾기
+      if (member != null) { // 연동 페이지 이동 
+        mv = new ModelAndView("/auth/kakaoLinkForm");
+        mv.addObject("kakaoId", profile.getId());
+        mv.addObject("member", member);
+        return mv;
+      } else { // 회원가입 페이지 이동
+        mv = new ModelAndView("/auth/join");
+        mv.addObject("regionList", regionService.list()); // join.html에서 필요한 값
+        mv.addObject("sportsList", sportsService.list()); // join.html에서 필요한 값
+        mv.addObject("kakaoProfile", profile); // 회원가입 시 자동으로 입력될 카카오 정보(이메일, 사진, 이름)
+        return mv;
+      }
+    }
+  }
+
+  // 카카오 로그아웃
+  @GetMapping("kakaoLogout")
+  public String kakaoLogout(HttpSession session) throws Exception {
+
+    // 카카오 서버 토큰 무효화
+    kakaoLogoutProcess((String)session.getAttribute("access_token"));
+
+    // 서버 세션 초기화
+    session.invalidate();
+    return "redirect:../";
+  }
+
+  // 카카오 계정 연동 페이지 이동
+  @GetMapping("kakaoLinkForm")
+  public void kakaoLinkForm() {}
+
+  // 카카오 계정 연동 
+  @PostMapping("kakaoLink")
+  @ResponseBody
+  public int kakaoLink(long kakaoId, int memberNo, HttpSession session) {
+    return memberService.linkKakaoId(kakaoId, memberNo);
+  }
+
+  private OAuthToken kakaoLoginProcess(String code) {
     // key=value 데이터 요청(카카오로)
     RestTemplate rt = new RestTemplate();
-
     // HttpHeader 오브젝트 생성
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -275,48 +337,12 @@ public class AuthController {
     OAuthToken oauthToken = null;
     try {
       oauthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
-      System.out.println("oauthToken" + oauthToken);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
-
-    // 카카오 유저 정보 가져오기
-    KakaoProfile profile = getProfile(oauthToken);
-
-    // 카카오 id와 일치하는 member 가져오기
-    Member member = memberService.getWithKakao(profile.getId());
-
-    if (member != null) { // 일치하는 member가 있다면 로그인
-      session.setAttribute("loginMember", member);
-      session.setAttribute("access_token", oauthToken.getAccess_token());
-      mv = new ModelAndView("redirect:/");
-      return mv;
-    } else {
-      // 카카오 이메일과 일치하는 member 찾기
-      member = memberService.matcheKakaoEmail(profile.getKakao_account().getEmail());
-      if (member != null) { // kakaoId는 없지만 카카오 email과 같은 email을 가진 member가 있다면 연동하기로 유도
-        session.setAttribute("kakaoId", profile.getId());
-        session.setAttribute("member", member);
-        mv = new ModelAndView("redirect:kakaoLinkForm");
-        return mv;
-      } else { // kakaoId도 없고 일치하는 email도 없는 경우 회원가입으로 유도
-        System.out.println("뭐가 들어있니?" + profile);
-        mv = new ModelAndView("/auth/join");
-        mv.addObject("kakaoProfile", profile);
-        return mv;
-      }
-    }
-
-  }
-  @GetMapping("kakaoLogout")
-  public String kakaoLogout(HttpSession session) throws Exception {
-    // 카카오 
-    kakaoLogoutProcess((String)session.getAttribute("access_token"));
-    session.invalidate();
-    return "redirect:../";
+    return oauthToken;
   }
 
-  // 로그아웃
   private void kakaoLogoutProcess(String access_Token) {
     String reqURL = "https://kapi.kakao.com/v1/user/logout";
     try {
@@ -336,14 +362,13 @@ public class AuthController {
       while ((line = br.readLine()) != null) {
         result += line;
       }
-      System.out.println("로그아웃결과: " + result);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   // 회원 탈퇴 시 카카오 아이디 연결끊기
-  private void kakaoUnlinkProcess(String access_Token) {
+  public static void kakaoUnlinkProcess(String access_Token) {
     String reqURL = "https://kapi.kakao.com/v1/user/unlink";
     try {
       URL url = new URL(reqURL);
@@ -368,7 +393,7 @@ public class AuthController {
     }
   }
 
-
+  // 카카오 프로필 가져오기
   private KakaoProfile getProfile(OAuthToken oauthToken) {
     RestTemplate rt = new RestTemplate(); // http 요청을 간단하게 해줄 수 있는 클래스
 
@@ -397,22 +422,6 @@ public class AuthController {
     System.out.println(profile);
 
     return profile;
-  }
-
-  @GetMapping("kakaoLinkForm")
-  public void kakaoLinkForm() {}
-
-  @GetMapping("kakaoLink")
-  @ResponseBody
-  public int kakaoLink(HttpSession session) {
-    // 세션에 넣어놓은 카카오id와 member정보 가져오기
-    long kakaoId = (long) session.getAttribute("kakaoId");
-    Member member = (Member) session.getAttribute("member");
-
-    // 세션 무효화
-    session.invalidate();
-
-    return memberService.linkKakaoId(kakaoId, member.getNo());
   }
 
 }
