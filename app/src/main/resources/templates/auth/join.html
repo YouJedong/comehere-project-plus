@@ -89,7 +89,8 @@
                       <div id="imagePreview">
                       <div class="imgimg">
                       <div class="add-file" >
-                        <img id="previewImg" src='../images/default-profile-pic.png' onchange="changeValue(this)" class="profile_pic profile" alt="profile_picture" >
+                        <img data-th-if="${kakaoProfile == null}" id="previewImg" src='../images/default-profile-pic.png' onchange="changeValue(this)" class="profile_pic profile" alt="profile_picture" >
+                        <img data-th-if="${kakaoProfile != null}" id="previewImg" data-th-src="${kakaoProfile.properties.profile_image}" onchange="changeValue(this)" class="profile_pic profile" alt="profile_picture" >
                         <button type="button" class="btn btn-outline-secondary file" id="btn-upload">사진첨부</button>
                       </div>
                       </div>
@@ -100,7 +101,8 @@
                         <div class="join_menu blank">이름</div>
                       <input type="text" class="email-bt small-area2" placeholder="이름" id="name" name="name">
                         <div class="join_menu">생년월일</div>
-                      <input type='date' class="email-bt small-area2" placeholder="생년월일" id="birthday" name="birthday">
+                      <input data-th-if="kakaoProfile == null" type='date' class="email-bt small-area2" placeholder="생년월일" id="birthday" name="birthday">
+                      <input data-th-if="kakaoProfile != null" type='date' class="email-bt small-area2" placeholder="생년월일" id="birthday" name="birthday">
                         <div class="join_menu">성별<br/>
                           <div class= "join_gender">
                         <span class =gender>남성</span>
@@ -340,12 +342,12 @@
                }
                
                if(pw.length < 4 || pw.length>16) {
-                   window.alert('4자 이상, 16자 이하만 이용 가능합니다.');
+                   /* window.alert('4자 이상, 16자 이하만 이용 가능합니다.'); */
                    document.getElementById('password').value='';
                }
                
                if(check_SC == 0){
-                   window.alert('!,@,#,$,% 중 특수문자를 1개 이상 입력해주세요.')
+                   /* window.alert('!,@,#,$,% 중 특수문자를 1개 이상 입력해주세요.') */
                    document.getElementById('password').value='';
                }
                    

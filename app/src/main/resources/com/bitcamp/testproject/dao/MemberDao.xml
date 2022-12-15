@@ -279,6 +279,13 @@
     where
       email=#{value}
   </select>
+  
+  <update id="linkKakaoId" parameterType="hashMap">
+    update member set
+      kakao_id=#{kakaoId}
+    where
+      mno=#{memberNo}
+  </update>
 
 </mapper>
 

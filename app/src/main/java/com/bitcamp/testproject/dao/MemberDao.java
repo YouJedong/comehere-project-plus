@@ -1,6 +1,7 @@
 package com.bitcamp.testproject.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.bitcamp.testproject.vo.Member;
@@ -72,6 +73,8 @@ public interface MemberDao {
   Member findMemberWithKakao(long id);
 
   Member matcheKakaoEmail(String email);
+
+  int linkKakaoId(Map<String, Object> mapToLink);
 
 
 

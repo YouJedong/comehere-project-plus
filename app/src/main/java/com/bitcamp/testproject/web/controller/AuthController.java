@@ -284,7 +284,7 @@ public class AuthController {
     KakaoProfile profile = getProfile(oauthToken);
 
     // 카카오 id와 일치하는 member 가져오기
-    Member member = memberService.getWithKakao(profile.id);
+    Member member = memberService.getWithKakao(profile.getId());
 
     if (member != null) { // 일치하는 member가 있다면 로그인
       session.setAttribute("loginMember", member);
@@ -293,14 +293,16 @@ public class AuthController {
       return mv;
     } else {
       // 카카오 이메일과 일치하는 member 찾기
-      member = memberService.matcheKakaoEmail(profile.kakao_account.email);
-      if (member != null) { // kakaoId는 없지만 카카오 email과 같은 email을 가진 member가 있다면 
-        session.setAttribute("kakaoId", profile.id);
+      member = memberService.matcheKakaoEmail(profile.getKakao_account().getEmail());
+      if (member != null) { // kakaoId는 없지만 카카오 email과 같은 email을 가진 member가 있다면 연동하기로 유도
+        session.setAttribute("kakaoId", profile.getId());
         session.setAttribute("member", member);
-        mv = new ModelAndView("redirect:kakaoLink");
+        mv = new ModelAndView("redirect:kakaoLinkForm");
         return mv;
-      } else {
-        mv = new ModelAndView("redirect:form");
+      } else { // kakaoId도 없고 일치하는 email도 없는 경우 회원가입으로 유도
+        System.out.println("뭐가 들어있니?" + profile);
+        mv = new ModelAndView("/auth/join");
+        mv.addObject("kakaoProfile", profile);
         return mv;
       }
     }
@@ -308,6 +310,7 @@ public class AuthController {
   }
   @GetMapping("kakaoLogout")
   public String kakaoLogout(HttpSession session) throws Exception {
+    // 카카오 
     kakaoLogoutProcess((String)session.getAttribute("access_token"));
     session.invalidate();
     return "redirect:../";
@@ -315,7 +318,7 @@ public class AuthController {
 
   // 로그아웃
   private void kakaoLogoutProcess(String access_Token) {
-    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+    String reqURL = "https://kapi.kakao.com/v1/user/logout";
     try {
       URL url = new URL(reqURL);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -333,7 +336,7 @@ public class AuthController {
       while ((line = br.readLine()) != null) {
         result += line;
       }
-      System.out.println(result);
+      System.out.println("로그아웃결과: " + result);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -341,7 +344,6 @@ public class AuthController {
 
   // 회원 탈퇴 시 카카오 아이디 연결끊기
   private void kakaoUnlinkProcess(String access_Token) {
-    System.out.println("뭐야???" + access_Token);
     String reqURL = "https://kapi.kakao.com/v1/user/unlink";
     try {
       URL url = new URL(reqURL);
@@ -397,8 +399,20 @@ public class AuthController {
     return profile;
   }
 
+  @GetMapping("kakaoLinkForm")
+  public void kakaoLinkForm() {}
+
   @GetMapping("kakaoLink")
-  public void kakaoLink() {
+  @ResponseBody
+  public int kakaoLink(HttpSession session) {
+    // 세션에 넣어놓은 카카오id와 member정보 가져오기
+    long kakaoId = (long) session.getAttribute("kakaoId");
+    Member member = (Member) session.getAttribute("member");
+
+    // 세션 무효화
+    session.invalidate();
+
+    return memberService.linkKakaoId(kakaoId, member.getNo());
   }
 
 }

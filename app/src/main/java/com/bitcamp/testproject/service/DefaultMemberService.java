@@ -1,6 +1,8 @@
 package com.bitcamp.testproject.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -135,6 +137,16 @@ public class DefaultMemberService implements MemberService {
   @Override
   public Member matcheKakaoEmail(String email) {
     return memberDao.matcheKakaoEmail(email);
+  }
+
+  @Override
+  public int linkKakaoId(long kakaoId, int memberNo) {
+    // Map에 담아서 Mybatis에 보냄
+    Map<String, Object> mapToLink = new HashMap<>();
+    mapToLink.put("kakaoId", kakaoId);
+    mapToLink.put("memberNo", memberNo);
+
+    return memberDao.linkKakaoId(mapToLink);
   }
 }
 

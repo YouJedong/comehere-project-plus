@@ -13,8 +13,6 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <!-- style css -->
 <link rel="stylesheet" type="text/css" href="../css/style3.css">
-<!-- Responsive-->
-<link rel="stylesheet" href="../css/responsive.css">
 <!-- fevicon -->
 <link rel="icon" href="../images/comehere_con.ico" type="image/gif" />
 <!-- Scrollbar Custom CSS -->
@@ -37,6 +35,18 @@
   font-size: 25px;
   font-weight: bold;
   background-color: #0d6efd !important; 
+  color: white;
+}
+.btnon2 {
+  height: 65px;
+  width: 360px;
+  margin-top: 1px;
+  margin-left: -30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: gray !important; 
   color: white;
 }
 .kakao {
@@ -66,7 +76,7 @@
   margin-top: -40px;
 }
 
-.form-container form {
+.form-container > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,6 +119,13 @@ body .container {
         max-width: none;
       }
 
+.link_text {
+  text-align: center;
+  color: black;
+  font-size: large;
+  margin-top: 100px;
+}
+
 </style>
 
 
@@ -138,70 +155,67 @@ body .container {
 		<div class="container">
 			<div class="">
 				<div class="form-container">
-					<form action='login' method="post">
+					<div>
 						<table border='1'>
 						</table>
-						<div>카카오 이메일([[${session.member.email}]])과 같은 이메일을 사용하고 있는 아이디([[${session.member.id}]])가 이미 존재합니다. 연동하시겠습니까?</div>
+						<div class="link_text">
+              현재 <b>카카오 이메일([[${session.member.email}]])</b>과 같은 이메일을 사용하고 있는 <b>아이디([[${session.member.id}]])</b>가 이미 존재합니다.
+              <br>
+              <br>
+              <b>카카오 아이디와 연동하시겠습니까?</b>
+            </div>
 						<p>
-							<button type="button" class="btnon1" id="login" onclick="bt(this.form);">연동하기</button>
+							<button type="button" class="btnon1" onclick="kakaoLink()">연동하기</button>
 						</p>
-					</form>
+            <p>
+              <a href="form"><button type="button" class="btnon2">돌아가기</button></a>
+            </p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- contact section end -->
+  
+    <!-- Javascript files-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.0.0.min.js"></script>
+    <script src="../js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../js/custom.js"></script>
+    <!-- javascript -->
+    <script src="../js/owl.carousel.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+  
+<script>
 
 
+function kakaoLink(){
+  $.ajax({
+      url : '/app/auth/kakaoLink',
+      type : 'get',
+      success : function(result){
+          if(result == 1) {
+            swal({
+              text: '연동되었습니다.',
+              icon: 'success',
+              closeOnClickOutside: false
+            }).then(() => {
+              console.log("성공!!")
+              location.href = 'form';
+            });
+          } else {
+            swal('','연동할 수 없습니다!','error');
+          }
+      }
+  });
+}
 
-		<script>
-       function bt(frm) {
-           var id = frm.id.value;
-           var password = frm.password.value;
-           
-           if (id.trim() == ''| password.trim()== '') {
-               swal("ID나 Password를 입력해주세요");
-               return false;
-           } 
-           $.ajax({
-               type: "POST",
-               url: "idPasswordCheck",
-               data: {id:id, password:password},
-               success: function(data) {
-                 console.log(data);
-                 if(data == 'true'){
-                    frm.submit();
-                 } else if (data == 'false'){
-                	 swal({
-                         text: "ID와 비밀번호를 확인해주세요.",
-                         icon: "error",
-                         button: "확인",
-                       });
-                 
-               } else if (data == 'active'){
-                   swal("존재하지 않는 계정입니다.")
-                 }
-               }
-             });
-           }
+</script>
 
-       
-      </script>
-
-
-		<!-- Javascript files-->
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/popper.min.js"></script>
-		<script src="../js/bootstrap.bundle.min.js"></script>
-		<script src="../js/jquery-3.0.0.min.js"></script>
-		<script src="../js/plugin.js"></script>
-		<!-- sidebar -->
-		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="../js/custom.js"></script>
-		<!-- javascript -->
-		<script src="../js/owl.carousel.js"></script>
-		<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-	</div>
 </body>
 </html>
