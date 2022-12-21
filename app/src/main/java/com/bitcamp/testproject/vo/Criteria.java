@@ -8,8 +8,6 @@ public class Criteria {
   // SQL문에서 특정 게시판을 페이징하기 위해 받아놓을 카테고리 번호 
   private int catenoToPage;
 
-
-
   @Override
   public String toString() {
     return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", catenoToPage="
@@ -23,7 +21,7 @@ public class Criteria {
   // 최초 게시판 목록에 들어왔을 때의 기본 셋팅 (1페이지에 10개의 게시글 출력)
   public Criteria() {
     this.page = 1;
-    this.perPageNum = 4;
+    this.perPageNum = 10;
   }
 
   // getter/setter 셋팅

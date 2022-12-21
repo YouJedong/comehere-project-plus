@@ -197,17 +197,16 @@ public class BoardController {
         }
       }
     } 
-    // 조회수리스트가 존재한다면 실행 (처음 조회하는 게시판이라면 조회수 증가)    
-    if (oldCookie != null) { 
+    if (oldCookie != null) { // 리스트가 존재할 때  
+      // 처음 조회하는 게시글 번호이라면 조회수 증가
       if (!oldCookie.getValue().contains("[" + no + "]")) {
         boardService.increaseViews(no);
         oldCookie.setValue(oldCookie.getValue() + "_[" + no + "]");
         oldCookie.setPath("/");
-        oldCookie.setMaxAge(60 * 60 * 24);
+        oldCookie.setMaxAge(60 * 60 * 24); // 24시간
         response.addCookie(oldCookie);
       }
-      // 조회수리스트가 존재하지 않는다면 실행
-    } else { 
+    } else { // 리스트가 존재하지 않을 때 조회한 게시글 번호와 함께 리스트 생성
       boardService.increaseViews(no);
       Cookie newCookie = new Cookie("boardView","[" + no + "]");
       newCookie.setPath("/");

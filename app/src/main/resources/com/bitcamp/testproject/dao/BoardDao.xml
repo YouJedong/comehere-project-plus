@@ -128,13 +128,13 @@
 		      <foreach collection="search.typeArr" item="type">
 		          <trim prefix="OR">
 		              <choose>
-		                  <when test="type == 'T'.toString()">
+		                  <when test="type == 'T'.toString()"> <!-- 제목 --> 
 		                      b.title like concat('%',#{search.keyword},'%') 
 		                  </when>
-		                  <when test="type == 'C'.toString()">
+		                  <when test="type == 'C'.toString()"> <!-- 내용 -->
 		                      b.cont like concat('%',#{search.keyword},'%') 
 		                  </when>
-		                  <when test="type == 'W'.toString()">
+		                  <when test="type == 'W'.toString()"> <!-- 작성자 -->
 		                      m.nick like concat('%',#{search.keyword},'%' )
 		                  </when>
 		              </choose>
