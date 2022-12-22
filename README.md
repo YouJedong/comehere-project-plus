@@ -1,7 +1,7 @@
 
 # **👟여기모여 - 팀 프로젝트**
 
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/108327853/209047716-23f7abfa-2c41-4f62-83b0-6e51d777009f.png">
 <p>
 
 ### **유제동의 구현 기능 및 소스**
