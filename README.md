@@ -4,7 +4,36 @@
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
 <p>
 
-- 발표영상
+### **유제동의 구현 기능 및 소스**
+1. **커뮤니티 기능 전체 구현** (게시글, 댓글, 스크랩, 검색, 페이징)
+- web/controller/ <br>
+  BoardController.java, BoardCommentController.java, ScrapController.java
+
+- service/ <br>
+  BoardService.java, BoardCommentService.java, ScrapService.java
+
+- dao/ <br>
+  BoardDao.java, BoardCommentDao.java, ScrapDao.java
+
+- resources/com/bitcamp/testproject/dao/ <br>
+  BoardDao.xml, BoardCommentDao.xml, ScrapDao.xml
+
+- vo/ <br>
+  Board.java, Comment.java, Criteria.java, PageMaker.java, Scrap.java, Search.java
+  
+- resources/templates/board/ .html <br>
+
+2. **카카오 로그인 API 구현**
+- web/controller/ <br>
+  AuthController.java (kakao 부분)
+
+- vo/ <br>
+  KakaoProfile.java, OAuthToken.java
+  
+- resources/templates/auth/ <br>
+  kakaoLinkForm.html, join.html
+
+**발표영상**
 https://youtu.be/VcFEVTZOpzg?t=1395
 
 ## **프로젝트 소개**
