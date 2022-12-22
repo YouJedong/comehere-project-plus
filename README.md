@@ -1,5 +1,8 @@
 # 팀 프로젝트 - 여기모여
 
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
+<p>
+
 ## **프로젝트 소개**
 **'여기모여' 사이트란?**
 
@@ -17,9 +20,6 @@
 모임에 리뷰와 **평점** 도입, 사용자가 원하는 신뢰성을 가진 건강한 정보를 제공 <br>
 대가성 광고가 포함된 정보가 아닌 사용자가 실제 이용 밒 사용 후기를 바탕으로 한 **커뮤니티** 제공
 
-
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
-<p>
 
 ## **주요기능**
 
