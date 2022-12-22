@@ -24,8 +24,14 @@ https://youtu.be/VcFEVTZOpzg?t=1395
 모임에 리뷰와 **평점** 도입, 사용자가 원하는 신뢰성을 가진 건강한 정보를 제공 <br>
 대가성 광고가 포함된 정보가 아닌 사용자가 실제 이용 밒 사용 후기를 바탕으로 한 **커뮤니티** 제공
 
+<br>
 
+## **사용 기술 및 도구**
+- **BackEnd** : Spring Boot, Undertow, mybatis, MariaDB, Thymeleaf
+- **FrontEnd** : HTML5, CSS3, Java Script, jQuery, AJAX, BootStrap SweetAlert
+- **Programming Tool** : eclipse, Visual Studio Code, Gradle, Github, GitKraken, Sequel Pro
 
+<br>
 
 ## **주요기능**
 
@@ -69,6 +75,6 @@ https://youtu.be/VcFEVTZOpzg?t=1395
 
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209041027-b1b3116f-4806-4e5e-a885-3bf28a878c33.png">
 
-- 카카오 로그인 API를 활용하여 로그인, 회원가입, 아이디 연동, 로그아웃을 할 수 있음
+- 카카오 로그인 API를 활용하여 **로그인, 회원가입, 아이디 연동, 로그아웃**을 할 수 있음
 
 <br>
