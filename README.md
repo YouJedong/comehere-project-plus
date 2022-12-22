@@ -1,7 +1,7 @@
-# 팀 프로젝트 - 여기모여
-
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
 <p>
+
+# 팀 프로젝트 - 여기모여
 
 ## **프로젝트 소개**
 **'여기모여' 사이트란?**
