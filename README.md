@@ -21,7 +21,7 @@
 - vo/ <br>
   Board.java, Comment.java, Criteria.java, PageMaker.java, Scrap.java, Search.java
   
-- resources/templates/board/ .html <br>
+- resources/templates/board/ .html <br><br>
 
 2. **카카오 로그인 API 구현**
 - web/controller/ <br>
