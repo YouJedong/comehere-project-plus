@@ -25,12 +25,12 @@
 
 ### **1. 모임 개설 및 참가**
 
-<img border="1" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
+<img style="border:1px solid #eaeaea;" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
  
 - 다양한 **검색조건**(시간, 운동종류, 장소)으로 원하는 모임을 선택하여 참가
  
   
-<img style="display: inline-block" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209035903-cf3607c6-c599-49c9-8cff-1a90bdc748fd.png">
+<img style="border:1px solid #eaeaea;" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209035903-cf3607c6-c599-49c9-8cff-1a90bdc748fd.png">
 
 - **카카오 Map**을 활용하여 장소를 선택하여 모임을 개설
 
