@@ -7,7 +7,7 @@
 **종합운동사이트**
 
 
-<img width="1262" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/108327853/209030791-63f8899c-7bda-46af-90ba-607a8a5281a4.png">
 
 
 ## 팀원
