@@ -25,12 +25,20 @@
 
 ### **1. 모임 개설 및 참가**
 
-<img style="border:1px solid #eaeaea;" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
  
 - 다양한 **검색조건**(시간, 운동종류, 장소)으로 원하는 모임을 선택하여 참가
  
   
-<img style="border:1px solid #eaeaea;" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209035903-cf3607c6-c599-49c9-8cff-1a90bdc748fd.png">
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209035903-cf3607c6-c599-49c9-8cff-1a90bdc748fd.png">
 
 - **카카오 Map**을 활용하여 장소를 선택하여 모임을 개설
+ 
+### **2. 커뮤니티 기능**
+ 
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209039851-9ccab7ce-036c-44a5-8ccb-2f8ed2db1e31.png">
+ 
+- 인기글, 최근 챌린지 인증글, 다양한 게시판들을 통해 글을 작성하고 조회
+ 
+<img width="918" alt="image" src="https://user-images.githubusercontent.com/108327853/209040193-375b54f5-8356-4dc9-8b95-8368d763715d.png">
 
