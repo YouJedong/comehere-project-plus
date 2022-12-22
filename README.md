@@ -25,7 +25,7 @@
 
 ### **1. 모임 개설 및 참가**
 
-<img style="display: inline-block" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
+<img board="1" width="600" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
  
 - 다양한 **검색조건**(시간, 운동종류, 장소)으로 원하는 모임을 선택하여 참가
  
