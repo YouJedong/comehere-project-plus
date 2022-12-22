@@ -28,7 +28,7 @@
 <figure class="half">
   <img width="350" alt="image" src="https://user-images.githubusercontent.com/108327853/209033155-37048394-0cd0-4d12-8a0b-bf7775661f2e.png">
   <img width="350" alt="image" src="https://user-images.githubusercontent.com/108327853/209035903-cf3607c6-c599-49c9-8cff-1a90bdc748fd.png">
-figure>
+<figure/>
 
 - **카카오 Map**을 활용하여 장소를  모임 개설
 - 
